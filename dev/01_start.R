@@ -28,7 +28,7 @@ golem::fill_desc(
     email = "simeon.ng@alaska.gov", # Your email
     role = c("aut", "cre") # Your role (here author/creator)
   ),
-  repo_url = NULL, # The URL of the GitHub repo (optional),
+  repo_url = "https://github.com/simeon-s-ng/akregulatoryaq", # The URL of the GitHub repo (optional),
   pkg_version = "0.0.0.9000", # The version of the package containing the app
   set_options = TRUE # Set the global golem options
 )
@@ -38,12 +38,12 @@ golem::install_dev_deps()
 
 ## Create Common Files ----
 ## See ?usethis for more information
-usethis::use_mit_license("Golem User") # You can set another license here
+usethis::use_mit_license("Simeon Ng") # You can set another license here
 golem::use_readme_rmd(open = FALSE)
 devtools::build_readme()
 # Note that `contact` is required since usethis version 2.1.5
 # If your {usethis} version is older, you can remove that param
-usethis::use_code_of_conduct(contact = "Golem User")
+usethis::use_code_of_conduct(contact = "Simeon Ng")
 usethis::use_lifecycle_badge("Experimental")
 usethis::use_news_md(open = FALSE)
 
@@ -52,6 +52,7 @@ usethis::use_news_md(open = FALSE)
 golem::use_recommended_tests()
 
 ## Favicon ----
+# TODO
 # If you want to change the favicon (default is golem's one)
 golem::use_favicon() # path = "path/to/ico". Can be an online file.
 # golem::remove_favicon() # Uncomment to remove the default favicon
@@ -65,7 +66,7 @@ usethis::use_git()
 ## Sets the remote associated with 'name' to 'url'
 usethis::use_git_remote(
   name = "origin",
-  url = "https://github.com/<OWNER>/<REPO>.git"
+  url = "https://github.com/simeon-s-ng/akregulatoryaq.git"
 )
 
 # You're now set! ----
