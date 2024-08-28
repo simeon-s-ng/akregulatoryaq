@@ -33,18 +33,16 @@ This README has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2024-08-28 09:11:51 AKDT"
+#> [1] "2024-08-28 10:26:43 AKDT"
 ```
 
 Here are the tests results and package coverage:
 
 ``` r
 devtools::check(quiet = TRUE)
-#> ══ Documenting ═════════════════════════════════════════════════════════════════
-#> ℹ Installed roxygen2 version (7.3.2) doesn't match required (7.1.1)
-#> ✖ `check()` will not re-document this package
+#> ℹ Loading akregulatoryaq
 #> ── R CMD check results ────────────────────────── akregulatoryaq 0.0.0.9000 ────
-#> Duration: 16.9s
+#> Duration: 17.5s
 #> 
 #> ❯ checking package subdirectories ... NOTE
 #>   Problems with news in 'NEWS.md':
