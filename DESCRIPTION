@@ -3,27 +3,19 @@ Title: AK DEC Regulatory Air Quality Shiny App
 Version: 0.0.0.9000
 Authors@R: 
     person("Simeon", "Ng", , "simeon.ng@alaska.gov", role = c("aut", "cre"))
-Description: Revamping of Alaska DEC Air Monitoring regulatory data
-    webpages. Previously, data and graphs for the communities of Alaska
-    were spread across multiple pages on the website. This shiny app will
-    allow users to access data in a central location. It will provide data
-    of EPAs criteria pollutants collected at Alaska's regulatory sites.
+Description: Revamping of Alaska DEC Air Monitoring regulatory data webpages. Previously, data and graphs for the communities of Alaska were spread across multiple pages on the website. This shiny app will allow users to access data in a central location. It will provide data of EPAs criteria pollutants collected at Alaska's regulatory sites.
 License: MIT + file LICENSE
-URL: https://github.com/simeon-s-ng/akregulatoryaq
-BugReports: https://github.com/simeon-s-ng/akregulatoryaq/issues
 Imports: 
-    bslib,
     config,
     golem,
     shiny
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
+URL: https://github.com/simeon-s-ng/akregulatoryaq
+BugReports: https://github.com/simeon-s-ng/akregulatoryaq/issues
 Suggests: 
-    knitr,
-    rmarkdown,
     spelling,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-Encoding: UTF-8
 Language: en-US
-LazyData: true
-RoxygenNote: 7.3.2
-VignetteBuilder: knitr

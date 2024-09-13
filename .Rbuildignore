@@ -8,5 +8,3 @@ $run_dev.*
 ^LICENSE\.md$
 ^README\.Rmd$
 ^CODE_OF_CONDUCT\.md$
-^doc$
-^Meta$

@@ -9,25 +9,8 @@ app_ui <- function(request) {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # Your application UI logic
-    bslib::page_navbar(
-      id = "nav",
-      inverse = TRUE,
-      sidebar = bslib::sidebar(),
-      bslib::nav_panel(
-        "Fairbanks"
-      ),
-      bslib::nav_panel(
-        "Anchorage"
-      ),
-      bslib::nav_panel(
-        "Juneau"
-      ),
-      bslib::nav_panel(
-        "Mat-Su"
-      ),
-      bslib::nav_panel(
-        "Bethel"
-      ),
+    fluidPage(
+      golem::golem_welcome_page() # Remove this line to start building your UI
     )
   )
 }
