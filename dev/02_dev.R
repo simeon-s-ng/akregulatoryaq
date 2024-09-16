@@ -20,13 +20,13 @@ attachment::att_amend_desc()
 
 ## Add modules ----
 ## Create a module infrastructure in R/
-golem::add_module(name = "name_of_module1", with_test = TRUE) # Name of the module
-golem::add_module(name = "name_of_module2", with_test = TRUE) # Name of the module
+golem::add_module(name = "pm25_avg", with_test = FALSE) # Name of the module
+golem::add_module(name = "filter_data", with_test = FALSE) # Name of the module
 
 ## Add helper functions ----
 ## Creates fct_* and utils_*
-golem::add_fct("ui_elements", with_test = FALSE)
-golem::add_utils("helpers", with_test = TRUE)
+golem::add_fct("ui_site_lists", with_test = FALSE)
+golem::add_utils("plots_avg", with_test = FALSE)
 
 ## External resources
 ## Creates .js and .css files at inst/app/www
