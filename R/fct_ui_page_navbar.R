@@ -11,6 +11,7 @@ ui_page_navbar <- function() {
     theme = ui_theme(),
     inverse = TRUE,
     fillable = FALSE,
+    # Styling for sidebar button
     htmltools::tags$head(
       htmltools::tags$style(
         htmltools::HTML(
@@ -45,32 +46,56 @@ ui_page_navbar <- function() {
       bslib::accordion(
         bslib::accordion_panel(
           "Filters", icon = bsicons::bs_icon("filter"),
-          # Fairbanks PM25 Filters ---------------------------------------------
+          # Fairbanks PM25 Filters ----
           shiny::conditionalPanel(  
             condition = paste0("input.nav == 'Fairbanks' & input.fnsb == 'PM2.5'"),
             # PM25 Year Filter Module
             mod_filter_data_ui(
               "filter_data_fbx_pm25", 
-              get_range("2000", "2023"),
+              range_pm25(),
               fbx_sites_pm25()
             ),
-            bslib::card(
-              bslib::card_header("Site Information"),
-              bslib::card_body(
-                shiny::markdown(
-                  "The [**NCore Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/) is located in Downtown Fairbanks, AK."
-                ),
-                shiny::markdown(
-                  "The [**A Street**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-a-street/) is located in Fairbanks, AK."
-                ),
-                shiny::markdown(
-                  "The [**Hurst Road**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/north-pole-hurst-road/) is located in North Pole, AK."
-                ),
-                shiny::markdown(
-                  "The **Fairbanks State Office Building** Site monitored PM2.5 in Fairbanks, AK between 2000-2020.<br>"
-                )     
-              )
-            )
+            fbx_pm25_info()
+          ),
+          # Anchorage PM25 Filters ----
+          shiny::conditionalPanel(
+            condition = "input.nav == 'Anchorage' & input.anc == 'PM2.5'",
+            mod_filter_data_ui(
+              "filter_data_anc_pm25",
+              range_pm25(),
+              anc_sites_pm25()
+            ),
+            anc_pm25_info()
+          ),
+          # Juneau PM25 Filters ----
+          shiny::conditionalPanel(
+            condition = "input.nav == 'Juneau' & input.jnu == 'PM2.5'",
+            mod_filter_data_ui(
+              "filter_data_jnu_pm25",
+              range_pm25(),
+              jnu_sites_pm25()
+            ),
+            jnu_pm25_info()
+          ),
+          # Mat-Su PM25 Filters ----
+          shiny::conditionalPanel(
+            condition = "input.nav == 'Mat-Su' & input.ms == 'PM2.5'",
+            mod_filter_data_ui(
+              "filter_data_ms_pm25",
+              range_pm25(),
+              matsu_sites_pm25()
+            ),
+            ms_pm25_info()
+          ),
+          # Bethel PM25 Filters ----
+          shiny::conditionalPanel(
+            condition = "input.nav == 'Bethel' & input.sw == 'PM2.5'",
+            mod_filter_data_ui(
+              "filter_data_sw_pm25",
+              range_pm25_bethel(),
+              bethel_sites_pm25()
+            ),
+            sw_pm25_info()
           )
         ),
         mod_download_ui("download"),
@@ -78,6 +103,7 @@ ui_page_navbar <- function() {
       )
     ),
     # REGION PAGES -------------------------------------------------------------
+    # Fairbanks ----
     bslib::nav_panel(
       title = "Fairbanks",
       bslib::navset_card_underline(
@@ -89,11 +115,62 @@ ui_page_navbar <- function() {
         )
       ),
       ui_footer()
+    ),
+    # Anchorage ----
+    bslib::nav_panel(
+      title = "Anchorage",
+      bslib::navset_card_underline(
+        title = "Municipality of Anchorage",
+        id = "anc",
+        bslib::nav_panel(
+          title = "PM2.5",
+          plot_card_pm25("pm25_avg_anc", "pm25_epa_dv_anc", "pm25_dec_dv_anc")
+        )
+      ),
+      ui_footer()
+    ),
+    # Juneau ----
+    bslib::nav_panel(
+      title = "Juneau",
+      bslib::navset_card_underline(
+        title = "City and Borough of Juneau",
+        id = "jnu",
+        bslib::nav_panel(
+          title = "PM2.5",
+          plot_card_pm25("pm25_avg_jnu", "pm25_epa_dv_jnu", "pm25_dec_dv_jnu")
+        )
+      ),
+      ui_footer()
+    ),
+    # Mat-Su ----
+    bslib::nav_panel(
+      title = "Mat-Su",
+      bslib::navset_card_underline(
+        title = "Matanuska-Susitna Borough",
+        id = "ms",
+        bslib::nav_panel(
+          title = "PM2.5",
+          plot_card_pm25("pm25_avg_ms", "pm25_epa_dv_ms", "pm25_dec_dv_ms")
+        )
+      ),
+      ui_footer()
+    ),
+    # Bethel ----
+    bslib::nav_panel(
+      title = "Bethel",
+      bslib::navset_card_underline(
+        title = "Southwest Alaska",
+        id = "sw",
+        bslib::nav_panel(
+          title = "PM2.5",
+          plot_card_pm25("pm25_avg_sw", "pm25_epa_dv_sw", "pm25_dec_dv_sw")
+        )
+      ),
+      ui_footer()
     )
   ) |> 
     htmltools::tagAppendAttributes(
       .cssSelector = "nav",
       class = "navbar-expand"
     )
-  
 }
