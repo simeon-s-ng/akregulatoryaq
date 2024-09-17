@@ -1,6 +1,6 @@
 #' pm25_avg UI Function
 #'
-#' @description A shiny Module to handle plotting pm25 average concentrations.
+#' @description A shiny Module to handle plotting PM25 average concentrations.
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'

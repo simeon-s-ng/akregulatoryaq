@@ -162,13 +162,13 @@ get_range <- function(start_year, end_year) {
 #' 
 #' @description Card with avg conc & design value plots
 #' 
-#' @param plot A reactive avg conc plot
-#' @param plot_dv A static design value plot
+#' @param avg_mod A reactive avg conc module
+#' @param dv_mod A static design value module
 #' 
 #' @return A bslib::card() with accordion and plot outputs
 #' 
 #' @noRd
-plot_card <- function(plot, plot_dv) {
+plot_card <- function(avg_mod, dv_mod) {
   bslib::accordion(
     # Panel for Avg. Concentration & DV plots
     bslib::accordion_panel(
@@ -180,7 +180,7 @@ plot_card <- function(plot, plot_dv) {
       shiny::markdown(
         "*Please wait a few seconds for plots to show.*"
       ),
-      plotly::plotlyOutput(plot),
+      avg_mod,
       shiny::markdown(
         "
         
@@ -188,7 +188,7 @@ plot_card <- function(plot, plot_dv) {
         
         "
       ),
-      plotly::plotlyOutput(plot_dv)
+      dv_mod
     ),
     # Panel for 'how to use'
     bslib::accordion_panel(
@@ -214,9 +214,9 @@ plot_card <- function(plot, plot_dv) {
 #' 
 #' @description Card with avg conc & design value plots - pm2.5 specific
 #' 
-#' @param plot A reactive avg conc plot
-#' @param plot_dv_epa Design value plot with EPA Concurred EEs excluded
-#' @param plot_dv_dec Design value plot with DEC Concurred EEs excluded
+#' @param avg_ns A reactive avg conc module
+#' @param epa_dv_ns Design value module with EPA Concurred EEs excluded
+#' @param dec_dv_ns Design value module with DEC Concurred EEs excluded
 #' 
 #' @return A bslib::card() with accordion and plot outputs - pm2.5 specific
 #' 

@@ -51,7 +51,7 @@ range_no2 <- function() {
 #' 
 #' @noRd
 range_pm10_fbx <- function() {
-  get_range("2011", "2023")
+  get_range("2012", "2023")
 }
 
 #' range_pm25_bethel

@@ -82,3 +82,71 @@ plot_pm25 <- function(pm25_data, year) {
     plotly::layout(legend = list(orientation = 'h', x = 0.33, y = -0.1)) |> 
     plotly::toWebGL()
 }
+
+#' plot_pm10
+#' 
+#' @description Plots PM10 24-hour average concentration
+#' 
+#' @param pm10_data Cleaned PM10 24-hour average concentration dataset
+#' @param year Year to plot
+#' 
+#' @return A ggplotly object to be output in a renderPlotly()
+#' 
+#' @noRd
+plot_pm10 <- function(pm10_data, year) {
+  plotly::ggplotly(
+    ggplot2::ggplot(pm10_data) +
+      ggplot2::geom_point(
+        mapping = ggplot2::aes(
+          x = Date,
+          y = sample_measurement,
+          color = site_name,
+          shape = site_name,
+          text = paste(year, site_name, "Data Point:", sample_measurement, "µg/m³")
+        ),
+        alpha = 0.5
+      ) +
+      ggplot2::scale_color_brewer(palette = "Dark2", direction = -1) +
+      # Axis settings
+      ggplot2::labs(
+        title = paste(year, "PM10 24-hr Average Concentrations", sep = ' '),
+        y = "1987 PM10 24-hr Average Concentration (µg/m³)",
+        color = "Site Name",
+        shape = "Site Name"
+      ) +
+      ggplot2::scale_x_date(
+        date_labels = "%b '%y", 
+        date_breaks = "1 month",
+        limits = c(
+          lubridate::as_date(paste(year, "-01-01", sep="")),
+          lubridate::as_date(paste(year, "-12-31", sep=""))
+        )
+      ) +
+      ggplot2::scale_y_continuous(breaks = seq(0, 200, 20), limits = c(0, 200)) +
+      # NAAQS 150ug/m3  limit
+      ggplot2::geom_hline(
+        ggplot2::aes(yintercept = 150),
+        color = "red",
+        linewidth = 0.2
+      ) +
+      ggplot2::annotate(
+        'text', 
+        x = lubridate::date(paste(year, "-06-30", sep = "")), 
+        y = 140,
+        label = "24-hr PM10 NAAQS (150 µg/m³)"
+      ) +
+      ggplot2::theme_minimal() +
+      # Visual formatting
+      ggplot2::theme(
+        axis.title.x = ggplot2::element_blank(),
+        axis.ticks.x = ggplot2::element_line(),
+        legend.position = "bottom",
+        legend.title = ggplot2::element_blank(),
+        panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
+        panel.grid.major.x = ggplot2::element_blank()
+      ),
+    tooltip = c('Date', 'text')
+  ) |>
+    plotly::layout(legend = list(orientation = 'h', x = 0.33, y = -0.1)) |> 
+    plotly::toWebGL()
+}

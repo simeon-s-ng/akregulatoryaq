@@ -5,6 +5,7 @@
 #' @import shiny
 #' @noRd
 app_server <- function(input, output, session) {
+  # PM2.5 ----
   proxy_pm25_fbx <- mod_filter_data_server("filter_data_fbx_pm25")
   proxy_pm25_anc <- mod_filter_data_server("filter_data_anc_pm25")
   proxy_pm25_jnu <- mod_filter_data_server("filter_data_jnu_pm25")
@@ -28,6 +29,13 @@ app_server <- function(input, output, session) {
   mod_pm25_dec_dv_server("pm25_dec_dv_jnu", "Juneau")
   mod_pm25_dec_dv_server("pm25_dec_dv_ms", "Mat-Su")
   mod_pm25_dec_dv_server("pm25_dec_dv_sw", "Bethel")
+
+  # PM10 ----
+  proxy_pm10_fbx <- mod_filter_data_server("filter_data_fbx_pm10")
+
+  mod_pm10_avg_server("pm10_avg_fbx", proxy_pm10_fbx)
+
+  mod_pm10_dv_server("pm10_dv_fbx", "Fairbanks")
 
   # Data Download
   mod_download_server("download")

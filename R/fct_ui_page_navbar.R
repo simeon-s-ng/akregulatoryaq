@@ -48,7 +48,7 @@ ui_page_navbar <- function() {
           "Filters", icon = bsicons::bs_icon("filter"),
           # Fairbanks PM25 Filters ----
           shiny::conditionalPanel(  
-            condition = paste0("input.nav == 'Fairbanks' & input.fnsb == 'PM2.5'"),
+            condition = "input.nav == 'Fairbanks' & input.fnsb == 'PM2.5'",
             # PM25 Year Filter Module
             mod_filter_data_ui(
               "filter_data_fbx_pm25", 
@@ -56,6 +56,16 @@ ui_page_navbar <- function() {
               fbx_sites_pm25()
             ),
             fbx_pm25_info()
+          ),
+          # Fairbanks PM10 Filters ----
+          shiny::conditionalPanel(
+            condition = "input.nav == 'Fairbanks' & input.fnsb == 'PM10'",
+            mod_filter_data_ui(
+              "filter_data_fbx_pm10",
+              range_pm10_fbx(),
+              fbx_sites_pm10()
+            ),
+            fbx_pm10_info()
           ),
           # Anchorage PM25 Filters ----
           shiny::conditionalPanel(
@@ -112,6 +122,10 @@ ui_page_navbar <- function() {
         bslib::nav_panel(
           title = "PM2.5",
           plot_card_pm25("pm25_avg_fbx", "pm25_epa_dv_fbx", "pm25_dec_dv_fbx")
+        ),
+        bslib::nav_panel(
+          title = "PM10",
+          plot_card(mod_pm10_avg_ui("pm10_avg_fbx"), mod_pm10_dv_ui("pm10_dv_fbx"))
         )
       ),
       ui_footer()

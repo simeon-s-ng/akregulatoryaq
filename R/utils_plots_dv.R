@@ -277,3 +277,79 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
     plotly::toWebGL()
   )
 }
+
+#' plot_pm10_dv
+#' 
+#' @noRd
+plot_pm10_dv <- function(pm10_data, region) {
+  xrng <- range(pm10_data$Year)
+  
+  return(plotly::ggplotly(
+    ggplot2::ggplot(pm10_data, ggplot2::aes(x = Year)) +
+      ggplot2::geom_point(
+        mapping = ggplot2::aes(
+          y = first_max,
+          color = site_name,
+          shape = site_name,
+          text = paste(site_name, "1st Max:", first_max, "µg/m³")
+        ),
+        alpha = 0.9,
+        size = 2
+      ) +
+      ggplot2::geom_line(
+        ggplot2::aes(y = first_max, color = site_name), 
+        alpha = 0.9
+      ) +
+      ggplot2::geom_point(
+        mapping = ggplot2::aes(
+          y = second_max,
+          color = site_name,
+          shape = site_name,
+          text = paste(site_name, "2nd Max:", second_max, "µg/m³")
+        ),
+        alpha = 0.5,
+        size = 2
+      ) +
+      ggplot2::geom_line(
+        ggplot2::aes(y = second_max, color = site_name), 
+        alpha = 0.5
+      ) +
+      ggplot2::guides(color = "none") +
+      ggthemes::scale_color_excel_new() +
+      # Axis settings
+      ggplot2::labs(
+        title = paste(region, "PM10 24-hr Maximum Values", sep = ' '),
+        y = "PM10 24-hr Concentration (µg/m³)",
+        color = "Site Name",
+        shape = "Site Name"
+      ) +
+      ggplot2::scale_x_continuous(breaks = function(x) unique(floor(pretty(x)))) +
+      ggplot2::scale_y_continuous(breaks = seq(0, 350, 50), limits = c(0, 350)) +
+      # NAAQS 150µg/m³ limit
+      ggplot2::geom_hline(
+        ggplot2::aes(yintercept = 150), 
+        color = "red", 
+        linewidth = 0.2
+      ) +
+      ggplot2::annotate(
+        'text', 
+        x = xrng[2] - (xrng[2] - xrng[1]) / 2,
+        y = 300,
+        label = "1987 PM2.5 24-hr NAAQS (150 µg/m³)",
+        size = 3
+      ) +
+      ggplot2::theme_minimal() +
+      # Visual formatting
+      ggplot2::theme(
+        axis.title.x = ggplot2::element_blank(),
+        axis.ticks.x = ggplot2::element_line(),
+        legend.position = "bottom",
+        legend.title = ggplot2::element_blank(),
+        panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
+        panel.grid.major.x = ggplot2::element_blank()),
+    tooltip = c('Year', 'text')
+  ) |> 
+    plotly::layout(legend = list(orientation = 'h')) |> 
+    plotly::toWebGL()
+  )
+}
