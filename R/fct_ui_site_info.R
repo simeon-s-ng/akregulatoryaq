@@ -50,9 +50,12 @@ fbx_co_info <- function() {
         "The [**NCore Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/) is located in Downtown Fairbanks, AK."
       ),
       shiny::markdown(
-        "The **Armory** Site monitored CO in Fairbanks, AK between 2002-2007.<br>
-          The **Hunter Elementary** Site monitored CO in Fairbanks, AK between 2000-2009.<br>
-          The **Old Post Office** Site monitored CO in Fairbanks, AK between 2000-2014."
+        "The **Armory** Site monitored CO in Fairbanks, AK between 2002-2007."
+      ),
+      shiny::markdown(
+        "The **Hunter Elementary** Site monitored CO in Fairbanks, AK between 2000-2009."),
+      shiny::markdown(
+        "The **Old Post Office** Site monitored CO in Fairbanks, AK between 2000-2014."
       )
     )
   )
@@ -139,9 +142,13 @@ anc_pm10_info <- function() {
         "The [**Parkgate Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/eagle-river-parkgate/) is located in Eagle River, AK."
       ),
       shiny::markdown(
-        "The **DHHS** Site monitored PM10 in Anchorage, AK between 2009-2012.<br>
-          The **Muldoon** Site monitored PM10 in Anchorage, AK between 2000-2005.<br>
-          The **Tudor** Site monitored PM10 in Anchorage, AK between 2000-2014."
+        "The **DHHS** Site monitored PM10 in Anchorage, AK between 2009-2012."
+      ),
+      shiny::markdown(
+        "The **Muldoon** Site monitored PM10 in Anchorage, AK between 2000-2005."
+      ),
+      shiny::markdown(
+        "The **Tudor** Site monitored PM10 in Anchorage, AK between 2000-2014."
       )
     )
   )
@@ -220,9 +227,13 @@ ms_pm10_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The **Butte** Site monitored PM10 in Butte, AK between 2000-2023.<br>
-          The **Palmer** Site monitored PM10 in Palmer, AK between 2011-2019.<br>
-          The **Wasilla** Site monitored PM10 in Wasilla, AK between 2010-2015."
+        "The **Butte** Site monitored PM10 in Butte, AK between 2000-2023."
+      ),
+      shiny::markdown(
+        "The **Palmer** Site monitored PM10 in Palmer, AK between 2011-2019."
+      ),
+      shiny::markdown(
+        "The **Wasilla** Site monitored PM10 in Wasilla, AK between 2010-2015."
       )
     )
   )

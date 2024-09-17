@@ -353,3 +353,362 @@ plot_pm10_dv <- function(pm10_data, region) {
     plotly::toWebGL()
   )
 }
+
+#' plot_co_dv
+#' 
+#' @noRd
+plot_co_dv <- function(co_data, region) {
+  xrng <- range(co_data$Year)
+  
+  return(plotly::ggplotly(
+    ggplot2::ggplot(co_data, ggplot2::aes(x = Year, )) +
+      ggplot2::geom_point(
+        mapping = ggplot2::aes(
+          y = max_8hr,
+          color = site_name,
+          shape = site_name,
+          text = paste(site_name, "1st Maximum:", max_8hr, "ppm")
+        ),
+        alpha = 0.9,
+        size = 2
+      ) +
+      ggplot2::geom_line(
+        ggplot2::aes(y = max_8hr, color = site_name),
+        alpha = 0.9
+      ) +
+      ggplot2::geom_point(
+        mapping = ggplot2::aes(
+          y = max_8hr_2,
+          color = site_name,
+          shape = site_name,
+          text = paste(site_name, "2nd Maximum:", max_8hr_2, "ppm")
+        ),
+        alpha = 0.5,
+        size = 2
+      ) +
+      ggplot2::geom_line(
+        ggplot2::aes(y = max_8hr_2, color = site_name), 
+        alpha = 0.5
+      ) +
+      ggplot2::guides(color = "none") +
+      ggthemes::scale_color_excel_new() +
+      # Axis settings
+      ggplot2::labs(
+        title = paste(region, "CO 8-hr Maximum Values", sep = ' '),
+        y = "CO 8-hr Concentration (ppm)",
+        color = "Site Name",
+        shape = "Site Name"
+      ) +
+      ggplot2::scale_y_continuous(breaks = seq(0, 10, 1), limits = c(0, 10)) +
+      # NAAQS 9ppm limit
+      ggplot2::geom_hline(
+        ggplot2::aes(yintercept = 9),
+        color = "red",
+        linewidth = 0.2
+      ) +
+      ggplot2::annotate(
+        'text', 
+        x = xrng[2] - (xrng[2] - xrng[1]) / 2,
+        y = 9.5,
+        label = "1971 CO 8-hr NAAQS (9 ppm)",
+        size = 3
+      ) +
+      ggplot2::theme_minimal() +
+      # Visual formatting
+      ggplot2::theme(
+        axis.title.x = ggplot2::element_blank(),
+        axis.ticks.x = ggplot2::element_line(),
+        legend.position = "bottom",
+        legend.title = ggplot2::element_blank(),
+        panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
+        panel.grid.major.x = ggplot2::element_blank()
+      ),
+    tooltip = c('Year', 'text')
+  ) |> 
+    plotly::layout(legend = list(orientation = 'h')) |> 
+    plotly::toWebGL()
+  )
+}
+
+#' plot_so2_dv
+#' 
+#' @noRd
+plot_so2_dv <- function(so2_data, region) {
+  xrng <- range(so2_data$Year)
+  
+  return(plotly::ggplotly(
+    ggplot2::ggplot(so2_data, ggplot2::aes(x = Year)) +
+      ggplot2::geom_point(
+        mapping = ggplot2::aes(
+          y = dv_3yr,
+          color = site_name,
+          shape = site_name,
+          text = paste(site_name, "3-Year Design Value:", dv_3yr, "ppb")
+        ),
+        alpha = 0.9,
+        size = 2
+      ) +
+      ggplot2::geom_line(
+        ggplot2::aes(y = dv_3yr, color = site_name), 
+        alpha = 0.9
+      ) +
+      ggplot2::geom_point(
+        mapping = ggplot2::aes(
+          y = max_1hr,
+          color = site_name,
+          shape = site_name,
+          text = paste(site_name, "Maximum Value:", max_1hr, "ppb")
+        ),
+        alpha = 0.5,
+        size = 2
+      ) +
+      ggplot2::geom_line(
+        ggplot2::aes(y = max_1hr, color = site_name), 
+        alpha = 0.5
+      ) +
+      ggplot2::guides(color = "none") +
+      ggthemes::scale_color_excel_new() +
+      # Axis settings
+      ggplot2::labs(
+        title = paste(region, "SO2 Design Values", sep = ' '),
+        y = "SO2 1-hr Concentrations (ppb)",
+        color = "Site Name",
+        shape = "Site Name"
+      ) +
+      ggplot2::scale_y_continuous(breaks = seq(0, 80, 20), limits = c(0, 80)) +
+      # NAAQS 75ppb limit
+      ggplot2::geom_hline(
+        ggplot2::aes(yintercept = 75),
+        color = "red",
+        linewidth = 0.2
+      ) +
+      ggplot2::annotate(
+        'text', 
+        x = xrng[2] - (xrng[2] - xrng[1]) / 2,
+        y = 70,
+        label = "2010 SO2 1-hr NAAQS (75 ppb)",
+        size = 3
+      ) +
+      ggplot2::theme_minimal() +
+      # Visual formatting
+      ggplot2::theme(
+        axis.title.x = ggplot2::element_blank(),
+        axis.ticks.x = ggplot2::element_line(),
+        legend.position = "bottom",
+        legend.title = ggplot2::element_blank(),
+        panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
+        panel.grid.major.x = ggplot2::element_blank()
+      ),
+    tooltip = c('Year', 'text')
+  ) |> 
+    plotly::layout(legend = list(orientation = 'h')) |> 
+    plotly::toWebGL()
+  )
+}
+
+#' plot_o3_dv
+#' 
+#' @noRd
+plot_o3_dv <- function(o3_data, region) {
+  xrng <- range(o3_data$Year)
+  
+  return(plotly::ggplotly(
+    ggplot2::ggplot(o3_data, ggplot2::aes(x = Year)) +
+      ggplot2::geom_point(
+        mapping = ggplot2::aes(
+          y = max_8hr,
+          color = site_name,
+          shape = site_name,
+          text = paste(site_name, "Maximum Value:", max_8hr, "ppb")
+        ),
+        alpha = 0.5,
+        size = 2
+      ) +
+      ggplot2::geom_line(
+        ggplot2::aes(y = max_8hr, color = site_name), 
+        alpha = 0.5
+      ) +
+      ggplot2::geom_point(
+        mapping = ggplot2::aes(
+          y = dv_3yr,
+          color = site_name,
+          shape = site_name,
+          text = paste(site_name, "3-Year Design Value:", dv_3yr, "ppb")
+        ),
+        alpha = 0.9,
+        size = 2) +
+      ggplot2::geom_line(ggplot2::aes(y = dv_3yr, color = site_name), alpha = 0.9) +
+      ggplot2::guides(color = "none") +
+      ggthemes::scale_color_excel_new() +
+      # Axis settings
+      ggplot2::labs(
+        title = paste(region, "O3 8-hr Maximum Values", sep = ' '),
+        y = "O3 8-hr Concentrations (ppm)",
+        color = "Site Name",
+        shape = "Site Name") +
+      ggplot2::scale_y_continuous(breaks = seq(0, 0.1, 0.01), limits = c(0, 0.1)) +
+      # NAAQS 9ppm limit
+      # Annotate if max(years) < 2015
+      # Annotate if max(years) >= 2015
+      # ONLY SHOW 2008 NAAQS LINE
+      {if(xrng[2] < 2015) 
+        ggplot2::geom_segment(
+          ggplot2::aes(
+            x = 2008, 
+            xend = max(Year), 
+            y = 0.075, 
+            yend = 0.075
+          ),
+          color = "red", 
+          linewidth = 0.2
+        )
+      } +
+      {if(xrng[2] < 2015) 
+        ggplot2::annotate(
+          'text', 
+          x = xrng[2] - (xrng[2] - 2008) / 2, 
+          y = 0.08, 
+          label = "2008 O3 8-hr NAAQS (0.075 ppm)", 
+          size = 3
+        )
+      } +
+      # SHOW ALL NAAQS LINES
+      {if(xrng[2] >= 2015 & xrng[1] < 2015) 
+        ggplot2::geom_segment(
+          ggplot2::aes(x = 2015, xend = max(Year), y = 0.07, yend = 0.07),
+          color = "red", 
+          linewidth = 0.2
+        )
+      } +
+      {if(xrng[2] >= 2015 & xrng[1] < 2015)
+        ggplot2::annotate(
+          'text', 
+          x = xrng[2] - (xrng[2] - 2015) / 2, 
+          y = 0.075,
+          label = "2015 O3 8-hr NAAQS (0.070 ppm)", 
+          size = 3
+        )
+      } +
+      {if(xrng[2] >= 2015 & xrng[1] < 2015) 
+        ggplot2::geom_segment(
+          ggplot2::aes(x = xrng[1], xend = 2015, y = 0.075, yend = 0.075),
+          color = "red", 
+          linewidth = 0.2
+        )
+      } +
+      {if(xrng[2] >= 2015 & xrng[1] < 2015) 
+        ggplot2::annotate(
+          'text', 
+          x = 2015 - (2015 - xrng[1]) / 2, 
+          y = 0.08,
+          label = "2008 O3 8-hr NAAQS (0.075 ppm)", 
+          size = 3
+        )
+      } +
+      {if(xrng[2] >= 2015 & xrng[1] >= 2015) 
+        ggplot2::geom_segment(
+          ggplot2::aes(x = xrng[1], xend = max(Year), y = 0.07, yend = 0.07),
+          color = "red", 
+          linewidth = 0.2
+        )
+      } +
+      {if(xrng[2] >= 2015 & xrng[1] >= 2015) 
+        ggplot2::annotate(
+          'text', 
+          x = xrng[2] - (xrng[2] - xrng[1]) / 2, 
+          y = 0.075,
+          label = "2015 O3 8-hr NAAQS (0.070 ppm)", 
+          size = 3
+        )
+      } +
+      ggplot2::theme_minimal() +
+      # Visual formatting
+      ggplot2::theme(
+        axis.title.x = ggplot2::element_blank(),
+        axis.ticks.x = ggplot2::element_line(),
+        legend.position = "bottom",
+        legend.title = ggplot2::element_blank(),
+        panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
+        panel.grid.major.x = ggplot2::element_blank()),
+    tooltip = c('Year', 'text')
+  ) |> 
+    plotly::layout(legend = list(orientation = 'h')) |> 
+    plotly::toWebGL()
+  )
+}
+
+#' plot_no2_dv
+#' 
+#' @noRd
+plot_no2_dv <- function(no2_data, region) {
+  xrng <- range(no2_data$Year)
+  
+  return(plotly::ggplotly(
+    ggplot2::ggplot(no2_data, ggplot2::aes(x = Year)) +
+      ggplot2::geom_point(
+        mapping = ggplot2::aes(
+          y = dv_3yr, 
+          color = site_name,
+          shape = site_name,
+          text = paste(site_name, "3-Year Design Value:", dv_3yr, "ppb")
+        ),
+        alpha = 0.9,
+        size = 2
+      ) +
+      ggplot2::geom_line(
+        ggplot2::aes(y = dv_3yr, color = site_name), 
+        alpha = 0.9
+      ) +
+      ggplot2::geom_point(
+        mapping = ggplot2::aes(
+          y = max_1hr, 
+          color = site_name,
+          shape = site_name,
+          text = paste(site_name, "1-Hour Maximum Value:",max_1hr, "ppb")
+        ),
+        alpha = 0.5,
+        size = 2
+      ) +
+      ggplot2::geom_line(
+        ggplot2::aes(y = max_1hr, color = site_name), 
+        alpha = 0.5
+      ) +
+      ggplot2::guides(color = "none") +
+      ggthemes::scale_color_excel_new() +
+      # Axis settings
+      ggplot2::labs(
+        title = paste(region, "NO2 Design Values", sep = ' '),
+        y = "NO2 1-hr Concentrations (ppb)",
+        color = "Site Name",
+        shape = "Site Name"
+      ) +
+      ggplot2::scale_y_continuous(breaks = seq(0, 120, 20), limits = c(0, 120)) +
+      # NAAQS 100ppb limit
+      ggplot2::geom_hline(
+        ggplot2::aes(yintercept = 100),
+        color = "red",
+        linewidth = 0.2
+      ) +
+      ggplot2::annotate(
+        'text', 
+        x = xrng[2] - (xrng[2] - xrng[1]) / 2,
+        y = 105,
+        label = "2010 NO2 1-hr NAAQS (100 ppb)",
+        size = 3
+      ) +
+      ggplot2::theme_minimal() +
+      # Visual formatting
+      ggplot2::theme(
+        axis.title.x = ggplot2::element_blank(),
+        axis.ticks.x = ggplot2::element_line(),
+        legend.position = "bottom",
+        legend.title = ggplot2::element_blank(),
+        panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
+        panel.grid.major.x = ggplot2::element_blank()
+      ),
+    tooltip = c('Year', 'text')
+  ) |> 
+    plotly::layout(legend = list(orientation = 'h')) |> 
+    plotly::toWebGL()
+  )
+}

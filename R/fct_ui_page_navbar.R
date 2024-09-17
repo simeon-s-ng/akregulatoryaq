@@ -67,6 +67,46 @@ ui_page_navbar <- function() {
             ),
             fbx_pm10_info()
           ),
+          # Fairbanks CO Filters ----
+          shiny::conditionalPanel(
+            condition = "input.nav == 'Fairbanks' & input.fnsb == 'CO'",
+            mod_filter_data_ui(
+              "filter_data_fbx_co",
+              range_co(),
+              fbx_sites_co()
+            ),
+            fbx_co_info()
+          ),
+          # Fairbanks SO2 Filter ----
+          shiny::conditionalPanel(
+            condition = "input.nav == 'Fairbanks' & input.fnsb == 'SO2'",
+            mod_filter_data_ui(
+              "filter_data_fbx_so2",
+              range_so2(),
+              fbx_sites_so2()
+            ),
+            fbx_so2_info()
+          ),
+          # Fairbanks O3 Filter ----
+          shiny::conditionalPanel(
+            condition = "input.nav == 'Fairbanks' & input.fnsb == 'O3'",
+            mod_filter_data_ui(
+              "filter_data_fbx_o3",
+              range_o3(),
+              "NCore"
+            ),
+            fbx_o3_info()
+          ),
+          # Fairbanks NO2 Filter ----
+          shiny::conditionalPanel(
+            condition = "input.nav == 'Fairbanks' & input.fnsb == 'NO2'",
+            mod_filter_data_ui(
+              "filter_data_fbx_no2",
+              range_no2(),
+              "NCore"
+            ),
+            fbx_no2_info()
+          ),
           # Anchorage PM25 Filters ----
           shiny::conditionalPanel(
             condition = "input.nav == 'Anchorage' & input.anc == 'PM2.5'",
@@ -76,6 +116,26 @@ ui_page_navbar <- function() {
               anc_sites_pm25()
             ),
             anc_pm25_info()
+          ),
+          # Anchorage PM10 Filters ----
+          shiny::conditionalPanel(
+            condition = "input.nav == 'Anchorage' & input.anc == 'PM10'",
+            mod_filter_data_ui(
+              "filter_data_anc_pm10",
+              range_pm10(),
+              anc_sites_pm10()
+            ),
+            anc_pm10_info()
+          ),
+          # Anchorage CO Filters ----
+          shiny::conditionalPanel(
+            condition = "input.nav == 'Anchorage' & input.anc == 'CO'",
+            mod_filter_data_ui(
+              "filter_data_anc_co",
+              range_co(),
+              anc_sites_co()
+            ),
+            anc_co_info()
           ),
           # Juneau PM25 Filters ----
           shiny::conditionalPanel(
@@ -87,6 +147,16 @@ ui_page_navbar <- function() {
             ),
             jnu_pm25_info()
           ),
+          # Juneau PM10 Filters ----
+          shiny::conditionalPanel(
+            condition = "input.nav == 'Juneau' & input.jnu == 'PM10'",
+            mod_filter_data_ui(
+              "filter_data_jnu_pm10",
+              range_pm10(),
+              jnu_sites_pm10()
+            ),
+            jnu_pm10_info()
+          ),
           # Mat-Su PM25 Filters ----
           shiny::conditionalPanel(
             condition = "input.nav == 'Mat-Su' & input.ms == 'PM2.5'",
@@ -97,6 +167,16 @@ ui_page_navbar <- function() {
             ),
             ms_pm25_info()
           ),
+          # Mat-Su PM10 Filters ----
+          shiny::conditionalPanel(
+            condition = "input.nav == 'Mat-Su' & input.ms == 'PM10'",
+            mod_filter_data_ui(
+              "filter_data_ms_pm10",
+              range_pm10(),
+              matsu_sites_pm10()
+            ),
+            ms_pm10_info()
+          ),
           # Bethel PM25 Filters ----
           shiny::conditionalPanel(
             condition = "input.nav == 'Bethel' & input.sw == 'PM2.5'",
@@ -106,6 +186,16 @@ ui_page_navbar <- function() {
               bethel_sites_pm25()
             ),
             sw_pm25_info()
+          ),
+          # Bethel PM10 Filters ----
+          shiny::conditionalPanel(
+            condition = "input.nav == 'Bethel' & input.sw == 'PM10'",
+            mod_filter_data_ui(
+              "filter_data_sw_pm25",
+              range_pm25_bethel(),
+              bethel_sites_pm25()
+            ),
+            sw_pm10_info()
           )
         ),
         mod_download_ui("download"),
@@ -126,6 +216,22 @@ ui_page_navbar <- function() {
         bslib::nav_panel(
           title = "PM10",
           plot_card(mod_pm10_avg_ui("pm10_avg_fbx"), mod_pm10_dv_ui("pm10_dv_fbx"))
+        ),
+        bslib::nav_panel(
+          title = "CO",
+          plot_card(mod_co_avg_ui("co_avg_fbx"), mod_co_dv_ui("co_dv_fbx"))
+        ),
+        bslib::nav_panel(
+          title = "SO2",
+          plot_card(mod_so2_avg_ui("so2_avg_fbx"), mod_so2_dv_ui("so2_dv_fbx"))
+        ),
+        bslib::nav_panel(
+          title = "O3",
+          plot_card(mod_o3_avg_ui("o3_avg_fbx"), mod_o3_dv_ui("o3_dv_fbx"))
+        ),
+        bslib::nav_panel(
+          title = "NO2",
+          plot_card(mod_no2_avg_ui("no2_avg_fbx"), mod_no2_dv_ui("no2_dv_fbx"))
         )
       ),
       ui_footer()
@@ -139,6 +245,14 @@ ui_page_navbar <- function() {
         bslib::nav_panel(
           title = "PM2.5",
           plot_card_pm25("pm25_avg_anc", "pm25_epa_dv_anc", "pm25_dec_dv_anc")
+        ),
+        bslib::nav_panel(
+          title = "PM10",
+          plot_card(mod_pm10_avg_ui("pm10_avg_anc"), mod_pm10_dv_ui("pm10_dv_anc"))
+        ),
+        bslib::nav_panel(
+          title = "CO",
+          plot_card(mod_co_avg_ui("co_avg_anc"), mod_co_dv_ui("co_dv_anc"))
         )
       ),
       ui_footer()
@@ -152,6 +266,10 @@ ui_page_navbar <- function() {
         bslib::nav_panel(
           title = "PM2.5",
           plot_card_pm25("pm25_avg_jnu", "pm25_epa_dv_jnu", "pm25_dec_dv_jnu")
+        ),
+        bslib::nav_panel(
+          title = "PM10",
+          plot_card(mod_pm10_avg_ui("pm10_avg_jnu"), mod_pm10_dv_ui("pm10_dv_jnu"))
         )
       ),
       ui_footer()
@@ -165,6 +283,10 @@ ui_page_navbar <- function() {
         bslib::nav_panel(
           title = "PM2.5",
           plot_card_pm25("pm25_avg_ms", "pm25_epa_dv_ms", "pm25_dec_dv_ms")
+        ),
+        bslib::nav_panel(
+          title = "PM10",
+          plot_card(mod_pm10_avg_ui("pm10_avg_ms"), mod_pm10_dv_ui("pm10_dv_ms"))
         )
       ),
       ui_footer()
@@ -178,6 +300,10 @@ ui_page_navbar <- function() {
         bslib::nav_panel(
           title = "PM2.5",
           plot_card_pm25("pm25_avg_sw", "pm25_epa_dv_sw", "pm25_dec_dv_sw")
+        ),
+        bslib::nav_panel(
+          title = "PM10",
+          plot_card(mod_pm10_avg_ui("pm10_avg_sw"), mod_pm10_dv_ui("pm10_dv_sw"))
         )
       ),
       ui_footer()
