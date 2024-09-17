@@ -36,6 +36,7 @@ ui_page_navbar <- function() {
       ".shiny-output-error { visibility: hidden; }",
       ".shiny-output-error:before { visibility: hidden; }"
     ),
+    ## SIDEBAR -----------------------------------------------------------------
     sidebar = bslib::sidebar(
       open = FALSE,
       padding = c(10, 15),
@@ -71,9 +72,12 @@ ui_page_navbar <- function() {
               )
             )
           )
-        )
+        ),
+        mod_download_ui("download"),
+        open = "Filters"
       )
     ),
+    # REGION PAGES -------------------------------------------------------------
     bslib::nav_panel(
       title = "Fairbanks",
       bslib::navset_card_underline(
@@ -81,7 +85,7 @@ ui_page_navbar <- function() {
         id = "fnsb",
         bslib::nav_panel(
           title = "PM2.5",
-          mod_pm25_avg_ui("pm25_avg_fbx")
+          plot_card_pm25("pm25_avg_fbx", "pm25_epa_dv_fbx", "pm25_dec_dv_fbx")
         )
       ),
       ui_footer()
@@ -91,4 +95,5 @@ ui_page_navbar <- function() {
       .cssSelector = "nav",
       class = "navbar-expand"
     )
+  
 }

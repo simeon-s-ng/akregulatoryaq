@@ -1,6 +1,6 @@
 #' pm25_avg UI Function
 #'
-#' @description A shiny Module.
+#' @description A shiny Module to handle plotting pm25 average concentrations.
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
@@ -16,7 +16,7 @@ mod_pm25_avg_ui <- function(id) {
     
 #' pm25_avg Server Functions
 #' 
-#' @param filter_data
+#' @param filterProxy Input filtering, selected by the user.
 #'
 #' @noRd 
 mod_pm25_avg_server <- function(id, filterProxy){
@@ -32,18 +32,6 @@ mod_pm25_avg_server <- function(id, filterProxy){
     output$plot_pm25 <- plotly::renderPlotly({
       plot_pm25(pm25_data(), filterProxy$year())
     })
-    # pm25_data <- reactive({
-    #   pm25_import_named |> 
-    #     dplyr::filter(
-    #       site_name %in% isolate(filterProxy$site) & 
-    #       lubridate::year(Date) %in% isolate(filterProxy$year)
-    #     )
-    # })
-    # print(head(pm25_data))
-    # output$pm25 <- plotly::renderPlotly({
-      
-    #   plot_pm25(pm25_data(), isolate(filterProxy$year), isolate(filterProxy$site))
-    # })
   })
 }
     

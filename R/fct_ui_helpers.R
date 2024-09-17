@@ -145,7 +145,7 @@ get_howto <- function() {
 #' @param start_year Year site began collecting pollutant data
 #' @param end_year Latest year of collected pollutant data
 #'
-#' @return A sea() of a given year range
+#' @return A seq() of a given year range
 #'
 #' @noRd
 get_range <- function(start_year, end_year) {
@@ -221,19 +221,19 @@ plot_card <- function(plot, plot_dv) {
 #' @return A bslib::card() with accordion and plot outputs - pm2.5 specific
 #' 
 #' @noRd
-plot_card_pm25 <- function(plot, plot_dv_epa, plot_dv_dec) {
+plot_card_pm25 <- function(avg_ns, epa_dv_ns, dec_dv_ns) {
   bslib::accordion(
     # Panel for Avg. Concentration & DV plots
     bslib::accordion_panel(
       "Air Quality Monitoring Data",
       shiny::markdown(
-        "***Expand the left sidepanel (>) to filter by year or site.***",
+        "***Expand the left sidepanel [>] to filter by year or site.***",
         extensions = TRUE
       ),
       shiny::markdown(
         "*Please wait a few seconds for plots to show.*"
       ),
-      plotly::plotlyOutput(plot), 
+      mod_pm25_avg_ui(avg_ns), 
       shiny::markdown(
         "
         
@@ -241,7 +241,7 @@ plot_card_pm25 <- function(plot, plot_dv_epa, plot_dv_dec) {
         
         "
       ),
-      plotly::plotlyOutput(plot_dv_epa),
+      mod_pm25_epa_dv_ui(epa_dv_ns),
       shiny::markdown(
         "
         
@@ -249,7 +249,7 @@ plot_card_pm25 <- function(plot, plot_dv_epa, plot_dv_dec) {
         
         "
       ),
-      plotly::plotlyOutput(plot_dv_dec)
+      mod_pm25_dec_dv_ui(dec_dv_ns)
     ),
     # Panel for 'how to use'
     bslib::accordion_panel(

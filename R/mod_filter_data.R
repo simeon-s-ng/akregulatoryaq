@@ -1,6 +1,6 @@
 #' filter_data UI Function
 #'
-#' @description A shiny Module.
+#' @description A shiny Module to handle user selected input
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #' @param range Year range of when pollutant was measured in the region.
@@ -35,11 +35,12 @@ mod_filter_data_ui <- function(id, range, sites) {
     
 #' filter_data Server Functions
 #'
+#' @return A list of year & site selected by the user
+#' 
 #' @noRd 
 mod_filter_data_server <- function(id){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
-    # filters <- reactiveValues(year = input$year, site = input$site)
     return(
       list(
         year = reactive({input$year}),
