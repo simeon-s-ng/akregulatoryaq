@@ -72,8 +72,8 @@ app_server <- function(input, output, session) {
   mod_o3_avg_server("o3_avg_fbx", proxy_o3_fbx)
 
   mod_o3_dv_server("o3_dv_fbx", "Fairbanks")
-  mod_o3_dv_server("o3_dv_anc", "Anchorage")
-  mod_o3_dv_server("o3_dv_ms", "Mat-Su")
+  # mod_o3_dv_server("o3_dv_anc", "Anchorage")
+  # mod_o3_dv_server("o3_dv_ms", "Mat-Su")
 
   # NO2 1-hour Masimum and Design Values ----
   proxy_no2_fbx <- mod_filter_data_server("filter_data_fbx_no2")
@@ -82,6 +82,6 @@ app_server <- function(input, output, session) {
 
   mod_no2_dv_server("no2_dv_fbx", "Interior")
 
-  # Data Download
+  # Data Download ----
   mod_download_server("download")
 }

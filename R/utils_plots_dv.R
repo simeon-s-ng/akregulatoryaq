@@ -682,6 +682,7 @@ plot_no2_dv <- function(no2_data, region) {
         color = "Site Name",
         shape = "Site Name"
       ) +
+      ggplot2::scale_x_continuous(breaks = function(x) unique(floor(pretty(x)))) +  
       ggplot2::scale_y_continuous(breaks = seq(0, 120, 20), limits = c(0, 120)) +
       # NAAQS 100ppb limit
       ggplot2::geom_hline(

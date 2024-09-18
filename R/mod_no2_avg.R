@@ -10,7 +10,7 @@
 mod_no2_avg_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    plotly::plotlyOutput("plot_no2")
+    plotly::plotlyOutput(ns("plot_no2"))
   )
 }
     

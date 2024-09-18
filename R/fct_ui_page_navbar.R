@@ -191,7 +191,7 @@ ui_page_navbar <- function() {
           shiny::conditionalPanel(
             condition = "input.nav == 'Bethel' & input.sw == 'PM10'",
             mod_filter_data_ui(
-              "filter_data_sw_pm25",
+              "filter_data_sw_pm10",
               range_pm25_bethel(),
               bethel_sites_pm25()
             ),

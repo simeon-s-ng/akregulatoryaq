@@ -174,7 +174,7 @@ plot_card <- function(avg_mod, dv_mod) {
     bslib::accordion_panel(
       "Air Quality Monitoring Data",
       shiny::markdown(
-        "***Expand the left sidepanel (>) to filter by year or site.***",
+        "***Expand the left sidepanel [>] to filter by year or site.***",
         extensions = TRUE
       ),
       shiny::markdown(

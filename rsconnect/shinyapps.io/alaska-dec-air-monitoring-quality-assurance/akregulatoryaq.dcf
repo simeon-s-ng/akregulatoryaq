@@ -1,0 +1,10 @@
+name: akregulatoryaq
+title: akregulatoryaq
+username: alaska-dec-air-monitoring-quality-assurance
+account: alaska-dec-air-monitoring-quality-assurance
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 12755506
+bundleId:
+url: https://alaska-dec-air-monitoring-quality-assurance.shinyapps.io/akregulatoryaq/
+version: 1

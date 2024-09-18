@@ -10,7 +10,7 @@
 mod_no2_dv_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    plotly::plotlyOutput("plot_no2_dv")
+    plotly::plotlyOutput(ns("plot_no2_dv"))
   )
 }
     

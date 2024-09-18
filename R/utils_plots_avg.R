@@ -79,7 +79,7 @@ plot_pm25 <- function(pm25_data, year) {
       ),
     tooltip = c('Date', 'text')
   ) |> 
-    plotly::layout(legend = list(orientation = 'h', x = 0.33, y = -0.1)) |> 
+    plotly::layout(legend = list(orientation = 'h')) |> 
     plotly::toWebGL()
 }
 
@@ -147,7 +147,7 @@ plot_pm10 <- function(pm10_data, year) {
       ),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', x = 0.33, y = -0.1)) |> 
+    plotly::layout(legend = list(orientation = 'h')) |> 
     plotly::toWebGL()
 }
 
@@ -211,7 +211,7 @@ plot_co <- function(co_data, year) {
       ),
     tooltip = c('Date', 'text')
   ) |> 
-    plotly::layout(legend = list(orientation = 'h', x = 0.33, y = -0.1)) |> 
+    plotly::layout(legend = list(orientation = 'h')) |> 
     plotly::toWebGL()
 }
 
@@ -271,7 +271,7 @@ plot_so2 <- function(so2_data, year) {
         panel.grid.major.x = ggplot2::element_blank()),
     tooltip = c('Date', 'text')
   ) |> 
-    plotly::layout(legend = list(orientation = 'h', x = 0.33, y = -0.1)) |> 
+    plotly::layout(legend = list(orientation = 'h')) |> 
     plotly::toWebGL()
 }
 
@@ -289,7 +289,8 @@ plot_o3 <- function(o3_data, year) {
           shape = site_name,
           text = paste(year, site_name, "Data Point:", avg_8hr, "ppm")
         ),
-        alpha = 0.5) +
+        alpha = 0.5
+      ) +
       ggplot2::scale_color_brewer(palette = "Dark2", direction = -1) +
       # Axis settings
       ggplot2::labs(
@@ -349,7 +350,7 @@ plot_o3 <- function(o3_data, year) {
         panel.grid.major.x = ggplot2::element_blank()),
     tooltip = c('Date', 'text')
   ) |> 
-    plotly::layout(legend = list(orientation = 'h', x = 0.33, y = -0.1)) |> 
+    plotly::layout(legend = list(orientation = 'h')) |> 
     plotly::toWebGL()
 }
 
@@ -410,7 +411,7 @@ plot_no2 <- function(no2_data, year) {
       ),
     tooltip = c('Date', 'text')
   ) |> 
-    plotly::layout(legend = list(orientation = 'h', x = 0.33, y = -0.1)) |> 
+    plotly::layout(legend = list(orientation = 'h'))|> 
     plotly::toWebGL()
 }
 
