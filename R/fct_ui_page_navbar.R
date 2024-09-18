@@ -301,7 +301,8 @@ ui_page_navbar <- function() {
         id = "sw",
         bslib::nav_panel(
           title = "PM2.5",
-          plot_card_pm25("pm25_avg_sw", "pm25_epa_dv_sw", "pm25_dec_dv_sw")
+          plot_card(mod_pm25_avg_ui("pm25_avg_sw"), mod_pm25_dec_dv_ui("pm25_dec_dv_sw"))
+          # plot_card_pm25("pm25_avg_sw", "pm25_epa_dv_sw", "pm25_dec_dv_sw")
         ),
         bslib::nav_panel(
           title = "PM10",
