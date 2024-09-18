@@ -3,6 +3,8 @@
 #' @description Wrapper for main page navbar.
 #'
 #' @return A bslib::page_navbar()
+#' 
+#' @importFrom bsicons bs_icon
 #'
 #' @noRd
 ui_page_navbar <- function() {
