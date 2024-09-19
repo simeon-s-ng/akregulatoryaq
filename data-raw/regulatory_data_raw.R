@@ -479,7 +479,13 @@ co_dvs <- read_csv(
     Year = year
   ) |> 
   filter(!is.na(max_8hr), !is.na(max_8hr_2), !is.na(site_name)) |> 
-  mutate(site_name = ifelse(site_name == "Ncore", "NCore", site_name))
+  mutate(site_name = ifelse(site_name == "Ncore", "NCore", site_name)) |> 
+  pivot_longer(cols = 3:4, names_to = "value_type", values_to = "value") |> 
+  mutate(
+    value_type = ifelse(
+      value_type == "max_8hr", "First Maximum", "Second Maximum"
+    )
+  )
 
 # Filter to FBX CO monitoring sites
 co_dvs_fbx <- co_dvs |> 
@@ -514,7 +520,13 @@ o3_dvs <- read_csv(
   select(site_name, year, "8 hour maximum", "3-year design value") |> 
   rename(max_8hr = "8 hour maximum", dv_3yr = "3-year design value",
          Year = year) |> 
-  filter(!is.na(max_8hr) | !is.na(dv_3yr), !is.na(site_name))
+  filter(!is.na(max_8hr) | !is.na(dv_3yr), !is.na(site_name)) |> 
+  pivot_longer(cols = 3:4, names_to = "value_type", values_to = "value") |> 
+  mutate(
+    value_type = ifelse(
+      value_type == "max_8hr", "Fourth Maximum", "3-Year Design Value"
+    )
+  )
 
 o3_dvs_fbx <- o3_dvs |> filter(site_name == "NCore")
 
@@ -537,7 +549,16 @@ so2_dvs <- read_csv(
     dv_3yr = "3-year design value", 
     Year = year
   ) |>
-  filter(!is.na(max_1hr), !is.na(dv_3yr))
+  filter(!is.na(max_1hr), !is.na(dv_3yr)) |> 
+  pivot_longer(cols = 3:4, names_to = "value_type", values_to = "value") |> 
+  mutate(
+    value_type = ifelse(
+      value_type == "max_1hr", "1-hr Maximum", "3-Year Design Value"
+    ),
+    site_name = ifelse(
+      site_name == "Hurst", "Hurst Road", site_name
+    )
+  )
 
 # Import NO2 DVs ---------------------------------------------------------------
 no2_dvs <- read_csv(
@@ -554,7 +575,13 @@ no2_dvs <- read_csv(
     dv_3yr = "3-year design value", 
     Year = year
   ) |> 
-  filter(!is.na(max_1hr), !is.na(dv_3yr))
+  filter(!is.na(max_1hr), !is.na(dv_3yr)) |> 
+  pivot_longer(cols = 3:4, names_to = "value_type", values_to = "value") |> 
+  mutate(
+    value_type = ifelse(
+      value_type == "max_1hr", "1-hr Maximum", "3-Year Design Value"
+    )
+  )
 
 ## Write datasets --------------------------------------------------------------
 

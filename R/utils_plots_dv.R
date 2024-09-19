@@ -383,36 +383,35 @@ plot_co_dv <- function(co_data, region) {
   xrng <- range(co_data$Year)
   
   return(plotly::ggplotly(
-    ggplot2::ggplot(co_data, ggplot2::aes(x = Year, )) +
+    ggplot2::ggplot(
+      co_data,
+      ggplot2::aes(
+        x = Year,
+        y = value,
+        group = value_type,
+        color = site_name,
+        shape = site_name,
+        text = paste(site_name, value_type, ":", value, "ppm") 
+      )
+    ) +
+      ggplot2::geom_line(
+        data = subset(co_data, value_type == "Second Maximum"),
+        alpha = 0.45
+      ) + 
       ggplot2::geom_point(
-        mapping = ggplot2::aes(
-          y = max_8hr,
-          color = site_name,
-          shape = site_name,
-          text = paste(site_name, "1st Maximum:", max_8hr, "ppm")
-        ),
-        alpha = 0.9,
+        data = subset(co_data, value_type == "Second Maximum"),
+        alpha = 0.45, 
         size = 2
       ) +
       ggplot2::geom_line(
-        ggplot2::aes(y = max_8hr, color = site_name),
+        data = subset(co_data, value_type == "First Maximum"),
         alpha = 0.9
-      ) +
+      ) + 
       ggplot2::geom_point(
-        mapping = ggplot2::aes(
-          y = max_8hr_2,
-          color = site_name,
-          shape = site_name,
-          text = paste(site_name, "2nd Maximum:", max_8hr_2, "ppm")
-        ),
-        alpha = 0.5,
+        data = subset(co_data, value_type == "First Maximum"),
+        alpha = 0.9, 
         size = 2
       ) +
-      ggplot2::geom_line(
-        ggplot2::aes(y = max_8hr_2, color = site_name), 
-        alpha = 0.5
-      ) +
-      ggplot2::guides(color = "none") +
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
@@ -435,6 +434,7 @@ plot_co_dv <- function(co_data, region) {
         label = "1971 CO 8-hr NAAQS (9 ppm)",
         size = 3
       ) +
+      ggplot2::guides(color = "none", linetype = "none") +
       ggplot2::theme_minimal() +
       # Visual formatting
       ggplot2::theme(
@@ -459,36 +459,35 @@ plot_so2_dv <- function(so2_data, region) {
   xrng <- range(so2_data$Year)
   
   return(plotly::ggplotly(
-    ggplot2::ggplot(so2_data, ggplot2::aes(x = Year)) +
+    ggplot2::ggplot(
+      so2_data, 
+      ggplot2::aes(
+        x = Year,
+        y = value,
+        group = value_type,
+        color = site_name,
+        shape = site_name,
+        text = paste(site_name, value_type, ":", value, "ppb")
+      )
+    ) +
+      ggplot2::geom_line(
+        data = subset(so2_data, value_type == "1-hr Maximum"),
+        alpha = 0.45
+      ) + 
       ggplot2::geom_point(
-        mapping = ggplot2::aes(
-          y = dv_3yr,
-          color = site_name,
-          shape = site_name,
-          text = paste(site_name, "3-Year Design Value:", dv_3yr, "ppb")
-        ),
-        alpha = 0.9,
+        data = subset(so2_data, value_type == "1-hr Maximum"),
+        alpha = 0.45, 
         size = 2
       ) +
       ggplot2::geom_line(
-        ggplot2::aes(y = dv_3yr, color = site_name), 
+        data = subset(so2_data, value_type == "3-Year Design Value"),
         alpha = 0.9
-      ) +
+      ) + 
       ggplot2::geom_point(
-        mapping = ggplot2::aes(
-          y = max_1hr,
-          color = site_name,
-          shape = site_name,
-          text = paste(site_name, "Maximum Value:", max_1hr, "ppb")
-        ),
-        alpha = 0.5,
+        data = subset(so2_data, value_type == "3-Year Design Value"),
+        alpha = 0.9, 
         size = 2
       ) +
-      ggplot2::geom_line(
-        ggplot2::aes(y = max_1hr, color = site_name), 
-        alpha = 0.5
-      ) +
-      ggplot2::guides(color = "none") +
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
@@ -511,6 +510,7 @@ plot_so2_dv <- function(so2_data, region) {
         label = "2010 SO2 1-hr NAAQS (75 ppb)",
         size = 3
       ) +
+      ggplot2::guides(color = "none", linetype = "none") +
       ggplot2::theme_minimal() +
       # Visual formatting
       ggplot2::theme(
@@ -535,32 +535,35 @@ plot_o3_dv <- function(o3_data, region) {
   xrng <- range(o3_data$Year)
   
   return(plotly::ggplotly(
-    ggplot2::ggplot(o3_data, ggplot2::aes(x = Year)) +
+    ggplot2::ggplot(
+      o3_data, 
+      ggplot2::aes(
+        x = Year,
+        y = value,
+        group = value_type,
+        color = site_name,
+        shape = site_name,
+        text = paste(site_name, value_type, ":", value, "ppb")
+      )
+    ) +
+      ggplot2::geom_line(
+        data = subset(o3_data, value_type == "Fourth Maximum"),
+        alpha = 0.45
+      ) + 
       ggplot2::geom_point(
-        mapping = ggplot2::aes(
-          y = max_8hr,
-          color = site_name,
-          shape = site_name,
-          text = paste(site_name, "Maximum Value:", max_8hr, "ppb")
-        ),
-        alpha = 0.5,
+        data = subset(o3_data, value_type == "Fourth Maximum"),
+        alpha = 0.45, 
         size = 2
       ) +
       ggplot2::geom_line(
-        ggplot2::aes(y = max_8hr, color = site_name), 
-        alpha = 0.5
-      ) +
+        data = subset(o3_data, value_type == "3-Year Design Value"),
+        alpha = 0.9
+      ) + 
       ggplot2::geom_point(
-        mapping = ggplot2::aes(
-          y = dv_3yr,
-          color = site_name,
-          shape = site_name,
-          text = paste(site_name, "3-Year Design Value:", dv_3yr, "ppb")
-        ),
-        alpha = 0.9,
-        size = 2) +
-      ggplot2::geom_line(ggplot2::aes(y = dv_3yr, color = site_name), alpha = 0.9) +
-      ggplot2::guides(color = "none") +
+        data = subset(o3_data, value_type == "3-Year Design Value"),
+        alpha = 0.9, 
+        size = 2
+      ) +
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
@@ -643,6 +646,7 @@ plot_o3_dv <- function(o3_data, region) {
           size = 3
         )
       } +
+      ggplot2::guides(color = "none", linetype = "none") +
       ggplot2::theme_minimal() +
       # Visual formatting
       ggplot2::theme(
@@ -666,36 +670,35 @@ plot_no2_dv <- function(no2_data, region) {
   xrng <- range(no2_data$Year)
   
   return(plotly::ggplotly(
-    ggplot2::ggplot(no2_data, ggplot2::aes(x = Year)) +
+    ggplot2::ggplot(
+      no2_data, 
+      ggplot2::aes(
+        x = Year,
+        y = value,
+        group = value_type,
+        color = site_name,
+        shape = site_name,
+        text = paste(site_name, value_type, ":", value, "ppb")
+      )
+    ) +
+      ggplot2::geom_line(
+        data = subset(no2_data, value_type == "1-hr Maximum"),
+        alpha = 0.45
+      ) + 
       ggplot2::geom_point(
-        mapping = ggplot2::aes(
-          y = dv_3yr, 
-          color = site_name,
-          shape = site_name,
-          text = paste(site_name, "3-Year Design Value:", dv_3yr, "ppb")
-        ),
-        alpha = 0.9,
+        data = subset(no2_data, value_type == "1-hr Maximum"),
+        alpha = 0.45, 
         size = 2
       ) +
       ggplot2::geom_line(
-        ggplot2::aes(y = dv_3yr, color = site_name), 
+        data = subset(no2_data, value_type == "3-Year Design Value"),
         alpha = 0.9
-      ) +
+      ) + 
       ggplot2::geom_point(
-        mapping = ggplot2::aes(
-          y = max_1hr, 
-          color = site_name,
-          shape = site_name,
-          text = paste(site_name, "1-Hour Maximum Value:",max_1hr, "ppb")
-        ),
-        alpha = 0.5,
+        data = subset(no2_data, value_type == "3-Year Design Value"),
+        alpha = 0.9, 
         size = 2
       ) +
-      ggplot2::geom_line(
-        ggplot2::aes(y = max_1hr, color = site_name), 
-        alpha = 0.5
-      ) +
-      ggplot2::guides(color = "none") +
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
@@ -719,6 +722,7 @@ plot_no2_dv <- function(no2_data, region) {
         label = "2010 NO2 1-hr NAAQS (100 ppb)",
         size = 3
       ) +
+      ggplot2::guides(color = "none", linetype = "none") +
       ggplot2::theme_minimal() +
       # Visual formatting
       ggplot2::theme(
