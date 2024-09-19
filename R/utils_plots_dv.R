@@ -142,7 +142,10 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
-        panel.grid.major.x = ggplot2::element_blank()),
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
+        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
+      ),
     tooltip = c('Year', 'text'),
     dynamicTicks = TRUE
   ) |> 
@@ -291,7 +294,10 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
-        panel.grid.major.x = ggplot2::element_blank()),
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
+        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
+      ),
     tooltip = c('Year', 'text')
   ) |> 
     plotly::layout(legend = list(orientation = 'h')) |> 
@@ -368,7 +374,10 @@ plot_pm10_dv <- function(pm10_data, region) {
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
-        panel.grid.major.x = ggplot2::element_blank()),
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
+        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
+      ),
     tooltip = c('Year', 'text')
   ) |> 
     plotly::layout(legend = list(orientation = 'h')) |> 
@@ -443,7 +452,9 @@ plot_co_dv <- function(co_data, region) {
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
-        panel.grid.major.x = ggplot2::element_blank()
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
+        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
       ),
     tooltip = c('Year', 'text')
   ) |> 
@@ -519,7 +530,9 @@ plot_so2_dv <- function(so2_data, region) {
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
-        panel.grid.major.x = ggplot2::element_blank()
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
+        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
       ),
     tooltip = c('Year', 'text')
   ) |> 
@@ -655,7 +668,10 @@ plot_o3_dv <- function(o3_data, region) {
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
-        panel.grid.major.x = ggplot2::element_blank()),
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
+        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
+      ),
     tooltip = c('Year', 'text')
   ) |> 
     plotly::layout(legend = list(orientation = 'h')) |> 
@@ -731,7 +747,9 @@ plot_no2_dv <- function(no2_data, region) {
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
-        panel.grid.major.x = ggplot2::element_blank()
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
+        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
       ),
     tooltip = c('Year', 'text')
   ) |> 
@@ -886,7 +904,10 @@ plot_dv_test <- function(pm25_data, region) {
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
-        panel.grid.major.x = ggplot2::element_blank()),
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
+        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
+      ),
     tooltip = c('Year', 'text'),
     dynamicTicks = TRUE
   ) |> 

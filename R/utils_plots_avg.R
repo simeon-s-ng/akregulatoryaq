@@ -75,7 +75,9 @@ plot_pm25 <- function(pm25_data, year) {
         axis.ticks.x = ggplot2::element_line(),
         legend.position = "bottom",
         panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
-        panel.grid.major.x = ggplot2::element_blank()
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
+        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
       ),
     tooltip = c('Date', 'text')
   ) |> 
@@ -143,7 +145,9 @@ plot_pm10 <- function(pm10_data, year) {
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
-        panel.grid.major.x = ggplot2::element_blank()
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
+        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
       ),
     tooltip = c('Date', 'text')
   ) |>
@@ -207,7 +211,9 @@ plot_co <- function(co_data, year) {
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
-        panel.grid.major.x = ggplot2::element_blank()
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
+        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
       ),
     tooltip = c('Date', 'text')
   ) |> 
@@ -268,7 +274,10 @@ plot_so2 <- function(so2_data, year) {
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
-        panel.grid.major.x = ggplot2::element_blank()),
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
+        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
+      ),
     tooltip = c('Date', 'text')
   ) |> 
     plotly::layout(legend = list(orientation = 'h')) |> 
@@ -347,7 +356,10 @@ plot_o3 <- function(o3_data, year) {
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
-        panel.grid.major.x = ggplot2::element_blank()),
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
+        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
+      ),
     tooltip = c('Date', 'text')
   ) |> 
     plotly::layout(legend = list(orientation = 'h')) |> 
@@ -407,7 +419,9 @@ plot_no2 <- function(no2_data, year) {
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#4572A7", fill = NA),
-        panel.grid.major.x = ggplot2::element_blank()
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
+        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
       ),
     tooltip = c('Date', 'text')
   ) |> 

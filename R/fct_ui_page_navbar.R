@@ -8,6 +8,8 @@
 #'
 #' @noRd
 ui_page_navbar <- function() {
+  thematic::thematic_shiny(font = "auto")
+
   bslib::page_navbar(
     id = "nav",
     theme = ui_theme(),
@@ -20,7 +22,7 @@ ui_page_navbar <- function() {
           "
             .bslib-sidebar-layout > .collapse-toggle {
               margin-top: 10px;
-              background-color: #3B4F73;
+              background-color: #194A6B;
             }
             .bslib-sidebar-layout > .collapse-toggle > .collapse-icon {
               fill: white !important;

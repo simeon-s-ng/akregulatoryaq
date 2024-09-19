@@ -41,10 +41,10 @@ ui_theme <- function() {
   bslib::bs_theme(
     version = 5,
     preset = "bootstrap",
-    bg = "#FFFFFF",
-    fg = "#253B64",
+    bg = "#F7F5F2",
+    fg = "#194A6B",
     primary = "#000000",
-    secondary = "#253B64",
+    secondary = "#194A6B",
     "nav-link-font-size" = "14px",
     base_font = bslib::font_google("Open Sans", local = TRUE)
   ) |> 
