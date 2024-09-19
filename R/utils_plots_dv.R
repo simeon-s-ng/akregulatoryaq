@@ -306,36 +306,35 @@ plot_pm10_dv <- function(pm10_data, region) {
   xrng <- range(pm10_data$Year)
   
   return(plotly::ggplotly(
-    ggplot2::ggplot(pm10_data, ggplot2::aes(x = Year)) +
+    ggplot2::ggplot(
+      pm10_data, 
+      ggplot2::aes(
+        x = Year,
+        y = value,
+        group = value_type,
+        color = site_name,
+        shape = site_name,
+        text = paste(site_name, value_type, ":", value, "µg/m³")
+      )
+    ) +
+      ggplot2::geom_line(
+        data = subset(pm10_data, value_type == "Second Maximum"),
+        alpha = 0.45
+      ) + 
       ggplot2::geom_point(
-        mapping = ggplot2::aes(
-          y = first_max,
-          color = site_name,
-          shape = site_name,
-          text = paste(site_name, "1st Max:", first_max, "µg/m³")
-        ),
-        alpha = 0.9,
+        data = subset(pm10_data, value_type == "Second Maximum"),
+        alpha = 0.45, 
         size = 2
       ) +
       ggplot2::geom_line(
-        ggplot2::aes(y = first_max, color = site_name), 
+        data = subset(pm10_data, value_type == "First Maximum"),
         alpha = 0.9
-      ) +
+      ) + 
       ggplot2::geom_point(
-        mapping = ggplot2::aes(
-          y = second_max,
-          color = site_name,
-          shape = site_name,
-          text = paste(site_name, "2nd Max:", second_max, "µg/m³")
-        ),
-        alpha = 0.5,
+        data = subset(pm10_data, value_type == "First Maximum"),
+        alpha = 0.9, 
         size = 2
       ) +
-      ggplot2::geom_line(
-        ggplot2::aes(y = second_max, color = site_name), 
-        alpha = 0.5
-      ) +
-      ggplot2::guides(color = "none") +
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
@@ -355,10 +354,12 @@ plot_pm10_dv <- function(pm10_data, region) {
       ggplot2::annotate(
         'text', 
         x = xrng[2] - (xrng[2] - xrng[1]) / 2,
-        y = 300,
+        y = 175,
         label = "1987 PM2.5 24-hr NAAQS (150 µg/m³)",
+        alpha = 0.7,
         size = 3
       ) +
+      ggplot2::guides(color = "none", linetype = "none") +
       ggplot2::theme_minimal() +
       # Visual formatting
       ggplot2::theme(

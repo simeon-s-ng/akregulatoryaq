@@ -371,7 +371,7 @@ pm25_dvs <- read_csv(
   ) |> 
   mutate(site_name = if_else(site_name == "Hurst", "Hurst Road", site_name)) |> 
   mutate(percentile_EPA_ex = as.numeric(percentile_EPA_ex)) |> 
-  pivot_longer(cols = 3:6, names_to = "value_type", values_to = "value") 
+  pivot_longer(cols = 3:6, names_to = "value_type", values_to = "value")
 
 pm25_dvs_sw <- pm25_dvs |> 
   filter(site_name == "Bethel")
@@ -427,7 +427,15 @@ pm10_dvs <- read_csv(
          second_max = "second maximum",
          Year = year) |> 
   select(site_name, Year, first_max, second_max) |> 
-  filter(!is.na(first_max) | !is.na(second_max))
+  filter(!is.na(first_max) | !is.na(second_max)) |> 
+  pivot_longer(cols = 3:4, names_to = "value_type", values_to = "value") |> 
+  mutate(
+    value_type = ifelse(
+      value_type == "first_max", 
+      "First Maximum", 
+      "Second Maximum"
+    )
+  )
 
 pm10_dvs_sw <- pm10_dvs |> filter(site_name == "Bethel")
 
