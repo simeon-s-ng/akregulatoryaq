@@ -21,7 +21,7 @@ plot_pm25 <- function(pm25_data, year) {
         ),
         alpha = 0.6
       ) +
-      ggplot2::scale_color_brewer(palette = "Dark2", direction = -1) +
+      ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
         title = paste(year, "PM2.5 24-hr Average Concentrations", sep = ' '),
@@ -106,7 +106,7 @@ plot_pm10 <- function(pm10_data, year) {
         ),
         alpha = 0.5
       ) +
-      ggplot2::scale_color_brewer(palette = "Dark2", direction = -1) +
+      ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
         title = paste(year, "PM10 24-hr Average Concentrations", sep = ' '),
@@ -170,7 +170,7 @@ plot_co <- function(co_data, year) {
           text = paste(year, site_name, "Data Point:", avg_8hr, "ppm")
         ),
         alpha = 0.5) +
-      ggplot2::scale_color_brewer(palette = "Dark2", direction = -1) +
+      ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
         title = paste(year, "CO 8-hr Average Concentrations", sep = ' '),
@@ -231,7 +231,7 @@ plot_so2 <- function(so2_data, year) {
         ),
         alpha = 0.5
       ) +
-      ggplot2::scale_color_brewer(palette = "Dark2", direction = -1) +
+      ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
         title = paste(year, "SO2 1-hr Maximum Concentrations", sep = ' '),
@@ -291,7 +291,7 @@ plot_o3 <- function(o3_data, year) {
         ),
         alpha = 0.5
       ) +
-      ggplot2::scale_color_brewer(palette = "Dark2", direction = -1) +
+     ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
         title = paste(year, "O3 8-hr Average Concentrations", sep = ' '),
@@ -370,7 +370,7 @@ plot_no2 <- function(no2_data, year) {
         ),
         alpha = 0.5
       ) +
-      ggplot2::scale_color_brewer(palette = "Dark2", direction = -1) +
+      ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
         title = paste(year, "NO2 1-hr Maximum Concentrations", sep = ' '),

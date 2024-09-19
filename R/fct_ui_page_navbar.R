@@ -302,14 +302,23 @@ ui_page_navbar <- function() {
         bslib::nav_panel(
           title = "PM2.5",
           plot_card(mod_pm25_avg_ui("pm25_avg_sw"), mod_pm25_dec_dv_ui("pm25_dec_dv_sw"))
-          # plot_card_pm25("pm25_avg_sw", "pm25_epa_dv_sw", "pm25_dec_dv_sw")
-        ),
+         ),
         bslib::nav_panel(
           title = "PM10",
           plot_card(mod_pm10_avg_ui("pm10_avg_sw"), mod_pm10_dv_ui("pm10_dv_sw"))
         )
       ),
       ui_footer()
+    ),
+    bslib::nav_spacer(),
+    # Link to realtime data ----
+    bslib::nav_item(
+      htmltools::tags$a(
+        shiny::icon("wind"), 
+        "Alaska Realtime Air Quality Data", 
+        href = "https://dec.alaska.gov/air/air-monitoring/responsibilities/database-management/alaska-air-quality-real-time-data/", 
+        target = "_blank"
+      )
     )
   ) |> 
     htmltools::tagAppendAttributes(

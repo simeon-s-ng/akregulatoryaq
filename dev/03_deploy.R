@@ -43,6 +43,8 @@ golem::add_shinyserver_file()
 rsconnect::writeManifest()
 
 ## In command line.
+## options(rsconnect.packrat = TRUE)
+
 rsconnect::deployApp(
   appName = desc::desc_get_field("Package"),
   appTitle = desc::desc_get_field("Package"),

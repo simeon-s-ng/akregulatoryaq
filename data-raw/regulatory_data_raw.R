@@ -369,8 +369,9 @@ pm25_dvs <- read_csv(
       site_name
     )
   ) |> 
-  mutate(ite_name = if_else(site_name == "Hurst", "Hurst Road", site_name)) |> 
-  mutate(percentile_EPA_ex = as.numeric(percentile_EPA_ex))
+  mutate(site_name = if_else(site_name == "Hurst", "Hurst Road", site_name)) |> 
+  mutate(percentile_EPA_ex = as.numeric(percentile_EPA_ex)) |> 
+  pivot_longer(cols = 3:6, names_to = "value_type", values_to = "value") 
 
 pm25_dvs_sw <- pm25_dvs |> 
   filter(site_name == "Bethel")
