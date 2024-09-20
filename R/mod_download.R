@@ -51,7 +51,7 @@ mod_download_server <- function(id){
         paste0("DEC_AK_", input$dataset, ".csv")
       },
       content = function(file) {
-        write.csv(datasetInput(), file())
+        write.csv(datasetInput(), file)
       }
     )
   })

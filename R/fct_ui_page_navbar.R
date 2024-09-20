@@ -387,7 +387,7 @@ ui_page_navbar <- function() {
     bslib::nav_item(
       htmltools::tags$a(
         shiny::icon("wind"), 
-        "Alaska Realtime Air Quality Data", 
+        "Alaska Real Time Air Quality Data", 
         href = "https://dec.alaska.gov/air/air-monitoring/responsibilities/database-management/alaska-air-quality-real-time-data/", 
         target = "_blank"
       )

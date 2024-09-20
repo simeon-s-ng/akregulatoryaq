@@ -173,7 +173,7 @@ naaqs_table <- function() {
       style = list(
         gt::cell_text(color = "#ffffff"),
         gt::cell_fill(color = "#072f49"),
-        gt::cell_borders(color = "#ffffff")
+        gt::cell_borders(color = "#F7F5F2")
       ),
       locations = list(
         gt::cells_stub(),
@@ -182,7 +182,10 @@ naaqs_table <- function() {
       )
     ) |> 
     gt::tab_style(
-      style = gt::cell_borders(color = "#072f49"),
+      style = list(
+        gt::cell_borders(color = "#072f49"),
+        gt::cell_fill(color = "#F7F5F2")
+      ),
       locations = gt::cells_body(columns = everything())
     ) |> 
     gt::tab_options(
