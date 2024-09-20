@@ -158,6 +158,40 @@ get_range <- function(start_year, end_year) {
   return(range)
 }
 
+#' naaqs_table
+#' 
+#' @description Table with PM2.5 NAAQS values.
+#' 
+#' @return A gt table
+#' 
+#' @noRd
+naaqs_table <- function() {
+  naaqs_table <- naaqs_data |> 
+    gt::gt(rowname_col = "Standard") |> 
+    gt::tab_stubhead(label = "Standard") |> 
+    gt::tab_style(
+      style = list(
+        gt::cell_text(color = "#ffffff"),
+        gt::cell_fill(color = "#072f49"),
+        gt::cell_borders(color = "#ffffff")
+      ),
+      locations = list(
+        gt::cells_stub(),
+        gt::cells_stubhead(),
+        gt::cells_column_labels(columns = everything())
+      )
+    ) |> 
+    gt::tab_style(
+      style = gt::cell_borders(color = "#072f49"),
+      locations = gt::cells_body(columns = everything())
+    ) |> 
+    gt::tab_options(
+      table.width = "100%",
+      table.layout = "auto"
+    )
+  return(naaqs_table)
+}
+
 #' plot_card
 #' 
 #' @description Card with avg conc & design value plots
@@ -168,7 +202,7 @@ get_range <- function(start_year, end_year) {
 #' @return A bslib::card() with accordion and plot outputs
 #' 
 #' @noRd
-plot_card <- function(avg_mod, dv_mod) {
+plot_card <- function(avg_mod, dv_mod, table_mod) {
   bslib::accordion(
     # Panel for Avg. Concentration & DV plots
     bslib::accordion_panel(
@@ -204,7 +238,7 @@ plot_card <- function(avg_mod, dv_mod) {
     # Panel for NAAQS table
     bslib::accordion_panel(
       "NAAQS Table",
-      "NAAQS Table HERE"
+      table_mod
     ),
     open = "Air Quality Monitoring Data"
   )
@@ -221,7 +255,7 @@ plot_card <- function(avg_mod, dv_mod) {
 #' @return A bslib::card() with accordion and plot outputs - pm2.5 specific
 #' 
 #' @noRd
-plot_card_pm25 <- function(avg_ns, epa_dv_ns, dec_dv_ns) {
+plot_card_pm25 <- function(avg_ns, epa_dv_ns, dec_dv_ns, table_ns) {
   bslib::accordion(
     # Panel for Avg. Concentration & DV plots
     bslib::accordion_panel(
@@ -265,7 +299,7 @@ plot_card_pm25 <- function(avg_ns, epa_dv_ns, dec_dv_ns) {
     # Panel for NAAQS table
     bslib::accordion_panel(
       "NAAQS Table",
-      "NAAQS Table HERE"
+      mod_naaqs_table_ui(table_ns)
     ),
     open = "Air Quality Monitoring Data"
   )

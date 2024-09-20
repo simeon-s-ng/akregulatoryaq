@@ -23,7 +23,7 @@ mod_download_ui <- function(id) {
             `none-selected-text` = "Select a Dataset"
           )
         ),
-        shiny::downloadButton("downloadData", "Download")
+        shiny::downloadButton(ns("downloadData"), "Download")
       )
     )
   )

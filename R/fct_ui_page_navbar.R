@@ -221,27 +221,52 @@ ui_page_navbar <- function() {
         id = "fnsb",
         bslib::nav_panel(
           title = "PM2.5",
-          plot_card_pm25("pm25_avg_fbx", "pm25_epa_dv_fbx", "pm25_dec_dv_fbx")
+          plot_card_pm25(
+            "pm25_avg_fbx", 
+            "pm25_epa_dv_fbx", 
+            "pm25_dec_dv_fbx",
+            "pm25_table_fbx"
+          )
         ),
         bslib::nav_panel(
           title = "PM10",
-          plot_card(mod_pm10_avg_ui("pm10_avg_fbx"), mod_pm10_dv_ui("pm10_dv_fbx"))
+          plot_card(
+            mod_pm10_avg_ui("pm10_avg_fbx"), 
+            mod_pm10_dv_ui("pm10_dv_fbx"),
+            mod_naaqs_table_ui("pm10_table_fbx")
+          )
         ),
         bslib::nav_panel(
           title = "CO",
-          plot_card(mod_co_avg_ui("co_avg_fbx"), mod_co_dv_ui("co_dv_fbx"))
+          plot_card(
+            mod_co_avg_ui("co_avg_fbx"), 
+            mod_co_dv_ui("co_dv_fbx"),
+            mod_naaqs_table_ui("co_table_fbx")
+          )
         ),
         bslib::nav_panel(
           title = "SO2",
-          plot_card(mod_so2_avg_ui("so2_avg_fbx"), mod_so2_dv_ui("so2_dv_fbx"))
+          plot_card(
+            mod_so2_avg_ui("so2_avg_fbx"), 
+            mod_so2_dv_ui("so2_dv_fbx"),
+            mod_naaqs_table_ui("so2_table_fbx")
+          )
         ),
         bslib::nav_panel(
           title = "O3",
-          plot_card(mod_o3_avg_ui("o3_avg_fbx"), mod_o3_dv_ui("o3_dv_fbx"))
+          plot_card(
+            mod_o3_avg_ui("o3_avg_fbx"), 
+            mod_o3_dv_ui("o3_dv_fbx"),
+            mod_naaqs_table_ui("o3_table_fbx")
+          )
         ),
         bslib::nav_panel(
           title = "NO2",
-          plot_card(mod_no2_avg_ui("no2_avg_fbx"), mod_no2_dv_ui("no2_dv_fbx"))
+          plot_card(
+            mod_no2_avg_ui("no2_avg_fbx"), 
+            mod_no2_dv_ui("no2_dv_fbx"),
+            mod_naaqs_table_ui("no2_table_fbx")
+          )
         )
       ),
       ui_footer()
@@ -254,15 +279,28 @@ ui_page_navbar <- function() {
         id = "anc",
         bslib::nav_panel(
           title = "PM2.5",
-          plot_card_pm25("pm25_avg_anc", "pm25_epa_dv_anc", "pm25_dec_dv_anc")
+          plot_card_pm25(
+            "pm25_avg_anc", 
+            "pm25_epa_dv_anc", 
+            "pm25_dec_dv_anc",
+            "pm25_table_anc"
+          )
         ),
         bslib::nav_panel(
           title = "PM10",
-          plot_card(mod_pm10_avg_ui("pm10_avg_anc"), mod_pm10_dv_ui("pm10_dv_anc"))
+          plot_card(
+            mod_pm10_avg_ui("pm10_avg_anc"), 
+            mod_pm10_dv_ui("pm10_dv_anc"),
+            mod_naaqs_table_ui("pm10_table_anc")
+          )
         ),
         bslib::nav_panel(
           title = "CO",
-          plot_card(mod_co_avg_ui("co_avg_anc"), mod_co_dv_ui("co_dv_anc"))
+          plot_card(
+            mod_co_avg_ui("co_avg_anc"), 
+            mod_co_dv_ui("co_dv_anc"),
+            mod_naaqs_table_ui("co_table_anc")
+          )
         )
       ),
       ui_footer()
@@ -275,11 +313,20 @@ ui_page_navbar <- function() {
         id = "jnu",
         bslib::nav_panel(
           title = "PM2.5",
-          plot_card_pm25("pm25_avg_jnu", "pm25_epa_dv_jnu", "pm25_dec_dv_jnu")
+          plot_card_pm25(
+            "pm25_avg_jnu", 
+            "pm25_epa_dv_jnu", 
+            "pm25_dec_dv_jnu",
+            "pm25_table_jnu"
+          )
         ),
         bslib::nav_panel(
           title = "PM10",
-          plot_card(mod_pm10_avg_ui("pm10_avg_jnu"), mod_pm10_dv_ui("pm10_dv_jnu"))
+          plot_card(
+            mod_pm10_avg_ui("pm10_avg_jnu"), 
+            mod_pm10_dv_ui("pm10_dv_jnu"),
+            mod_naaqs_table_ui("pm10_table_jnu")
+          )
         )
       ),
       ui_footer()
@@ -292,11 +339,20 @@ ui_page_navbar <- function() {
         id = "ms",
         bslib::nav_panel(
           title = "PM2.5",
-          plot_card_pm25("pm25_avg_ms", "pm25_epa_dv_ms", "pm25_dec_dv_ms")
+          plot_card_pm25(
+            "pm25_avg_ms", 
+            "pm25_epa_dv_ms", 
+            "pm25_dec_dv_ms",
+            "pm25_table_ms"
+          )
         ),
         bslib::nav_panel(
           title = "PM10",
-          plot_card(mod_pm10_avg_ui("pm10_avg_ms"), mod_pm10_dv_ui("pm10_dv_ms"))
+          plot_card(
+            mod_pm10_avg_ui("pm10_avg_ms"), 
+            mod_pm10_dv_ui("pm10_dv_ms"),
+            mod_naaqs_table_ui("pm10_table_ms")
+          )
         )
       ),
       ui_footer()
@@ -309,11 +365,19 @@ ui_page_navbar <- function() {
         id = "sw",
         bslib::nav_panel(
           title = "PM2.5",
-          plot_card(mod_pm25_avg_ui("pm25_avg_sw"), mod_pm25_dec_dv_ui("pm25_dec_dv_sw"))
+          plot_card(
+            mod_pm25_avg_ui("pm25_avg_sw"), 
+            mod_pm25_dec_dv_ui("pm25_dec_dv_sw"),
+            mod_naaqs_table_ui("pm25_table_sw")
+          )
          ),
         bslib::nav_panel(
           title = "PM10",
-          plot_card(mod_pm10_avg_ui("pm10_avg_sw"), mod_pm10_dv_ui("pm10_dv_sw"))
+          plot_card(
+            mod_pm10_avg_ui("pm10_avg_sw"), 
+            mod_pm10_dv_ui("pm10_dv_sw"),
+            mod_naaqs_table_ui("pm10_table_sw")
+          )
         )
       ),
       ui_footer()

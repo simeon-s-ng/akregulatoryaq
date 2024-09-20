@@ -82,6 +82,28 @@ app_server <- function(input, output, session) {
 
   mod_no2_dv_server("no2_dv_fbx", "Interior")
 
+  # NAAQS Table ----
+
+  mod_naaqs_table_server("pm25_table_fbx")
+  mod_naaqs_table_server("pm10_table_fbx")
+  mod_naaqs_table_server("co_table_fbx")
+  mod_naaqs_table_server("so2_table_fbx")
+  mod_naaqs_table_server("o3_table_fbx")
+  mod_naaqs_table_server("no2_table_fbx")
+
+  mod_naaqs_table_server("pm25_table_anc")
+  mod_naaqs_table_server("pm10_table_anc")
+  mod_naaqs_table_server("co_table_anc")
+
+  mod_naaqs_table_server("pm25_table_jnu")
+  mod_naaqs_table_server("pm10_table_jnu")
+
+  mod_naaqs_table_server("pm25_table_ms")
+  mod_naaqs_table_server("pm10_table_ms")
+
+  mod_naaqs_table_server("pm25_table_sw")
+  mod_naaqs_table_server("pm10_table_sw")
+
   # Data Download ----
   mod_download_server("download")
 }

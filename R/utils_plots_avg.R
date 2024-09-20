@@ -112,7 +112,7 @@ plot_pm10 <- function(pm10_data, year) {
       # Axis settings
       ggplot2::labs(
         title = paste(year, "PM10 24-hr Average Concentrations", sep = ' '),
-        y = "1987 PM10 24-hr Average Concentration (µg/m³)",
+        y = "PM10 24-hr Average Concentration (µg/m³)",
         color = "Site Name",
         shape = "Site Name"
       ) +

@@ -583,6 +583,9 @@ no2_dvs <- read_csv(
     )
   )
 
+## Import NAAQS Table
+naaqs_data <- read_csv("data-raw/pm25_naaqs.csv", show_col_types = FALSE)
+
 ## Write datasets --------------------------------------------------------------
 
 # save average concentration data
@@ -612,3 +615,6 @@ use_data(no2_dvs, overwrite = TRUE)
 use_data(o3_dvs_anc, overwrite = TRUE)
 use_data(o3_dvs_fbx, overwrite = TRUE)
 use_data(o3_dvs_ms, overwrite = TRUE)
+
+# save naaqs
+use_data(naaqs_data, overwrite = TRUE)

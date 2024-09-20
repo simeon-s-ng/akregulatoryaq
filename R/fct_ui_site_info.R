@@ -10,13 +10,13 @@ fbx_pm25_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The [**NCore Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/) is located in Downtown Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> is located in Downtown Fairbanks, AK."
       ),
       shiny::markdown(
-        "The [**A Street**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-a-street/) is located in Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-a-street/' target='_blank'>**A Street Site**</a> is located in Fairbanks, AK."
       ),
       shiny::markdown(
-        "The [**Hurst Road**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/north-pole-hurst-road/) is located in North Pole, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/north-pole-hurst-road/' target='_blank'>**Hurst Road Site**</a> is located in North Pole, AK."
       ),
       shiny::markdown(
         "The **Fairbanks State Office Building** Site monitored PM2.5 in Fairbanks, AK between 2000-2020.<br>"
@@ -33,7 +33,7 @@ fbx_pm10_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The [**NCore Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/) is located in Downtown Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> is located in Downtown Fairbanks, AK."
       ) 
     )
   )
@@ -47,7 +47,7 @@ fbx_co_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The [**NCore Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/) is located in Downtown Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> is located in Downtown Fairbanks, AK."
       ),
       shiny::markdown(
         "The **Armory** Site monitored CO in Fairbanks, AK between 2002-2007."
@@ -69,7 +69,7 @@ fbx_so2_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The [**Hurst Road Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/north-pole-hurst-road/) is located in North Pole, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/north-pole-hurst-road/' target='_blank'>**Hurst Road Site**</a> is located in North Pole, AK."
       ),
       shiny::markdown(
         "The [**NCore Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/) is located in Downtown Fairbanks, AK.")
@@ -85,7 +85,7 @@ fbx_o3_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The [**NCore Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/) is located in Downtown Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> is located in Downtown Fairbanks, AK."
       )
     )
   )
@@ -99,7 +99,7 @@ fbx_no2_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The [**NCore Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/) is located in Downtown Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> is located in Downtown Fairbanks, AK."
       )
     )
   )
@@ -113,10 +113,10 @@ anc_pm25_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The [**Garden Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/anchorage-garden/) is located in Airport Heights Anchorage, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/anchorage-garden/' target='_blank'>**Garden Site**</a> is located in Airport Heights Anchorage, AK."
       ),
       shiny::markdown(
-        "The [**Parkgate Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/eagle-river-parkgate/) is located in Eagle River, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/eagle-river-parkgate/' target='_blank'>**Parkgate Site**</a> is located in Eagle River, AK."
       ),
       shiny::markdown(
         "The **DHHS** Site monitored PM2.5 in Anchorage, AK between 2009-2012."
@@ -136,10 +136,10 @@ anc_pm10_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The [**Garden Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/anchorage-garden/) is located in Airport Heights Anchorage, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/anchorage-garden/' target='_blank'>**Garden Site**</a> is located in Airport Heights Anchorage, AK."
       ),
       shiny::markdown(
-        "The [**Parkgate Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/eagle-river-parkgate/) is located in Eagle River, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/eagle-river-parkgate/' target='_blank'>**Parkgate Site**</a> is located in Eagle River, AK."
       ),
       shiny::markdown(
         "The **DHHS** Site monitored PM10 in Anchorage, AK between 2009-2012."
@@ -162,7 +162,7 @@ anc_co_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The [**Garden Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/anchorage-garden/) is located in Airport Heights Anchorage, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/anchorage-garden/' target='_blank'>**Garden Site**</a> is located in Airport Heights Anchorage, AK."
       )
     )
   )
@@ -176,7 +176,7 @@ jnu_pm25_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The [**Floyd Dryden Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/juneau-floyd-dryden/) is located in Juneau, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/juneau-floyd-dryden/' target='_blank'>**Floyd Dryden Site**</a> is located in Juneau, AK."
       ),
       shiny::markdown(
         "The **Lemon Creek** Site monitored PM2.5 in Juneau, AK between 2000-2001."
@@ -193,7 +193,7 @@ jnu_pm10_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The [**Floyd Dryden Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/juneau-floyd-dryden/) is located in Juneau, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/juneau-floyd-dryden/' target='_blank'>**Floyd Dryden Site**</a> is located in Juneau, AK."
       )
     )
   )

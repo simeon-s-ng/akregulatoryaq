@@ -20,7 +20,7 @@ attachment::att_amend_desc()
 
 ## Add modules ----
 ## Create a module infrastructure in R/
-golem::add_module(name = "no2_dv", with_test = FALSE) # Name of the module
+golem::add_module(name = "naaqs_table", with_test = FALSE) # Name of the module
 golem::add_module(name = "filter_data", with_test = FALSE) # Name of the module
 
 ## Add helper functions ----

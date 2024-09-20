@@ -24,7 +24,11 @@ ui_footer <- function() {
   bslib::card_footer(
     "Alaska Department of Environmental Conservation | Division of Air Quality | ",
     bslib::tooltip(
-      htmltools::a("https://dec.alaska.gov/air/", href = "https://dec.alaska.gov/air/"),
+      htmltools::a(
+        "https://dec.alaska.gov/air/", 
+        href = "https://dec.alaska.gov/air/",
+        target = "_blank"
+      ),
       shiny::markdown("Alaska DEC Air Quality Homepage")
     )
   )
