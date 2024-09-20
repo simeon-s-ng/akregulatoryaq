@@ -48,6 +48,10 @@ ui_theme <- function() {
     "nav-link-font-size" = "14px",
     base_font = bslib::font_google("Open Sans", local = TRUE)
   ) |> 
+    bslib::bs_add_variables(
+      "border-radius" = 0,
+      "spacer" = "0.5rem"
+    ) |> 
     bslib::bs_add_rules(
       "
         .navbar .navbar-header,

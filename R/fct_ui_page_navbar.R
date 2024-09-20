@@ -15,7 +15,7 @@ ui_page_navbar <- function() {
     theme = ui_theme(),
     inverse = TRUE,
     fillable = FALSE,
-    # Styling for sidebar button
+    # Styling for sidebar button and link
     htmltools::tags$head(
       htmltools::tags$style(
         htmltools::HTML(
@@ -26,6 +26,12 @@ ui_page_navbar <- function() {
             }
             .bslib-sidebar-layout > .collapse-toggle > .collapse-icon {
               fill: white !important;
+            }
+            .bslib-nav-item > a {
+              color: rgb(255, 255, 255)
+            }
+            .nav-link.active > a.active {
+              color: #194A6B
             }
           "
         )
