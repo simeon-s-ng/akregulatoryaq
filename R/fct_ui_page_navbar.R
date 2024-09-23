@@ -76,7 +76,8 @@ ui_page_navbar <- function() {
               range_pm10_fbx(),
               fbx_sites_pm10()
             ),
-            fbx_pm10_info()
+            fbx_pm10_info(),
+            mod_download_ui("dl_pm10_fbx")
           ),
           # Fairbanks CO Filters ----
           shiny::conditionalPanel(
@@ -86,7 +87,8 @@ ui_page_navbar <- function() {
               range_co(),
               fbx_sites_co()
             ),
-            fbx_co_info()
+            fbx_co_info(),
+            mod_download_ui("dl_co_fbx")
           ),
           # Fairbanks SO2 Filter ----
           shiny::conditionalPanel(
@@ -96,7 +98,8 @@ ui_page_navbar <- function() {
               range_so2(),
               fbx_sites_so2()
             ),
-            fbx_so2_info()
+            fbx_so2_info(),
+            mod_download_ui("dl_so2_fbx")
           ),
           # Fairbanks O3 Filter ----
           shiny::conditionalPanel(
@@ -106,7 +109,8 @@ ui_page_navbar <- function() {
               range_o3(),
               "NCore"
             ),
-            fbx_o3_info()
+            fbx_o3_info(),
+            mod_download_ui("dl_o3_fbx")
           ),
           # Fairbanks NO2 Filter ----
           shiny::conditionalPanel(
@@ -116,7 +120,8 @@ ui_page_navbar <- function() {
               range_no2(),
               "NCore"
             ),
-            fbx_no2_info()
+            fbx_no2_info(),
+            mod_download_ui("dl_no2_fbx")
           ),
           # Anchorage PM25 Filters ----
           shiny::conditionalPanel(
@@ -126,7 +131,8 @@ ui_page_navbar <- function() {
               range_pm25(),
               anc_sites_pm25()
             ),
-            anc_pm25_info()
+            anc_pm25_info(),
+            mod_download_ui("dl_pm25_anc")
           ),
           # Anchorage PM10 Filters ----
           shiny::conditionalPanel(
@@ -136,7 +142,8 @@ ui_page_navbar <- function() {
               range_pm10(),
               anc_sites_pm10()
             ),
-            anc_pm10_info()
+            anc_pm10_info(),
+            mod_download_ui("dl_pm10_anc")
           ),
           # Anchorage CO Filters ----
           shiny::conditionalPanel(
@@ -146,7 +153,8 @@ ui_page_navbar <- function() {
               range_co(),
               anc_sites_co()
             ),
-            anc_co_info()
+            anc_co_info(),
+            mod_download_ui("dl_co_anc")
           ),
           # Juneau PM25 Filters ----
           shiny::conditionalPanel(
@@ -156,7 +164,8 @@ ui_page_navbar <- function() {
               range_pm25(),
               jnu_sites_pm25()
             ),
-            jnu_pm25_info()
+            jnu_pm25_info(),
+            mod_download_ui("dl_pm25_jnu")
           ),
           # Juneau PM10 Filters ----
           shiny::conditionalPanel(
@@ -166,7 +175,8 @@ ui_page_navbar <- function() {
               range_pm10(),
               jnu_sites_pm10()
             ),
-            jnu_pm10_info()
+            jnu_pm10_info(),
+            mod_download_ui("dl_pm10_jnu")
           ),
           # Mat-Su PM25 Filters ----
           shiny::conditionalPanel(
@@ -176,7 +186,8 @@ ui_page_navbar <- function() {
               range_pm25(),
               matsu_sites_pm25()
             ),
-            ms_pm25_info()
+            ms_pm25_info(),
+            mod_download_ui("dl_pm25_ms")
           ),
           # Mat-Su PM10 Filters ----
           shiny::conditionalPanel(
@@ -186,7 +197,8 @@ ui_page_navbar <- function() {
               range_pm10(),
               matsu_sites_pm10()
             ),
-            ms_pm10_info()
+            ms_pm10_info(),
+            mod_download_ui("dl_pm10_ms")
           ),
           # Bethel PM25 Filters ----
           shiny::conditionalPanel(
@@ -196,7 +208,8 @@ ui_page_navbar <- function() {
               range_pm25_bethel(),
               bethel_sites_pm25()
             ),
-            sw_pm25_info()
+            sw_pm25_info(),
+            mod_download_ui("dl_pm25_sw")
           ),
           # Bethel PM10 Filters ----
           shiny::conditionalPanel(
@@ -206,7 +219,8 @@ ui_page_navbar <- function() {
               range_pm25_bethel(),
               bethel_sites_pm25()
             ),
-            sw_pm10_info()
+            sw_pm10_info(),
+            mod_download_ui("dl_pm10_sw")
           )
         ),
         open = "Filters"
