@@ -25,7 +25,7 @@ golem::add_module(name = "filter_data", with_test = FALSE) # Name of the module
 
 ## Add helper functions ----
 ## Creates fct_* and utils_*
-golem::add_fct("ui_site_info", with_test = FALSE)
+golem::add_fct("ui_site_desc", with_test = FALSE)
 golem::add_utils("plots_dv", with_test = FALSE)
 
 ## External resources

@@ -33,6 +33,9 @@ ui_page_navbar <- function() {
             .nav-link.active > a.active {
               color: #194A6B
             }
+            .accordion-button {
+              padding: 0.75rem 1rem
+            }
           "
         )
       )
@@ -235,6 +238,10 @@ ui_page_navbar <- function() {
         id = "fnsb",
         bslib::nav_panel(
           title = "PM2.5",
+          bslib::card(
+            bslib::card_header("Fairbanks Particulate Matter 2.5 (PM2.5)"),
+            fbx_pm25_desc()
+          ),
           plot_card_pm25(
             "pm25_avg_fbx", 
             "pm25_epa_dv_fbx", 
@@ -244,6 +251,10 @@ ui_page_navbar <- function() {
         ),
         bslib::nav_panel(
           title = "PM10",
+          bslib::card(
+            bslib::card_header("Fairbanks Particulate Matter 10 (PM10)"),
+            fbx_pm10_desc()
+          ),
           plot_card(
             mod_pm10_avg_ui("pm10_avg_fbx"), 
             mod_pm10_dv_ui("pm10_dv_fbx"),
@@ -252,6 +263,10 @@ ui_page_navbar <- function() {
         ),
         bslib::nav_panel(
           title = "CO",
+          bslib::card(
+            bslib::card_header("Fairbanks Carbon Monoxide (CO)"),
+            fbx_co_desc()
+          ),
           plot_card(
             mod_co_avg_ui("co_avg_fbx"), 
             mod_co_dv_ui("co_dv_fbx"),
@@ -260,6 +275,10 @@ ui_page_navbar <- function() {
         ),
         bslib::nav_panel(
           title = "SO2",
+          bslib::card(
+            bslib::card_header("Fairbanks Sulfur Dioxide (SO2)"),
+            fbx_so2_desc()
+          ),
           plot_card(
             mod_so2_avg_ui("so2_avg_fbx"), 
             mod_so2_dv_ui("so2_dv_fbx"),
@@ -268,6 +287,10 @@ ui_page_navbar <- function() {
         ),
         bslib::nav_panel(
           title = "O3",
+          bslib::card(
+            bslib::card_header("Fairbanks Ozone (O3)"),
+            fbx_o3_desc()
+          ),
           plot_card(
             mod_o3_avg_ui("o3_avg_fbx"), 
             mod_o3_dv_ui("o3_dv_fbx"),
@@ -276,6 +299,10 @@ ui_page_navbar <- function() {
         ),
         bslib::nav_panel(
           title = "NO2",
+          bslib::card(
+            bslib::card_header("Fairbanks Nitrogen Dioxide (NO2)"),
+            fbx_no2_desc()
+          ),
           plot_card(
             mod_no2_avg_ui("no2_avg_fbx"), 
             mod_no2_dv_ui("no2_dv_fbx"),
@@ -293,6 +320,10 @@ ui_page_navbar <- function() {
         id = "anc",
         bslib::nav_panel(
           title = "PM2.5",
+          bslib::card(
+            bslib::card_header("Anchorage Particulate Matter 2.5 (PM2.5)"),
+            anc_pm25_desc()
+          ),
           plot_card_pm25(
             "pm25_avg_anc", 
             "pm25_epa_dv_anc", 
@@ -302,6 +333,10 @@ ui_page_navbar <- function() {
         ),
         bslib::nav_panel(
           title = "PM10",
+          bslib::card(
+            bslib::card_header("Anchorage Particulate Matter 10 (PM10)"),
+            anc_pm10_desc()
+          ),
           plot_card(
             mod_pm10_avg_ui("pm10_avg_anc"), 
             mod_pm10_dv_ui("pm10_dv_anc"),
@@ -310,6 +345,10 @@ ui_page_navbar <- function() {
         ),
         bslib::nav_panel(
           title = "CO",
+          bslib::card(
+            bslib::card_header("Anchorage Carbon Monoxide (CO)"),
+            anc_co_desc()
+          ),
           plot_card(
             mod_co_avg_ui("co_avg_anc"), 
             mod_co_dv_ui("co_dv_anc"),
@@ -327,6 +366,10 @@ ui_page_navbar <- function() {
         id = "jnu",
         bslib::nav_panel(
           title = "PM2.5",
+          bslib::card(
+            bslib::card_header("Juneau Particulate Matter 2.5 (PM2.5)"),
+            jnu_pm25_desc()
+          ),
           plot_card_pm25(
             "pm25_avg_jnu", 
             "pm25_epa_dv_jnu", 
@@ -336,6 +379,10 @@ ui_page_navbar <- function() {
         ),
         bslib::nav_panel(
           title = "PM10",
+          bslib::card(
+            bslib::card_header("Juneau Particulate Matter 10 (PM10)"),
+            jnu_pm10_desc()
+          ),
           plot_card(
             mod_pm10_avg_ui("pm10_avg_jnu"), 
             mod_pm10_dv_ui("pm10_dv_jnu"),
@@ -353,6 +400,10 @@ ui_page_navbar <- function() {
         id = "ms",
         bslib::nav_panel(
           title = "PM2.5",
+          bslib::card(
+            bslib::card_header("Mat-Su Particulate Matter 2.5 (PM2.5)"),
+            ms_pm25_desc()
+          ),
           plot_card_pm25(
             "pm25_avg_ms", 
             "pm25_epa_dv_ms", 
@@ -362,6 +413,10 @@ ui_page_navbar <- function() {
         ),
         bslib::nav_panel(
           title = "PM10",
+          bslib::card(
+            bslib::card_header("Mat-Su Particulate Matter 10 (PM10)"),
+            ms_pm10_desc()
+          ),
           plot_card(
             mod_pm10_avg_ui("pm10_avg_ms"), 
             mod_pm10_dv_ui("pm10_dv_ms"),
@@ -379,6 +434,10 @@ ui_page_navbar <- function() {
         id = "sw",
         bslib::nav_panel(
           title = "PM2.5",
+          bslib::card(
+            bslib::card_header("Bethel Particulate Matter 2.5 (PM2.5)"),
+            sw_pm25_desc()
+          ),
           plot_card(
             mod_pm25_avg_ui("pm25_avg_sw"), 
             mod_pm25_dec_dv_ui("pm25_dec_dv_sw"),
@@ -387,6 +446,10 @@ ui_page_navbar <- function() {
          ),
         bslib::nav_panel(
           title = "PM10",
+          bslib::card(
+            bslib::card_header("Bethel Particulate Matter 10 (PM10)"),
+            sw_pm10_desc()
+          ),
           plot_card(
             mod_pm10_avg_ui("pm10_avg_sw"), 
             mod_pm10_dv_ui("pm10_dv_sw"),

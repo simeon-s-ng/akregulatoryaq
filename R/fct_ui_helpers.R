@@ -121,9 +121,9 @@ get_howto <- function() {
     
     <!-- end of the list -->
     
-    For more details expand the Glossary by clicking the **Glossary dropdown ⋁** below the data figure. 
+    For more details expand the Glossary by clicking the **Glossary dropdown [⋁]** below the data figure. 
     To see the National Ambient Air Quality Standards (NAAQS) set forth by EPA 
-    expand the NAAQS Table by clicking the **NAAQS Table dropdown ⋁** below the data figure.<br><br>
+    expand the NAAQS Table by clicking the **NAAQS Table dropdown [⋁]** below the data figure.<br><br>
     Dashboard will time out after 15 minutes to prevent excessive load on the server. 
     To reload, refresh your browser menu.<br><br>
     All displayed design value data excludes exceptional events (generally wildfire) 
@@ -210,6 +210,7 @@ plot_card <- function(avg_mod, dv_mod, table_mod) {
     # Panel for Avg. Concentration & DV plots
     bslib::accordion_panel(
       "Air Quality Monitoring Data",
+      height = "75%",
       shiny::markdown(
         "***Expand the left sidepanel [>] to filter by year or site.***",
         extensions = TRUE
@@ -243,7 +244,8 @@ plot_card <- function(avg_mod, dv_mod, table_mod) {
       "NAAQS Table",
       table_mod
     ),
-    open = "Air Quality Monitoring Data"
+    open = "Air Quality Monitoring Data",
+    multiple = TRUE
   )
 }
 
@@ -263,6 +265,7 @@ plot_card_pm25 <- function(avg_ns, epa_dv_ns, dec_dv_ns, table_ns) {
     # Panel for Avg. Concentration & DV plots
     bslib::accordion_panel(
       "Air Quality Monitoring Data",
+      height = "75%",
       shiny::markdown(
         "***Expand the left sidepanel [>] to filter by year or site.***",
         extensions = TRUE
@@ -304,6 +307,7 @@ plot_card_pm25 <- function(avg_ns, epa_dv_ns, dec_dv_ns, table_ns) {
       "NAAQS Table",
       mod_naaqs_table_ui(table_ns)
     ),
-    open = "Air Quality Monitoring Data"
-  )
+    open = "Air Quality Monitoring Data",
+    multiple = TRUE
+   )
 }
