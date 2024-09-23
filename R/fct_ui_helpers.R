@@ -25,46 +25,49 @@ gaf_palette <- function() {
 #' @noRd
 get_glossary <- function() {
   shiny::markdown(
-    "**NAAQS**<br>
-          National Ambient Air Quality Standard - A health-based air quality 
-          standard set by EPA based on a review of available scientific information. 
-          NAAQS exist for criteria pollutants including Particulate Matter 
-          (PM2.5 and PM10), Carbon Monoxide (CO), Sulfur Dioxide (SO2), 
-          Nitrogen Dioxide (NO2), Ozone(O3), and Lead(Pb).<br>
-          [EPA's NAAQS Webpage](https://www.epa.gov/naaqs)<br>
-          <br>
-          **Concentration, µg/m³**<br>
-          The amount of PM2.5 suspended in the air with units of micrograms(one-millionth of a gram) 
-          per cubic meter<br>
-          <br>
-          **Exceedance**<br>
-          A day when the 24-hour measured concentration of PM2.5 exceeds the NAAQS.<br>
-          <br>
-          **98th Percentile**<br>
-          The daily value out of a year of PM2.5 monitoring data below which 98 
-          percent of all daily values fall. 
-          [40 CFR 50 Appendix N - see section 4.5(a) (PDF)](https://dec.alaska.gov/media/7666/40-cfr-50-appx-n.pdf)<br>
-          <br>
-          **24-hour Design Value (DV)**<br>
-          A three-year average of the 98th percentile value. An area is in 
-          violation of the NAAQS when the Design Values is greater than the 
-          24-hour NAAQS for PM2.5, which is currently set at 35 µg/m³
-          [40 CFR 50 Appendix N - see section 4.5(b) (PDF)](https://dec.alaska.gov/media/7666/40-cfr-50-appx-n.pdf)<br>
-          <br>
-          **Clean Data Year**<br>
-          A year when the 98th percentile value is less than the NAAQS.<br>
-          <br>
-          **Exceptional Events**<br>
-          Unusual or naturally occurring events that can affect air quality 
-          but are not reasonably controllable.<br>
-          [EPA's Exceptional Events Webpage](https://www.epa.gov/air-quality-analysis/treatment-air-quality-monitoring-data-influenced-exceptional-events/)<br>
-          [DEC's Exceptional Events Webpage](https://dec.alaska.gov/air/air-monitoring/guidance/exceptional-events/)<br>
-          <br>
-          **Compliance with PM2.5 NAAQS**<br>
-          24-Hour: 98th percentile, averaged over 3 years, must be below the 
-          standardAnnual: Annual arithmetic mean, averaged over 3 years, 
-          must be below the standard. 
-          [40 CFR 50 Appendix N - see sections 4.1 and 4.2 (PDF)](https://dec.alaska.gov/media/7666/40-cfr-50-appx-n.pdf)"
+    "
+    **24-hour Design Value (DV)**<br>
+    A three-year average of the 98th percentile value. An area is in 
+    violation of the NAAQS when the Design Values is greater than the 
+    24-hour NAAQS for PM2.5, which is currently set at 35 µg/m³
+    [40 CFR 50 Appendix N - see section 4.5(b) (PDF)](https://dec.alaska.gov/media/7666/40-cfr-50-appx-n.pdf)<br>
+    <br>
+    **98th Percentile**<br>
+    The daily value out of a year of PM2.5 monitoring data below which 98 
+    percent of all daily values fall. 
+    [40 CFR 50 Appendix N - see section 4.5(a) (PDF)](https://dec.alaska.gov/media/7666/40-cfr-50-appx-n.pdf)<br>
+    <br>
+    **Clean Data Year**<br>
+    A year when the 98th percentile value is less than the NAAQS.<br>
+    <br>
+    **Compliance with PM2.5 NAAQS**<br>
+    *24-Hour* - 98th percentile, averaged over 3 years, must be below the 
+    standard.<br>
+    *Annual* - Annual arithmetic mean, averaged over 3 years, 
+    must be below the standard. 
+    [40 CFR 50 Appendix N - see sections 4.1 and 4.2 (PDF)](https://dec.alaska.gov/media/7666/40-cfr-50-appx-n.pdf) <br>
+    <br>
+    **Concentration, µg/m³**<br>
+    The amount of PM2.5 suspended in the air with units of micrograms(one-millionth of a gram) 
+    per cubic meter<br>
+    <br>
+    **Exceedance**<br>
+    A day when the 24-hour measured concentration of PM2.5 exceeds the NAAQS.<br>
+    <br>
+    **Exceptional Events**<br>
+    Unusual or naturally occurring events that can affect air quality 
+    but are not reasonably controllable.<br>
+    [EPA's Exceptional Events Webpage](https://www.epa.gov/air-quality-analysis/treatment-air-quality-monitoring-data-influenced-exceptional-events/)<br>
+    [DEC's Exceptional Events Webpage](https://dec.alaska.gov/air/air-monitoring/guidance/exceptional-events/)<br>
+    <br>
+    **NAAQS**<br>
+    National Ambient Air Quality Standard - A health-based air quality 
+    standard set by EPA based on a review of available scientific information. 
+    NAAQS exist for criteria pollutants including Particulate Matter 
+    (PM2.5 and PM10), Carbon Monoxide (CO), Sulfur Dioxide (SO2), 
+    Nitrogen Dioxide (NO2), Ozone (O3), and Lead (Pb).<br>
+    [EPA's NAAQS Webpage](https://www.epa.gov/naaqs)
+    "
   )
 }
 
@@ -78,17 +81,14 @@ get_glossary <- function() {
 get_howto <- function() {
   shiny::markdown(
     "To filter by year (2000 and after) and site, view additional site information, 
-    or download data click the left-hand menu by clicking **>**. 
-    To collapse this menu and view the data figure as a larger figure click **<**.
-    - Site selection defaults to all sites in the region, to unselect or select sites, 
-    click the site/s in the site dropdown.
-    - Additional site information, for the sites in the selected region can be found
-    in the “Site Information” box below the site selection dropdown. 
+    or download data click the left-hand menu [**>**] icon. 
+    To collapse this menu and view the data figure as a larger figure click [**<**].
+    - Site selection defaults to all sites in the region. To unselect or select sites, 
+    click the site(s) in the site dropdown.
+    - Additional site information, can be found in the “Site Information” box below the site selection dropdown. 
     Click on the site name link to be redirected to the monitoring site’s webpage for further information.
-    - For data downloads you can download all years (2000 and after) and all sites 
-    for one pollutant (PM2.5, PM10, CO, SO2, O3, or NO2) at a time. 
-    To view data of various pollutants (PM2.5, PM10, CO, SO2, O3, or NO2) 
-    select a pollutant above the Air Quality Monitoring Data figure.
+    - To download data (2000 and after), select the site and year from the Filters section; You are limited to downloading one pollutant and one year at a time for the selected sites. To view data of various pollutants (PM2.5, PM10, CO, SO2, O3, or NO2) 
+    select a pollutant above the data graph.
     
     <!-- end of the list -->
     
@@ -103,7 +103,7 @@ get_howto <- function() {
     Hover over the figure to see additional figure options to the right of the figure title. Additional options include: 
     - Downloading the figure as a png file by clicking on the camera icon that says 
     “Download plot as png” when hovered over.
-    - Zooming in on a selection by clicking on the magnifying glass with a square 
+    - Zoom in on a selection of the figure by clicking on the magnifying glass with a square 
     in the middle that says “Zoom” when hovered over.
     - Moving around within the figure by clicking on the icon with arrows pointing 
     in the four cardinal directions that says “Pan” when hovered over.
@@ -124,8 +124,8 @@ get_howto <- function() {
     For more details expand the Glossary by clicking the **Glossary dropdown ⋁** below the data figure. 
     To see the National Ambient Air Quality Standards (NAAQS) set forth by EPA 
     expand the NAAQS Table by clicking the **NAAQS Table dropdown ⋁** below the data figure.<br><br>
-    Dashboard will time out after 15 minutes to prevent excessive load on the server, 
-    to reload just click refresh in your browser menu.<br><br>
+    Dashboard will time out after 15 minutes to prevent excessive load on the server. 
+    To reload, refresh your browser menu.<br><br>
     All displayed design value data excludes exceptional events (generally wildfire) 
     as considered by DEC, except when otherwise noted. For example, Fairbanks North Star 
     Borough data includes data without DEC considered exceptional events AND without 

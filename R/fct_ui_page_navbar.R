@@ -65,7 +65,8 @@ ui_page_navbar <- function() {
               range_pm25(),
               fbx_sites_pm25()
             ),
-            fbx_pm25_info()
+            fbx_pm25_info(),
+            mod_download_ui("dl_pm25_fbx")
           ),
           # Fairbanks PM10 Filters ----
           shiny::conditionalPanel(
@@ -208,7 +209,6 @@ ui_page_navbar <- function() {
             sw_pm10_info()
           )
         ),
-        mod_download_ui("download"),
         open = "Filters"
       )
     ),
