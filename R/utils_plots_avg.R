@@ -168,10 +168,10 @@ plot_co <- function(co_data, year) {
       ggplot2::geom_point(
         mapping = ggplot2::aes(
           x = Date,
-          y = avg_8hr,
+          y = sample_measurement,
           color = site_name,
           shape = site_name,
-          text = paste(year, site_name, "Data Point:", avg_8hr, "ppm")
+          text = paste(year, site_name, "Data Point:", sample_measurement, "ppm")
         ),
         alpha = 0.5) +
       ggthemes::scale_color_colorblind() +
@@ -230,10 +230,10 @@ plot_so2 <- function(so2_data, year) {
       ggplot2::geom_point(
         mapping = ggplot2::aes(
           x = Date,
-          y = max_1hr,
+          y = sample_measurement,
           color = site_name,
           shape = site_name,
-          text = paste(year, site_name, "Data Point:", max_1hr, "ppb")
+          text = paste(year, site_name, "Data Point:", sample_measurement, "ppb")
         ),
         alpha = 0.5
       ) +
@@ -293,10 +293,10 @@ plot_o3 <- function(o3_data, year) {
       ggplot2::geom_point(
         mapping = ggplot2::aes(
           x = Date, 
-          y = avg_8hr,
+          y = sample_measurement,
           color = site_name,
           shape = site_name,
-          text = paste(year, site_name, "Data Point:", avg_8hr, "ppm")
+          text = paste(year, site_name, "Data Point:", sample_measurement, "ppm")
         ),
         alpha = 0.5
       ) +
@@ -375,10 +375,10 @@ plot_no2 <- function(no2_data, year) {
       ggplot2::geom_point(
         mapping = ggplot2::aes(
           x = Date,
-          y = max_1hr,
+          y = sample_measurement,
           color = site_name,
           shape = site_name,
-          text = paste(year, site_name, "Data Point:", max_1hr, "ppb")
+          text = paste(year, site_name, "Data Point:", sample_measurement, "ppb")
         ),
         alpha = 0.5
       ) +
