@@ -222,6 +222,8 @@ pm25_import_named <- left_join(pm25_import, pm_sites, by = "site_id") |>
   ) |> 
   mutate(sample_measurement = round(sample_measurement, digits = 1))
 
+## Import PM10 ----
+
 pm10_import_named <- left_join(pm10_import, pm_sites, by = "site_id") |> 
   select(date_local, sample_measurement, site_name) |> 
   rename(Date = date_local) |> 
@@ -262,7 +264,8 @@ co_8hr_avg <- bind_rows(
   hunter_co_8hr_avg,
   ncore_co_8hr_avg,
   oldpo_co_8hr_avg
-)
+) |> 
+  rename(sample_measurement = "avg_8hr")
 
 # Import SO2 -------------------------------------------------------------------
 ncore_ex_so2 <- "*NCore*SO2*csv"
@@ -277,22 +280,24 @@ hurst_so2_1hr_max <- calc_so2_1hr_max(hurst_so2, "Hurst Road")
 so2_1hr_max <- bind_rows(
   ncore_so2_1hr_max,
   hurst_so2_1hr_max
-)
+) |> 
+  rename(sample_measurement = "max_1hr")
 
 # Import O3 --------------------------------------------------------------------
 ncore_ex_o3 <- "*NCore*O3*csv"
 ncore_o3 <- import_files(ncore_ex_o3)
 
 # Calculate o3 8-hr average
-ncore_o3_8hr_avg <- calc_o3_8hr_avg(ncore_o3, "NCore")
-
+ncore_o3_8hr_avg <- calc_o3_8hr_avg(ncore_o3, "NCore") |> 
+  rename(sample_measurement = "avg_8hr")
 
 # Import NO2 -------------------------------------------------------------------
 ncore_ex_no2 <- "*NCore*NO2*csv"
 ncore_no2 <- import_files(ncore_ex_no2)
 
 # Calculate NO2 1-hr max
-ncore_no2_1hr_max <- calc_no2_1hr_max(ncore_no2, "NCore")
+ncore_no2_1hr_max <- calc_no2_1hr_max(ncore_no2, "NCore") |> 
+  rename(sample_measurement = "max_1hr")
 
 ## Import DVs ------------------------------------------------------------------
 
