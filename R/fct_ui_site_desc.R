@@ -6,7 +6,7 @@ fbx_pm25_desc <- function() {
     "
     The State Office Building monitor was used to originally designate the FNSB PM2.5 Nonattainment Area in 2009. The charts below show historical data from this monitor and the downtown Fairbanks NCore monitor located nearby. The <a href='https://dec.alaska.gov/air/air-monitoring/guidance/monitoring-plans/' target='_blank'>Alaska Air Monitoring Plan</a> contains more information about these sites and <a href='https://dec.alaska.gov/air/air-monitoring/responsibilities/database-management/alaska-air-quality-real-time-data/' target='_blank'>Realtime Air Quality Data</a> is available for the public.<br><br>
 
-    **Note:** The vertical axis of these charts extends to **100 µg/m³**. The PM2.5 concentrations represent the concentration at local conditions and have not been corrected for local temperature and pressure.
+    **Note:** The vertical axis of these charts extends to **100 \u00B5g/m\u00B3**. The PM2.5 concentrations represent the concentration at local conditions and have not been corrected for local temperature and pressure.
     "
   )
 }
@@ -19,7 +19,7 @@ fbx_pm10_desc <- function() {
     "
     The NCore site is located in downtown Fairbanks. Monitoring for PM10 began on February 23, 2011. The charts below show historical data from this monitor. The <a href='https://dec.alaska.gov/air/air-monitoring/guidance/monitoring-plans/' target='_blank'>Alaska Air Monitoring Plan</a> contains more information about these sites and <a href='https://dec.alaska.gov/air/air-monitoring/responsibilities/database-management/alaska-air-quality-real-time-data/' target='_blank'>Realtime Air Quality Data</a> is available for the public.<br><br>
       
-    **Note:** The vertical axis of these charts extends to **200 µg/m³**. The PM10 concentrations are made at standard conditions and are corrected for local temperature and pressure.
+    **Note:** The vertical axis of these charts extends to **200 \u00B5g/m\u00B3**. The PM10 concentrations are made at standard conditions and are corrected for local temperature and pressure.
     "
   )
 }
@@ -84,7 +84,7 @@ anc_pm25_desc <- function() {
     "
     The interactive charts below show historical data from PM2.5 monitoring at Anchorage monitoring sites. The <a href='https://dec.alaska.gov/air/air-monitoring/guidance/monitoring-plans/' target='_blank'>Alaska Air Monitoring Plan</a> contains more information about these sites and <a href='https://dec.alaska.gov/air/air-monitoring/responsibilities/database-management/alaska-air-quality-real-time-data/' target='_blank'>Realtime Air Quality Data</a> is available for the public.<br><br>
     
-    **Note:** The vertical axes of these charts extends to **100 µg/m³**. The PM2.5 concentrations represent the concentration at local conditions and have not been corrected for local temperature and pressure. 
+    **Note:** The vertical axes of these charts extends to **100 \u00B5g/m\u00B3**. The PM2.5 concentrations represent the concentration at local conditions and have not been corrected for local temperature and pressure. 
     "
   )
 }
@@ -97,7 +97,7 @@ anc_pm10_desc <- function() {
     "
     The interactive charts below show historical data from PM10 monitoring at Anchorage monitoring sites. There are only two remaining sites in Anchorage - Garden and Laurel. Laurel is a maximum impact site. The <a href='https://dec.alaska.gov/air/air-monitoring/guidance/monitoring-plans/' target='_blank'>Alaska Air Monitoring Plan</a> contains more information about these sites and <a href='https://dec.alaska.gov/air/air-monitoring/responsibilities/database-management/alaska-air-quality-real-time-data/' target='_blank'>Realtime Air Quality Data</a> is available for the public.<br><br>
       
-    **Note:** The PM10 concentrations are made at standard conditions and are corrected for local temperature and pressure. The vertical axes of these charts extends to **200 µg/m³**.
+    **Note:** The PM10 concentrations are made at standard conditions and are corrected for local temperature and pressure. The vertical axes of these charts extends to **200 \u00B5g/m\u00B3**.
     "
   )
 }
@@ -123,7 +123,7 @@ jnu_pm25_desc <- function() {
     "
     The interactive charts below show historical data from PM2.5 monitoring at Juneau monitoring sites. The <a href='https://dec.alaska.gov/air/air-monitoring/guidance/monitoring-plans/' target='_blank'>Alaska Air Monitoring Plan</a> contains more information about these sites and <a href='https://dec.alaska.gov/air/air-monitoring/responsibilities/database-management/alaska-air-quality-real-time-data/' target='_blank'>Realtime Air Quality Data</a> is available for the public.<br><br>
     
-    **Note:** The vertical axis of these charts extends to **100 µg/m³**. The PM2.5 concentrations represent the concentration at local conditions and have not been corrected for local temperature and pressure.<br><br>
+    **Note:** The vertical axis of these charts extends to **100 \u00B5g/m\u00B3**. The PM2.5 concentrations represent the concentration at local conditions and have not been corrected for local temperature and pressure.<br><br>
     
     **Note:** The EPA correction factor has been applied to data for 2021-2023.
     "
@@ -138,7 +138,7 @@ jnu_pm10_desc <- function() {
     "
     The Juneau Floyd Dryden site is located in the Juneau Mendenhall Valley PM10 maintenance area. The charts below show historical data from this monitor. The <a href='https://dec.alaska.gov/air/air-monitoring/guidance/monitoring-plans/' target='_blank'>Alaska Air Monitoring Plan</a> contains more information about these sites and <a href='https://dec.alaska.gov/air/air-monitoring/responsibilities/database-management/alaska-air-quality-real-time-data/' target='_blank'>Realtime Air Quality Data</a> is available for the public.<br><br>
     
-    **Note:** The vertical axis of these charts extends to **200 µg/m³**. The PM10 concentrations are made at standard conditions and are corrected for local temperature and pressure.
+    **Note:** The vertical axis of these charts extends to **200 \u00B5g/m\u00B3**. The PM10 concentrations are made at standard conditions and are corrected for local temperature and pressure.
     "
   )
 }
@@ -151,7 +151,7 @@ ms_pm25_desc <- function() {
     "
     The interactive charts below show historical data from this monitor. The Palmer monitor operated between January 1, 2010 and July 24, 2019 and was shut down due to budget cuts. The <a href='https://dec.alaska.gov/air/air-monitoring/guidance/monitoring-plans/' target='_blank'>Alaska Air Monitoring Plan</a> contains more information about these sites and <a href='https://dec.alaska.gov/air/air-monitoring/responsibilities/database-management/alaska-air-quality-real-time-data/' target='_blank'>Realtime Air Quality Data</a> is available for the public.<br><br>
     
-    **Note:** The vertical axis of these charts extends to **100 µg/m³**. The PM2.5 concentrations represent the concentration at local conditions and have not been corrected for local temperature and pressure.
+    **Note:** The vertical axis of these charts extends to **100 \u00B5g/m\u00B3**. The PM2.5 concentrations represent the concentration at local conditions and have not been corrected for local temperature and pressure.
     "
   )
 }
@@ -164,7 +164,7 @@ ms_pm10_desc <- function() {
     "
     The interactive charts below show historical data from this monitor. The Palmer monitor operated between January 1, 2011 and July 24, 2019 and was shut down due to budget cuts. The <a href='https://dec.alaska.gov/air/air-monitoring/guidance/monitoring-plans/' target='_blank'>Alaska Air Monitoring Plan</a> contains more information about these sites and <a href='https://dec.alaska.gov/air/air-monitoring/responsibilities/database-management/alaska-air-quality-real-time-data/' target='_blank'>Realtime Air Quality Data</a> is available for the public.<br><br>
 
-    **Note:** The vertical axis of these charts extends to **200 µg/m³**. The PM10 concentrations are made at standard conditions and are corrected for local temperature and pressure.
+    **Note:** The vertical axis of these charts extends to **200 \u00B5g/m\u00B3**. The PM10 concentrations are made at standard conditions and are corrected for local temperature and pressure.
     "
   )
 }
@@ -177,7 +177,7 @@ sw_pm25_desc <- function() {
     "
     The interactive charts below show historical data from PM2.5 monitoring at the Bethel air quality monitoring site. Sampling began on May 31st, 2018 and ended in June 2020. The <a href='https://dec.alaska.gov/air/air-monitoring/guidance/monitoring-plans/' target='_blank'>Alaska Air Monitoring Plan</a> contains more information about these sites and <a href='https://dec.alaska.gov/air/air-monitoring/responsibilities/database-management/alaska-air-quality-real-time-data/' target='_blank'>Realtime Air Quality Data</a> is available for the public.<br><br>
 
-    **Note:** The vertical axis of these charts extends to **100 µg/m³**. The PM2.5 concentrations represent the concentration at local conditions and have not been corrected for local temperature and pressure.
+    **Note:** The vertical axis of these charts extends to **100 \u00B5g/m\u00B3**. The PM2.5 concentrations represent the concentration at local conditions and have not been corrected for local temperature and pressure.
     "
   )
 }
@@ -190,7 +190,7 @@ sw_pm10_desc <- function() {
     "
     The interactive charts below show historical data from PM10 monitoring at the Bethel air quality monitoring site. Sampling began on June 6th, 2018 and ended in June 2020. The <a href='https://dec.alaska.gov/air/air-monitoring/guidance/monitoring-plans/' target='_blank'>Alaska Air Monitoring Plan</a> contains more information about these sites and <a href='https://dec.alaska.gov/air/air-monitoring/responsibilities/database-management/alaska-air-quality-real-time-data/' target='_blank'>Realtime Air Quality Data</a> is available for the public.<br><br>
 
-    **Note:** The vertical axis of these charts extends to **200 µg/m³**. The PM10 concentrations are made at standard conditions and are corrected for local temperature and pressure.
+    **Note:** The vertical axis of these charts extends to **200 \u00B5g/m\u00B3**. The PM10 concentrations are made at standard conditions and are corrected for local temperature and pressure.
     "
   )
 }

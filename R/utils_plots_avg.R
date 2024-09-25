@@ -17,7 +17,7 @@ plot_pm25 <- function(pm25_data, year) {
           y = sample_measurement,
           color = site_name,
           shape = site_name,
-          text = paste(year, site_name, "Data Point:", sample_measurement, "µg/m³")
+          text = paste(year, site_name, "Data Point:", sample_measurement, "\u00B5g/m\u00B3")
         ),
         alpha = 0.6
       ) +
@@ -25,7 +25,7 @@ plot_pm25 <- function(pm25_data, year) {
       # Axis settings
       ggplot2::labs(
         title = paste(year, "PM2.5 24-hr Average Concentrations", sep = ' '),
-        y = "PM2.5 24-hr Average Concentration (µg/m³)",
+        y = "PM2.5 24-hr Average Concentration (\u00B5g/m\u00B3)",
         color = "Site Name",
         shape = "Site Name"
       ) +
@@ -51,7 +51,7 @@ plot_pm25 <- function(pm25_data, year) {
         ggplot2::annotate(
           'text', 
           x = lubridate::date(paste(year, "-06-30", sep = "")),
-          y = 40, label = "2006 PM2.5 24-hr NAAQS (35 µg/m³)"
+          y = 40, label = "2006 PM2.5 24-hr NAAQS (35 \u00B5g/m\u00B3)"
         )
       } +
       {if(year < 2006) 
@@ -65,7 +65,7 @@ plot_pm25 <- function(pm25_data, year) {
         ggplot2::annotate(
           'text', 
           x = lubridate::date(paste(year, "-06-30", sep = "")),
-          y = 70, label = "1997 PM2.5 24-hr NAAQS (35 µg/m³)"
+          y = 70, label = "1997 PM2.5 24-hr NAAQS (35 \u00B5g/m\u00B3)"
         )
       } +
       ggplot2::theme_minimal() +
@@ -104,7 +104,7 @@ plot_pm10 <- function(pm10_data, year) {
           y = sample_measurement,
           color = site_name,
           shape = site_name,
-          text = paste(year, site_name, "Data Point:", sample_measurement, "µg/m³")
+          text = paste(year, site_name, "Data Point:", sample_measurement, "\u00B5g/m\u00B3")
         ),
         alpha = 0.5
       ) +
@@ -112,7 +112,7 @@ plot_pm10 <- function(pm10_data, year) {
       # Axis settings
       ggplot2::labs(
         title = paste(year, "PM10 24-hr Average Concentrations", sep = ' '),
-        y = "PM10 24-hr Average Concentration (µg/m³)",
+        y = "PM10 24-hr Average Concentration (\u00B5g/m\u00B3)",
         color = "Site Name",
         shape = "Site Name"
       ) +
@@ -135,7 +135,7 @@ plot_pm10 <- function(pm10_data, year) {
         'text', 
         x = lubridate::date(paste(year, "-06-30", sep = "")), 
         y = 140,
-        label = "24-hr PM10 NAAQS (150 µg/m³)"
+        label = "24-hr PM10 NAAQS (150 \u00B5g/m\u00B3)"
       ) +
       ggplot2::theme_minimal() +
       # Visual formatting

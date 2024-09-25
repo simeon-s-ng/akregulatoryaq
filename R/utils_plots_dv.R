@@ -32,7 +32,7 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
         group = value_type, 
         color = site_name, 
         shape = site_name,
-        text = paste(site_name, value_type, ":", value, "µg/m³")
+        text = paste(site_name, value_type, ":", value, "\u00B5g/m\u00B3")
       )
     ) +
       ggplot2::geom_line(
@@ -57,7 +57,7 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
       # Axis settings
       ggplot2::labs(
         title = paste(region, "PM2.5 24-hr Design Values (EPA Concurred Exceptional Events Excluded)", sep = ' '),
-        y = "PM2.5 24-hr Concentration (µg/m³)",
+        y = "PM2.5 24-hr Concentration (\u00B5g/m\u00B3)",
         color = "Site Name",
         shape = "Site Name"
       ) +
@@ -78,7 +78,7 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
           'text', 
           x = xrng[2] - (xrng[2] - xrng[1]) / 2,
           y = 70, 
-          label = "1997 PM2.5 24-hr NAAQS (65 µg/m³)",
+          label = "1997 PM2.5 24-hr NAAQS (65 \u00B5g/m\u00B3)",
           size = 3
         )
       } +
@@ -95,7 +95,7 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
           'text', 
           x = 2006 - (2006 - xrng[1]) / 2, 
           y = 70, 
-          label = "1997 PM2.5 24-hr NAAQS (65 µg/m³)",
+          label = "1997 PM2.5 24-hr NAAQS (65 \u00B5g/m\u00B3)",
           size = 3
         )
       } +
@@ -111,7 +111,7 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
           'text', 
           x = xrng[2] - (xrng[2] - xrng[1]) / 2,
           y = 40, 
-          label = "2006 PM2.5 24-hr NAAQS (35 µg/m³)",
+          label = "2006 PM2.5 24-hr NAAQS (35 \u00B5g/m\u00B3)",
           alpha = 0.75,
           size = 3
         )
@@ -128,7 +128,7 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
           'text', 
           x = xrng[2] - (xrng[2] - 2006) / 2,
           y = 40, 
-          label = "2006 PM2.5 24-hr NAAQS (35 µg/m³)",
+          label = "2006 PM2.5 24-hr NAAQS (35 \u00B5g/m\u00B3)",
           alpha = 0.75,
           size = 3
         )
@@ -184,7 +184,7 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
         group = value_type,
         color = site_name,
         shape = site_name,
-        text = paste(site_name, value_type, ":", value, "µg/m³")
+        text = paste(site_name, value_type, ":", value, "\u00B5g/m\u00B3")
       )
     ) +
       ggplot2::geom_line(
@@ -209,7 +209,7 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
       # Axis settings
       ggplot2::labs(
         title = paste(region, "PM2.5 24-hr Design Values (DEC Exceptional Events Excluded)", sep = ' '),
-        y = "PM2.5 24-hr Concentration (µg/m³)",
+        y = "PM2.5 24-hr Concentration (\u00B5g/m\u00B3)",
         color = "Site Name",
         shape = "Site Name"
       ) +
@@ -230,7 +230,7 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
           'text', 
           x = xrng[2] - (xrng[2] - xrng[1]) / 2,
           y = 70, 
-          label = "1997 PM2.5 24-hr NAAQS (65 µg/m³)",
+          label = "1997 PM2.5 24-hr NAAQS (65 \u00B5g/m\u00B3)",
           size = 3
         )
       } +
@@ -247,7 +247,7 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
           'text', 
           x = 2006 - (2006 - xrng[1]) / 2,
           y = 70, 
-          label = "1997 PM2.5 24-hr NAAQS (65 µg/m³)",
+          label = "1997 PM2.5 24-hr NAAQS (65 \u00B5g/m\u00B3)",
           size = 3
         )
       } +
@@ -263,7 +263,7 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
           'text', 
           x = xrng[2] - (xrng[2] - xrng[1]) / 2,
           y = 40, 
-          label = "2006 PM2.5 24-hr NAAQS (35 µg/m³)",
+          label = "2006 PM2.5 24-hr NAAQS (35 \u00B5g/m\u00B3)",
           alpha = 0.75,
           size = 3
         )
@@ -280,7 +280,7 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
           'text', 
           x = xrng[2] - (xrng[2] - 2006) / 2,
           y = 40, 
-          label = "2006 PM2.5 24-hr NAAQS (35 µg/m³)",
+          label = "2006 PM2.5 24-hr NAAQS (35 \u00B5g/m\u00B3)",
           alpha = 0.75,
           size = 3
         )
@@ -320,7 +320,7 @@ plot_pm10_dv <- function(pm10_data, region) {
         group = value_type,
         color = site_name,
         shape = site_name,
-        text = paste(site_name, value_type, ":", value, "µg/m³")
+        text = paste(site_name, value_type, ":", value, "\u00B5g/m\u00B3")
       )
     ) +
       ggplot2::geom_line(
@@ -345,7 +345,7 @@ plot_pm10_dv <- function(pm10_data, region) {
       # Axis settings
       ggplot2::labs(
         title = paste(region, "PM10 24-hr Maximum Values", sep = ' '),
-        y = "PM10 24-hr Concentration (µg/m³)",
+        y = "PM10 24-hr Concentration (\u00B5g/m\u00B3)",
         color = "Site Name",
         shape = "Site Name"
       ) +
@@ -361,7 +361,7 @@ plot_pm10_dv <- function(pm10_data, region) {
         'text', 
         x = xrng[2] - (xrng[2] - xrng[1]) / 2,
         y = 175,
-        label = "1987 PM2.5 24-hr NAAQS (150 µg/m³)",
+        label = "1987 PM2.5 24-hr NAAQS (150 \u00B5g/m\u00B3)",
         alpha = 0.7,
         size = 3
       ) +
