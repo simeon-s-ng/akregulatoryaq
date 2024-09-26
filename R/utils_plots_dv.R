@@ -58,8 +58,8 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
-        title = paste(region, "PM2.5 24-hr Design Values & 98th %iles (EPA Concurred Exceptional Events Excluded)", sep = ' '),
-        y = "PM2.5 24-hr Concentration (\u00B5g/m\u00B3)",
+        title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup>%iles (EPA Concurred Exceptional Events Excluded)", sep = ' '),
+        y = "PM<sub>2.5</sub> 24-hr Concentration (\u00B5g/m\u00B3)",
         color = "Site Name",
         shape = "Site Name"
       ) +
@@ -77,7 +77,7 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
       } +
       {if(xrng[2] < 2006) 
         ggplot2::annotate(
-          'text', 
+          'text',
           x = xrng[2] - (xrng[2] - xrng[1]) / 2,
           y = 70, 
           label = "1997 PM2.5 24-hr NAAQS (65 \u00B5g/m\u00B3)",
@@ -94,10 +94,11 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
       } +
       {if(xrng[2] >= 2006 & xrng[1] < 2006) 
         ggplot2::annotate(
-          'text', 
+          'text',
           x = 2006 - (2006 - xrng[1]) / 2, 
           y = 70, 
           label = "1997 PM2.5 24-hr NAAQS (65 \u00B5g/m\u00B3)",
+          parse = TRUE,
           size = 3
         )
       } +
@@ -110,10 +111,10 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
       } +
       {if(xrng[2] >= 2006 & xrng[1] >= 2006) 
         ggplot2::annotate(
-          'text', 
+          'text',
           x = xrng[2] - (xrng[2] - xrng[1]) / 2,
           y = 40, 
-          label = "2006 PM2.5 24-hr NAAQS (35 \u00B5g/m\u00B3)",
+          label = "2006 PM2.5 24-hr NAAQS (35 \u00B5g/m\u00B3))",
           alpha = 0.75,
           size = 3
         )
@@ -127,10 +128,10 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
       } +
       {if(xrng[2] >= 2006 & xrng[1] < 2006) 
         ggplot2::annotate(
-          'text', 
+          'text',
           x = xrng[2] - (xrng[2] - 2006) / 2,
           y = 40, 
-          label = "2006 PM2.5 24-hr NAAQS (35 \u00B5g/m\u00B3)",
+          label = "2006 PM2.5 24-hr NAAQS (35 \u00B5g/m\u00B3))",
           alpha = 0.75,
           size = 3
         )
@@ -212,8 +213,8 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
-        title = paste(region, "PM2.5 24-hr Design Values & 98th %iles (DEC Exceptional Events Excluded)", sep = ' '),
-        y = "PM2.5 24-hr Concentration (\u00B5g/m\u00B3)",
+        title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup>%iles (DEC Exceptional Events Excluded)", sep = ' '),
+        y = "PM<sub>2.5</sub> 24-hr Concentration (\u00B5g/m\u00B3)",
         color = "Site Name",
         shape = "Site Name"
       ) +
@@ -251,7 +252,7 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
           'text', 
           x = 2006 - (2006 - xrng[1]) / 2,
           y = 70, 
-          label = "1997 PM2.5 24-hr NAAQS (65 \u00B5g/m\u00B3)",
+          label = "1997 PM2.524-hr NAAQS (65 \u00B5g/m\u00B3)",
           size = 3
         )
       } +
@@ -350,8 +351,8 @@ plot_pm10_dv <- function(pm10_data, region) {
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
-        title = paste(region, "PM10 24-hr Maximum Values", sep = ' '),
-        y = "PM10 24-hr Concentration (\u00B5g/m\u00B3)",
+        title = paste(region, "PM<sub>10</sub> 24-hr Maximum Values", sep = ' '),
+        y = "PM<sub>10</sub> 24-hr Concentration (\u00B5g/m\u00B3)",
         color = "Site Name",
         shape = "Site Name"
       ) +
@@ -367,7 +368,7 @@ plot_pm10_dv <- function(pm10_data, region) {
         'text', 
         x = xrng[2] - (xrng[2] - xrng[1]) / 2,
         y = 175,
-        label = "1987 PM2.5 24-hr NAAQS (150 \u00B5g/m\u00B3)",
+        label = "1987 PM10 24-hr NAAQS (150 \u00B5g/m\u00B3)",
         alpha = 0.7,
         size = 3
       ) +
@@ -512,8 +513,8 @@ plot_so2_dv <- function(so2_data, region) {
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
-        title = paste(region, "SO2 Design Values", sep = ' '),
-        y = "SO2 1-hr Concentrations (ppb)",
+        title = paste(region, "SO<sub>2</sub> Design Values & Maximums", sep = ' '),
+        y = "SO<sub>2</sub> 1-hr Concentrations (ppb)",
         color = "Site Name",
         shape = "Site Name"
       ) +
@@ -592,8 +593,8 @@ plot_o3_dv <- function(o3_data, region) {
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
-        title = paste(region, "O3 8-hr Maximum Values", sep = ' '),
-        y = "O3 8-hr Concentrations (ppm)",
+        title = paste(region, "O<sub>3</sub> 8-hr Design Values & Maximum Values", sep = ' '),
+        y = "O<sub>3</sub> 8-hr Concentrations (ppm)",
         color = "Site Name",
         shape = "Site Name") +
       ggplot2::scale_y_continuous(breaks = seq(0, 0.1, 0.01), limits = c(0, 0.1)) +
@@ -732,8 +733,8 @@ plot_no2_dv <- function(no2_data, region) {
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
-        title = paste(region, "NO2 Design Values", sep = ' '),
-        y = "NO2 1-hr Concentrations (ppb)",
+        title = paste(region, "NO<sub>2</sub> Design Values & Maximums", sep = ' '),
+        y = "NO<sub>2</sub> 1-hr Concentrations (ppb)",
         color = "Site Name",
         shape = "Site Name"
       ) +
