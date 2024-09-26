@@ -220,7 +220,13 @@ pm25_import_named <- left_join(pm25_import, pm_sites, by = "site_id") |>
       site_name
     )
   ) |> 
-  mutate(sample_measurement = round(sample_measurement, digits = 1))
+  mutate(
+    Date = parse_date_time(Date, "mdy"),
+    sample_measurement = round(sample_measurement, digits = 1)
+  ) |> 
+  mutate(
+    Date = as.Date(Date)
+  )
 
 ## Import PM10 ----
 
@@ -408,13 +414,13 @@ pm25_dvs_fbx <- pm25_dvs |>
     site_name == "Nordale Elementary" |
     site_name == "NCore" |
     site_name == "A Street" |
-    site_name == "Wood River"
+    site_name == "Wood River" |
+    site_name == "Hurst Road"
   )
 
 pm25_dvs_np <- pm25_dvs |> 
   filter(
     site_name == "North Pole Elementary" |
-    site_name == "Hurst Road" |
     site_name == "North Pole Water"
 )
 

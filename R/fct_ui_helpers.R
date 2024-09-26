@@ -121,9 +121,9 @@ get_howto <- function() {
     
     <!-- end of the list -->
     
-    For more details expand the Glossary by clicking the **Glossary dropdown [\u2304]** below the data figure. 
+    For more details expand the Glossary by clicking the **Glossary dropdown [\u2228]** below the data figure. 
     To see the National Ambient Air Quality Standards (NAAQS) set forth by EPA 
-    expand the NAAQS Table by clicking the **NAAQS Table dropdown [\u2304]** below the data figure.<br><br>
+    expand the NAAQS Table by clicking the **NAAQS Table dropdown [\u2228]** below the data figure.<br><br>
     Dashboard will time out after 15 minutes to prevent excessive load on the server. 
     To reload, refresh your browser menu.<br><br>
     All displayed design value data excludes exceptional events (generally wildfire) 

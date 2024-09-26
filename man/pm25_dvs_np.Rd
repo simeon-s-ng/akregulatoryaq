@@ -5,7 +5,7 @@
 \alias{pm25_dvs_np}
 \title{pm25_dvs_np}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 80 rows and 4 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 32 rows and 4 columns.
 }
 \usage{
 pm25_dvs_np

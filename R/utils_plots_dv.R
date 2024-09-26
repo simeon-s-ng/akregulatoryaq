@@ -29,34 +29,36 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
       ggplot2::aes(
         x = Year, 
         y = value, 
-        group = value_type, 
+        group = value_type,
         color = site_name, 
         shape = site_name,
         text = paste(site_name, value_type, ":", value, "\u00B5g/m\u00B3")
       )
     ) +
       ggplot2::geom_line(
-        data = subset(plot_data, value_type == "98th Percentile"),
-        alpha = 0.45
+        data = subset(plot_data, value_type == "Design Value"),
+        linetype = 1,
+        alpha = 1
       ) + 
       ggplot2::geom_point(
-        data = subset(plot_data, value_type == "98th Percentile"),
-        alpha = 0.45, 
+        data = subset(plot_data, value_type == "Design Value"),
+        alpha = 1, 
         size = 2
       ) +
       ggplot2::geom_line(
-        data = subset(plot_data, value_type == "Design Value"),
-        alpha = 0.9
+        data = subset(plot_data, value_type == "98th Percentile"),
+        linetype = 2,
+        alpha = 0.5
       ) + 
       ggplot2::geom_point(
-        data = subset(plot_data, value_type == "Design Value"),
-        alpha = 0.9, 
+        data = subset(plot_data, value_type == "98th Percentile"),
+        alpha = 0.5, 
         size = 2
       ) +
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
-        title = paste(region, "PM2.5 24-hr Design Values (EPA Concurred Exceptional Events Excluded)", sep = ' '),
+        title = paste(region, "PM2.5 24-hr Design Values & 98th %iles (EPA Concurred Exceptional Events Excluded)", sep = ' '),
         y = "PM2.5 24-hr Concentration (\u00B5g/m\u00B3)",
         color = "Site Name",
         shape = "Site Name"
@@ -133,7 +135,7 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
           size = 3
         )
       } +
-      ggplot2::guides(color = "none", linetype = "none") +
+      ggplot2::guides(color = "none") +
       ggplot2::theme_minimal() +
       # Visual formatting
       ggplot2::theme(
@@ -188,27 +190,29 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
       )
     ) +
       ggplot2::geom_line(
-        data = subset(plot_data, value_type == "98th Percentile"),
-        alpha = 0.45
+        data = subset(plot_data, value_type == "Design Value"),
+        linetype = 1,
+        alpha = 1
       ) + 
       ggplot2::geom_point(
-        data = subset(plot_data, value_type == "98th Percentile"),
-        alpha = 0.45, 
+        data = subset(plot_data, value_type == "Design Value"),
+        alpha = 1, 
         size = 2
       ) +
       ggplot2::geom_line(
-        data = subset(plot_data, value_type == "Design Value"),
-        alpha = 0.9
+        data = subset(plot_data, value_type == "98th Percentile"),
+        linetype = 2,
+        alpha = 0.5
       ) + 
       ggplot2::geom_point(
-        data = subset(plot_data, value_type == "Design Value"),
-        alpha = 0.9, 
+        data = subset(plot_data, value_type == "98th Percentile"),
+        alpha = 0.5, 
         size = 2
       ) +
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
-        title = paste(region, "PM2.5 24-hr Design Values (DEC Exceptional Events Excluded)", sep = ' '),
+        title = paste(region, "PM2.5 24-hr Design Values & 98th %iles (DEC Exceptional Events Excluded)", sep = ' '),
         y = "PM2.5 24-hr Concentration (\u00B5g/m\u00B3)",
         color = "Site Name",
         shape = "Site Name"
@@ -285,7 +289,7 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
           size = 3
         )
       } +
-      ggplot2::guides(color = "none", linetype = "none") +
+      ggplot2::guides(color = "none") +
       ggplot2::theme_minimal() +
       # Visual formatting
       ggplot2::theme(
@@ -324,21 +328,23 @@ plot_pm10_dv <- function(pm10_data, region) {
       )
     ) +
       ggplot2::geom_line(
-        data = subset(pm10_data, value_type == "Second Maximum"),
-        alpha = 0.45
+        data = subset(pm10_data, value_type == "First Maximum"),
+        linetype = 1,
+        alpha = 1
       ) + 
       ggplot2::geom_point(
-        data = subset(pm10_data, value_type == "Second Maximum"),
-        alpha = 0.45, 
+        data = subset(pm10_data, value_type == "First Maximum"),
+        alpha = 1, 
         size = 2
       ) +
       ggplot2::geom_line(
-        data = subset(pm10_data, value_type == "First Maximum"),
-        alpha = 0.9
+        data = subset(pm10_data, value_type == "Second Maximum"),
+        linetype = 2,
+        alpha = 0.5
       ) + 
       ggplot2::geom_point(
-        data = subset(pm10_data, value_type == "First Maximum"),
-        alpha = 0.9, 
+        data = subset(pm10_data, value_type == "Second Maximum"),
+        alpha = 0.5, 
         size = 2
       ) +
       ggthemes::scale_color_colorblind() +
@@ -404,21 +410,23 @@ plot_co_dv <- function(co_data, region) {
       )
     ) +
       ggplot2::geom_line(
-        data = subset(co_data, value_type == "Second Maximum"),
-        alpha = 0.45
+        data = subset(co_data, value_type == "First Maximum"),
+        linetype = 1,
+        alpha = 1
       ) + 
       ggplot2::geom_point(
-        data = subset(co_data, value_type == "Second Maximum"),
-        alpha = 0.45, 
+        data = subset(co_data, value_type == "First Maximum"),
+        alpha = 1, 
         size = 2
       ) +
       ggplot2::geom_line(
-        data = subset(co_data, value_type == "First Maximum"),
-        alpha = 0.9
+        data = subset(co_data, value_type == "Second Maximum"),
+        linetype = 2,
+        alpha = 0.5
       ) + 
       ggplot2::geom_point(
-        data = subset(co_data, value_type == "First Maximum"),
-        alpha = 0.9, 
+        data = subset(co_data, value_type == "Second Maximum"),
+        alpha = 0.5, 
         size = 2
       ) +
       ggthemes::scale_color_colorblind() +
@@ -482,21 +490,23 @@ plot_so2_dv <- function(so2_data, region) {
       )
     ) +
       ggplot2::geom_line(
-        data = subset(so2_data, value_type == "1-hr Maximum"),
-        alpha = 0.45
+        data = subset(so2_data, value_type == "3-Year Design Value"),
+        linetype = 1,
+        alpha = 1
       ) + 
       ggplot2::geom_point(
-        data = subset(so2_data, value_type == "1-hr Maximum"),
-        alpha = 0.45, 
+        data = subset(so2_data, value_type == "3-Year Design Value"),
+        alpha = 1, 
         size = 2
       ) +
       ggplot2::geom_line(
-        data = subset(so2_data, value_type == "3-Year Design Value"),
-        alpha = 0.9
+        data = subset(so2_data, value_type == "1-hr Maximum"),
+        linetype = 2,
+        alpha = 0.5
       ) + 
       ggplot2::geom_point(
-        data = subset(so2_data, value_type == "3-Year Design Value"),
-        alpha = 0.9, 
+        data = subset(so2_data, value_type == "1-hr Maximum"),
+        alpha = 0.5, 
         size = 2
       ) +
       ggthemes::scale_color_colorblind() +
@@ -560,21 +570,23 @@ plot_o3_dv <- function(o3_data, region) {
       )
     ) +
       ggplot2::geom_line(
-        data = subset(o3_data, value_type == "Fourth Maximum"),
-        alpha = 0.45
+        data = subset(o3_data, value_type == "3-Year Design Value"),
+        linetype = 1,
+        alpha = 1
       ) + 
       ggplot2::geom_point(
-        data = subset(o3_data, value_type == "Fourth Maximum"),
-        alpha = 0.45, 
+        data = subset(o3_data, value_type == "3-Year Design Value"),
+        alpha = 1, 
         size = 2
       ) +
       ggplot2::geom_line(
-        data = subset(o3_data, value_type == "3-Year Design Value"),
-        alpha = 0.9
+        data = subset(o3_data, value_type == "Fourth Maximum"),
+        linetype = 2,
+        alpha = 0.5
       ) + 
       ggplot2::geom_point(
-        data = subset(o3_data, value_type == "3-Year Design Value"),
-        alpha = 0.9, 
+        data = subset(o3_data, value_type == "Fourth Maximum"),
+        alpha = 0.5, 
         size = 2
       ) +
       ggthemes::scale_color_colorblind() +
@@ -698,21 +710,23 @@ plot_no2_dv <- function(no2_data, region) {
       )
     ) +
       ggplot2::geom_line(
-        data = subset(no2_data, value_type == "1-hr Maximum"),
-        alpha = 0.45
+        data = subset(no2_data, value_type == "3-Year Design Value"),
+        linetype = 1,
+        alpha = 1
       ) + 
       ggplot2::geom_point(
-        data = subset(no2_data, value_type == "1-hr Maximum"),
-        alpha = 0.45, 
+        data = subset(no2_data, value_type == "3-Year Design Value"),
+        alpha = 1, 
         size = 2
       ) +
       ggplot2::geom_line(
-        data = subset(no2_data, value_type == "3-Year Design Value"),
-        alpha = 0.9
+        data = subset(no2_data, value_type == "1-hr Maximum"),
+        linetype = 2,
+        alpha = 0.5
       ) + 
       ggplot2::geom_point(
-        data = subset(no2_data, value_type == "3-Year Design Value"),
-        alpha = 0.9, 
+        data = subset(no2_data, value_type == "1-hr Maximum"),
+        alpha = 0.5, 
         size = 2
       ) +
       ggthemes::scale_color_colorblind() +
