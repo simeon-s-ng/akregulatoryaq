@@ -58,7 +58,7 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
-        title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup>%iles (EPA Concurred Exceptional Events Excluded)", sep = ' '),
+        title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup> Percentiles (EPA Concurred Exceptional Events Excluded)", sep = ' '),
         y = "PM<sub>2.5</sub> 24-hr Concentration (\u00B5g/m\u00B3)",
         color = "Site Name",
         shape = "Site Name"
@@ -147,7 +147,8 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
         panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
         panel.grid.major.x = ggplot2::element_blank(),
         panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
-        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
+        plot.background = ggplot2::element_rect(fill = "#F7F5F2"),
+        plot.title = ggplot2::element_text(size = 11)
       ),
     tooltip = c('Year', 'text'),
     dynamicTicks = TRUE
@@ -213,7 +214,7 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
-        title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup>%iles (DEC Exceptional Events Excluded)", sep = ' '),
+        title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup> Percentiles (DEC Exceptional Events Excluded)", sep = ' '),
         y = "PM<sub>2.5</sub> 24-hr Concentration (\u00B5g/m\u00B3)",
         color = "Site Name",
         shape = "Site Name"
@@ -301,7 +302,8 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
         panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
         panel.grid.major.x = ggplot2::element_blank(),
         panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
-        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
+        plot.background = ggplot2::element_rect(fil = "#F7F5F2"),
+        plot.title = ggplot2::element_text(size = 11)
       ),
     tooltip = c('Year', 'text')
   ) |> 
