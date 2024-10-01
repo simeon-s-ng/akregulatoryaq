@@ -28,6 +28,10 @@ ui_page_navbar <- function() {
             .bslib-sidebar-layout > .collapse-toggle > .collapse-icon {
               fill: white !important;
             }
+            .bslib-nav-item {
+              border: 1px solid #F7F5F2;
+              padding-inline: 5px;
+            }
             .bslib-nav-item > a {
               color: rgb(255, 255, 255)
             }
