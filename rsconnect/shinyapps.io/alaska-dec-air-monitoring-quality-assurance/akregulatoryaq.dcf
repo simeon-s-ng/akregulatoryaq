@@ -5,6 +5,6 @@ account: alaska-dec-air-monitoring-quality-assurance
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 12755506
-bundleId: 9154265
+bundleId: 9169484
 url: https://alaska-dec-air-monitoring-quality-assurance.shinyapps.io/akregulatoryaq/
 version: 1

@@ -23,6 +23,7 @@ ui_page_navbar <- function() {
             .bslib-sidebar-layout > .collapse-toggle {
               margin-top: 10px;
               background-color: #194A6B;
+              border: 2px outset #F7F5F2;
             }
             .bslib-sidebar-layout > .collapse-toggle > .collapse-icon {
               fill: white !important;
