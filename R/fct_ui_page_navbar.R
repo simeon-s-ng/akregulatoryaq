@@ -29,7 +29,7 @@ ui_page_navbar <- function() {
               fill: white !important;
             }
             .bslib-nav-item {
-              border: 1px solid #F7F5F2;
+              border: 1px outset #F7F5F2;
               padding-inline: 5px;
             }
             .bslib-nav-item > a {
