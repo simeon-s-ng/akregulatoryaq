@@ -124,7 +124,7 @@ plot_pm10 <- function(pm10_data, year) {
           lubridate::as_date(paste(year, "-12-31", sep=""))
         )
       ) +
-      ggplot2::scale_y_continuous(breaks = seq(0, 200, 20), limits = c(0, 200)) +
+      ggplot2::scale_y_continuous(breaks = seq(0, 260, 20), limits = c(0, 260)) +
       # NAAQS 150ug/m3  limit
       ggplot2::geom_hline(
         ggplot2::aes(yintercept = 150),

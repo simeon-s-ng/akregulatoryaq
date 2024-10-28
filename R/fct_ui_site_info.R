@@ -10,44 +10,50 @@ fbx_pm25_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> is located in Downtown Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> began monitoring PM2.5 in 2009 and is located in Downtown Fairbanks, AK."
       ),
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-a-street/' target='_blank'>**A Street Site**</a> is located in Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-a-street/' target='_blank'>**A Street Site**</a> began monitoring PM2.5 in 2019 and is located in Fairbanks, AK."
       ),
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/north-pole-hurst-road/' target='_blank'>**Hurst Road Site**</a> is located in North Pole, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/north-pole-hurst-road/' target='_blank'>**Hurst Road Site**</a> began monitoring PM2.5 in 2012 and is located in North Pole, AK."
       ),
       shiny::markdown(
         "The **Fairbanks State Office Building** Site monitored PM2.5 in Fairbanks, AK between 2000-2020.<br>"
-      )     
+      ),
+      shiny::markdown(
+        "The **Nordale** Site monitored PM2.5 in Fairbanks, AK between 2007-2009.<br>"
+      ),
+      shiny::markdown(
+        "The **Woodriver** Site monitored PM2.5 in Fairbanks, AK between 2010-2011.<br>"
+      )
     )
   )
 }
 
 #' fbx_pm10_info
-#' 
+#'
 #' @noRd
 fbx_pm10_info <- function() {
   bslib::card(
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> is located in Downtown Fairbanks, AK."
-      ) 
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> began monitoring PM10 in 2011 and is located in Downtown Fairbanks, AK."
+      )
     )
   )
 }
 
 #' fbx_co_info
-#' 
+#'
 #' @noRd
 fbx_co_info <- function() {
   bslib::card(
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> is located in Downtown Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> began monitoring CO in 2011 and is located in Downtown Fairbanks, AK."
       ),
       shiny::markdown(
         "The **Armory** Site monitored CO in Fairbanks, AK between 2002-2007."
@@ -62,37 +68,37 @@ fbx_co_info <- function() {
 }
 
 #' fbx_so2_info
-#' 
+#'
 #' @noRd
 fbx_so2_info <- function() {
   bslib::card(
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/north-pole-hurst-road/' target='_blank'>**Hurst Road Site**</a> is located in North Pole, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/north-pole-hurst-road/' target='_blank'>**Hurst Road Site**</a> began monitoring SO2 in 2022 and is located in North Pole, AK."
       ),
       shiny::markdown(
-        "The [**NCore Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/) is located in Downtown Fairbanks, AK.")
+        "The [**NCore Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/) began monitoring SO2 in 2011 and is located in Downtown Fairbanks, AK.")
     )
   )
 }
 
 #' fbx_o3_info
-#' 
+#'
 #' @noRd
 fbx_o3_info <- function() {
   bslib::card(
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> is located in Downtown Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> began monitoring O3 in 2011 and is located in Downtown Fairbanks, AK."
       )
     )
   )
 }
 
 #' fbx_no2_info
-#' 
+#'
 #' @noRd
 fbx_no2_info <- function() {
   bslib::card(
@@ -106,14 +112,14 @@ fbx_no2_info <- function() {
 }
 
 #' anc_pm25_info
-#' 
+#'
 #' @noRd
 anc_pm25_info <- function() {
   bslib::card(
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/anchorage-garden/' target='_blank'>**Garden Site**</a> is located in Airport Heights Anchorage, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/anchorage-garden/' target='_blank'>**Garden Site**</a> is located in Airport Heights, Anchorage, AK."
       ),
       shiny::markdown(
         "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/eagle-river-parkgate/' target='_blank'>**Parkgate Site**</a> is located in Eagle River, AK."
@@ -129,7 +135,7 @@ anc_pm25_info <- function() {
 }
 
 #' anc_pm10_info
-#' 
+#'
 #' @noRd
 anc_pm10_info <- function() {
   bslib::card(
@@ -155,7 +161,7 @@ anc_pm10_info <- function() {
 }
 
 #' anc_co_info
-#' 
+#'
 #' @noRd
 anc_co_info <- function() {
   bslib::card(
@@ -169,7 +175,7 @@ anc_co_info <- function() {
 }
 
 #' jnu_pm25_info
-#' 
+#'
 #' @noRd
 jnu_pm25_info <- function() {
   bslib::card(
@@ -186,7 +192,7 @@ jnu_pm25_info <- function() {
 }
 
 #' jnu_pm10_info
-#' 
+#'
 #' @noRd
 jnu_pm10_info <- function() {
   bslib::card(
@@ -200,7 +206,7 @@ jnu_pm10_info <- function() {
 }
 
 #' ms_pm25_info
-#' 
+#'
 #' @noRd
 ms_pm25_info <- function() {
   bslib::card(
@@ -220,7 +226,7 @@ ms_pm25_info <- function() {
 }
 
 #' ms_pm10_info
-#' 
+#'
 #' @noRd
 ms_pm10_info <- function() {
   bslib::card(
@@ -240,7 +246,7 @@ ms_pm10_info <- function() {
 }
 
 #' sw_pm25_info
-#' 
+#'
 #' @noRd
 sw_pm25_info <- function() {
   bslib::card(
@@ -254,7 +260,7 @@ sw_pm25_info <- function() {
 }
 
 #' sw_pm10_info
-#' 
+#'
 #' @noRd
 sw_pm10_info <- function() {
   bslib::card(

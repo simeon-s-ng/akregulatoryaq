@@ -58,7 +58,7 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
-        title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup> Percentiles (EPA Concurred Exceptional Events Excluded)", sep = ' '),
+        title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup> Percentiles<br> (EPA Concurred Exceptional Events Excluded)", sep = ' '),
         y = "PM<sub>2.5</sub> 24-hr Concentration (\u00B5g/m\u00B3)",
         color = "Site Name",
         shape = "Site Name"
@@ -150,8 +150,7 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
         plot.background = ggplot2::element_rect(fill = "#F7F5F2"),
         plot.title = ggplot2::element_text(size = 11)
       ),
-    tooltip = c('Year', 'text'),
-    dynamicTicks = TRUE
+    tooltip = c('Year', 'text')
   ) |> 
     plotly::layout(legend = list(orientation = 'h')) |> 
     plotly::toWebGL()
@@ -214,7 +213,7 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
       ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
-        title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup> Percentiles (DEC Exceptional Events Excluded)", sep = ' '),
+        title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup> Percentiles<br> (DEC Exceptional Events Excluded)", sep = ' '),
         y = "PM<sub>2.5</sub> 24-hr Concentration (\u00B5g/m\u00B3)",
         color = "Site Name",
         shape = "Site Name"
@@ -359,7 +358,7 @@ plot_pm10_dv <- function(pm10_data, region) {
         shape = "Site Name"
       ) +
       ggplot2::scale_x_continuous(breaks = function(x) unique(floor(pretty(x)))) +
-      ggplot2::scale_y_continuous(breaks = seq(0, 350, 50), limits = c(0, 350)) +
+      ggplot2::scale_y_continuous(breaks = seq(0, 260, 20), limits = c(0, 260)) +
       # NAAQS 150µg/m³ limit
       ggplot2::geom_hline(
         ggplot2::aes(yintercept = 150), 

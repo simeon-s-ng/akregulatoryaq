@@ -45,46 +45,46 @@ calc_co_8hr_avg <- function(data, site) {
     ) |>
     # Arrange by datetime
     arrange(date_local) |>
-    mutate(date_local = date(date_local)) |> 
+    mutate(date_local = date(date_local)) |>
     # Calc rolling avg
     mutate(
       rolling_avg_8hr = round(
         rollapply(
           sample_measurement,
           8,
-          FUN = mean_valid_CO_8hr, 
-          align = "left", 
+          FUN = mean_valid_CO_8hr,
+          align = "left",
           fill = NA
         ),
         digits = 1
       )
-    ) |> 
-    dplyr::group_by(date_local) |> 
-    summarise(avg_8hr = max(rolling_avg_8hr)) |> 
-    mutate(site_name = site) |> 
+    ) |>
+    dplyr::group_by(date_local) |>
+    summarise(avg_8hr = max(rolling_avg_8hr)) |>
+    mutate(site_name = site) |>
     rename(Date = date_local)
-  
+
   return(co_data)
 }
 
 ## NO2 -------------------------------------------------------------------------
 
 calc_no2_1hr_max <- function(data, site) {
-  no2_data <- select(data, date_local, time_local, sample_measurement) |> 
+  no2_data <- select(data, date_local, time_local, sample_measurement) |>
     mutate(
       date_local = parse_date_time(
-        paste(date_local, time_local), 
+        paste(date_local, time_local),
         "Ymd HMS"
       )
-    ) |> 
-    arrange(date_local) |> 
-    mutate(date_local = date(date_local)) |> 
-    group_by(date_local) |> 
+    ) |>
+    arrange(date_local) |>
+    mutate(date_local = date(date_local)) |>
+    group_by(date_local) |>
     summarise(max_1hr = max(sample_measurement, na.rm = TRUE)) |>
-    mutate(max_1hr = if_else(max_1hr == "-Inf", NA, as.numeric(max_1hr))) |> 
-    mutate(site_name = site) |> 
+    mutate(max_1hr = if_else(max_1hr == "-Inf", NA, as.numeric(max_1hr))) |>
+    mutate(site_name = site) |>
     rename(Date = date_local)
-  
+
   return(no2_data)
 }
 
@@ -92,8 +92,8 @@ calc_no2_1hr_max <- function(data, site) {
 
 mean_valid_O3_8hr <- function(data) {
   if(sum(is.na(data)) > length(data) * 0.25) {
-    calc_sub_8_hr <- data |> 
-      replace_na(0.0025) |> 
+    calc_sub_8_hr <- data |>
+      replace_na(0.0025) |>
       mean()
     if(calc_sub_8_hr > 0.070) {
       return(calc_sub_8_hr)
@@ -116,21 +116,21 @@ mean_valid_O3_8hr <- function(data) {
 # the 8-hour average concentration is greater than the level of the standard (0.070 ppm).
 calc_o3_8hr_avg <- function(data, site) {
   o3_data <- select(
-      data, 
-      date_local, 
-      time_local, 
+      data,
+      date_local,
+      time_local,
       sample_measurement,
       detection_limit
-    ) |> 
+    ) |>
     mutate(
       date_local = parse_date_time(
-        paste(date_local, time_local), 
+        paste(date_local, time_local),
         "Ymd HMS"
       )
-    ) |> 
+    ) |>
     # Arrange by datetime
-    arrange(date_local) |> 
-    mutate(date_local = date(date_local)) |> 
+    arrange(date_local) |>
+    mutate(date_local = date(date_local)) |>
     # Calculate rolling average
     mutate(
       rolling_avg_8hr = trunc(
@@ -142,34 +142,34 @@ calc_o3_8hr_avg <- function(data, site) {
           fill = NA
         ) * 1000
       ) / 1000
-    ) |> 
-    group_by(date_local) |> 
-    summarise(avg_8hr = max(rolling_avg_8hr)) |> 
-    mutate(site_name = site) |> 
+    ) |>
+    group_by(date_local) |>
+    summarise(avg_8hr = max(rolling_avg_8hr)) |>
+    mutate(site_name = site) |>
     rename(Date = date_local)
-  
+
   return(o3_data)
 }
 
 ## SO2 -------------------------------------------------------------------------
 
 calc_so2_1hr_max <- function(data, site) {
-  so2_data <- filter(data, sample_duration == "1 HOUR") |> 
+  so2_data <- filter(data, sample_duration == "1 HOUR") |>
     select(date_local, time_local, sample_measurement) |>
     mutate(
       date_local = parse_date_time(
         paste(date_local, time_local),
         "Ymd HMS"
       )
-    ) |> 
-    arrange(date_local) |> 
-    mutate(date_local = date(date_local)) |> 
-    group_by(date_local) |> 
+    ) |>
+    arrange(date_local) |>
+    mutate(date_local = date(date_local)) |>
+    group_by(date_local) |>
     summarise(max_1hr = max(sample_measurement, na.rm = TRUE)) |>
-    mutate(max_1hr = if_else(max_1hr == "-Inf", NA, as.numeric(max_1hr))) |> 
-    mutate(site_name = site) |> 
+    mutate(max_1hr = if_else(max_1hr == "-Inf", NA, as.numeric(max_1hr))) |>
+    mutate(site_name = site) |>
     rename(Date = date_local)
-  
+
   return(so2_data)
 }
 
@@ -192,22 +192,22 @@ import_pm <- function(file_ex) {
 ## Import PM25 and PM10 --------------------------------------------------------
 
 pm25_ex <- "*PM25_final*csv"
-pm25_import <- import_pm(pm25_ex) |> 
+pm25_import <- import_pm(pm25_ex) |>
   rename(site_id = site_number)
 
 pm10_ex <- "*PM10_final*csv"
-pm10_import <- import_pm(pm10_ex) |> 
+pm10_import <- import_pm(pm10_ex) |>
   rename(site_id = site_number)
 
 pm_sites_ex <- "*sites*csv"
-pm_sites <- import_pm(pm_sites_ex) |> 
-  mutate(site_id = as.numeric(site_id)) |> 
-  select(site_id, site_name) |> 
+pm_sites <- import_pm(pm_sites_ex) |>
+  mutate(site_id = as.numeric(site_id)) |>
+  select(site_id, site_name) |>
   distinct()
 
-pm25_import_named <- left_join(pm25_import, pm_sites, by = "site_id") |> 
-  select(date_local, sample_measurement, site_name) |> 
-  rename(Date = date_local) |> 
+pm25_import_named <- left_join(pm25_import, pm_sites, by = "site_id") |>
+  select(date_local, sample_measurement, site_name) |>
+  rename(Date = date_local) |>
   mutate(
     site_name = ifelse(
       site_name == "Fairbanks State Office Building",
@@ -215,24 +215,24 @@ pm25_import_named <- left_join(pm25_import, pm_sites, by = "site_id") |>
       site_name
       ),
     site_name = ifelse(
-      site_name == "Hurst", 
-      "Hurst Road", 
+      site_name == "Hurst",
+      "Hurst Road",
       site_name
     )
-  ) |> 
+  ) |>
   mutate(
     Date = parse_date_time(Date, "mdy"),
     sample_measurement = round(sample_measurement, digits = 1)
-  ) |> 
+  ) |>
   mutate(
     Date = as.Date(Date)
   )
 
 ## Import PM10 ----
 
-pm10_import_named <- left_join(pm10_import, pm_sites, by = "site_id") |> 
-  select(date_local, sample_measurement, site_name) |> 
-  rename(Date = date_local) |> 
+pm10_import_named <- left_join(pm10_import, pm_sites, by = "site_id") |>
+  select(date_local, sample_measurement, site_name) |>
+  rename(Date = date_local) |>
   mutate(sample_measurement = round(sample_measurement, digits = 1))
 
 ## Import Gaseous --------------------------------------------------------------
@@ -265,12 +265,12 @@ ncore_co_8hr_avg <- calc_co_8hr_avg(ncore_co, "NCore")
 oldpo_co_8hr_avg <- calc_co_8hr_avg(oldpo_co, "Old Post Office")
 
 co_8hr_avg <- bind_rows(
-  armory_co_8hr_avg, 
+  armory_co_8hr_avg,
   garden_co_8hr_avg,
   hunter_co_8hr_avg,
   ncore_co_8hr_avg,
   oldpo_co_8hr_avg
-) |> 
+) |>
   rename(sample_measurement = "avg_8hr")
 
 # Import SO2 -------------------------------------------------------------------
@@ -286,7 +286,7 @@ hurst_so2_1hr_max <- calc_so2_1hr_max(hurst_so2, "Hurst Road")
 so2_1hr_max <- bind_rows(
   ncore_so2_1hr_max,
   hurst_so2_1hr_max
-) |> 
+) |>
   rename(sample_measurement = "max_1hr")
 
 # Import O3 --------------------------------------------------------------------
@@ -294,7 +294,7 @@ ncore_ex_o3 <- "*NCore*O3*csv"
 ncore_o3 <- import_files(ncore_ex_o3)
 
 # Calculate o3 8-hr average
-ncore_o3_8hr_avg <- calc_o3_8hr_avg(ncore_o3, "NCore") |> 
+ncore_o3_8hr_avg <- calc_o3_8hr_avg(ncore_o3, "NCore") |>
   rename(sample_measurement = "avg_8hr")
 
 # Import NO2 -------------------------------------------------------------------
@@ -302,7 +302,7 @@ ncore_ex_no2 <- "*NCore*NO2*csv"
 ncore_no2 <- import_files(ncore_ex_no2)
 
 # Calculate NO2 1-hr max
-ncore_no2_1hr_max <- calc_no2_1hr_max(ncore_no2, "NCore") |> 
+ncore_no2_1hr_max <- calc_no2_1hr_max(ncore_no2, "NCore") |>
   rename(sample_measurement = "max_1hr")
 
 ## Import DVs ------------------------------------------------------------------
@@ -311,10 +311,10 @@ ncore_no2_1hr_max <- calc_no2_1hr_max(ncore_no2, "NCore") |>
 
 pm25_dvs <- read_csv(
   paste(
-    input_path_dv, 
-    "/PM25_98th_percentile_24hr_design_value.csv", 
+    input_path_dv,
+    "/PM25_98th_percentile_24hr_design_value.csv",
     sep=""
-  ), 
+  ),
   show_col_types = FALSE
 ) |>
   rename(
@@ -323,102 +323,102 @@ pm25_dvs <- read_csv(
     dv_24hr_EPA_ex = "24-Hour Design Value (excluding EPA concurred exceptional events)",
     dv_24hr_DEC_ex = "24-Hour Design Value (excluding DEC exceptional events)",
     Year = year
-  ) |> 
+  ) |>
   select(
-    site_name, 
-    Year, 
-    percentile_EPA_ex, 
-    percentile_DEC_ex, 
-    dv_24hr_EPA_ex, 
+    site_name,
+    Year,
+    percentile_EPA_ex,
+    percentile_DEC_ex,
+    dv_24hr_EPA_ex,
     dv_24hr_DEC_ex
-  ) |> 
+  ) |>
   filter(
     !is.na(percentile_EPA_ex) |
-    !is.na(percentile_DEC_ex) | 
+    !is.na(percentile_DEC_ex) |
     !is.na(dv_24hr_EPA_ex) |
     !is.na(dv_24hr_DEC_ex)
-  ) |> 
+  ) |>
   mutate(
     site_name = if_else(
       site_name == "Nordale Elementary School - Hamilton and Eureka",
-      "Nordale Elementary", 
+      "Nordale Elementary",
       site_name
     )
-  ) |> 
+  ) |>
   mutate(
     site_name = if_else(
       site_name == "NP Elementary - 250 Snowman Lane",
-      "North Pole Elementary", 
+      "North Pole Elementary",
       site_name
     )
-  ) |> 
+  ) |>
   mutate(
     site_name = if_else(
       site_name == "North Pole Water - 2696 Mockler Ave.",
-      "North Pole Water", 
+      "North Pole Water",
       site_name
     )
-  ) |> 
+  ) |>
   mutate(
     site_name = if_else(
       site_name == "Wood River - 5000 Palo Verde Ave.",
-      "Wood River", 
+      "Woodriver",
       site_name
     )
-  ) |> 
+  ) |>
   mutate(
     site_name = if_else(
       site_name == "Soldotna 144 N Binkley St.",
-      "Soldotna", 
+      "Soldotna",
       site_name
     )
-  ) |> 
+  ) |>
   mutate(
     site_name = if_else(
       site_name == "Wasilla - 100 W Swanson Ave.",
-      "Wasilla", 
+      "Wasilla",
       site_name
     )
-  ) |> 
-  mutate(site_name = if_else(site_name == "Hurst", "Hurst Road", site_name)) |> 
-  mutate(percentile_EPA_ex = as.numeric(percentile_EPA_ex)) |> 
+  ) |>
+  mutate(site_name = if_else(site_name == "Hurst", "Hurst Road", site_name)) |>
+  mutate(percentile_EPA_ex = as.numeric(percentile_EPA_ex)) |>
   pivot_longer(cols = 3:6, names_to = "value_type", values_to = "value")
 
-pm25_dvs_sw <- pm25_dvs |> 
+pm25_dvs_sw <- pm25_dvs |>
   filter(site_name == "Bethel")
 
-pm25_dvs_jnu <- pm25_dvs |> 
+pm25_dvs_jnu <- pm25_dvs |>
   filter(
-    site_name == "Floyd Dryden" | 
+    site_name == "Floyd Dryden" |
     site_name == "Lemon Creek"
   )
 
-pm25_dvs_ms <- pm25_dvs |> 
+pm25_dvs_ms <- pm25_dvs |>
   filter(
     site_name == "Butte" |
     site_name == "Palmer" |
     site_name == "Wasilla"
   )
 
-pm25_dvs_anc <- pm25_dvs |> 
+pm25_dvs_anc <- pm25_dvs |>
   filter(
     site_name == "Garden" |
     site_name == "Tudor" |
-    site_name == "DHHS" | 
+    site_name == "DHHS" |
     site_name == "Parkgate"
   )
 
-pm25_dvs_fbx <- pm25_dvs |> 
+pm25_dvs_fbx <- pm25_dvs |>
   filter(
     site_name == "Fairbanks State Office Building" |
     site_name == "Nordale Elementary" |
     site_name == "NCore" |
     site_name == "A Street" |
-    site_name == "Wood River" |
+    site_name == "Woodriver" |
     site_name == "Hurst Road"
   )
 
-pm25_dvs_np <- pm25_dvs |> 
+pm25_dvs_np <- pm25_dvs |>
   filter(
     site_name == "North Pole Elementary" |
     site_name == "North Pole Water"
@@ -428,22 +428,22 @@ pm25_dvs_np <- pm25_dvs |>
 
 pm10_dvs <- read_csv(
   paste(
-    input_path_dv, 
-    "/PM10_24hr_first_second_maximum.csv", 
+    input_path_dv,
+    "/PM10_24hr_first_second_maximum.csv",
     sep=""
-  ), 
+  ),
   show_col_types = FALSE
-) |> 
+) |>
   rename(first_max = "first maximum",
          second_max = "second maximum",
-         Year = year) |> 
-  select(site_name, Year, first_max, second_max) |> 
-  filter(!is.na(first_max) | !is.na(second_max)) |> 
-  pivot_longer(cols = 3:4, names_to = "value_type", values_to = "value") |> 
+         Year = year) |>
+  select(site_name, Year, first_max, second_max) |>
+  filter(!is.na(first_max) | !is.na(second_max)) |>
+  pivot_longer(cols = 3:4, names_to = "value_type", values_to = "value") |>
   mutate(
     value_type = ifelse(
-      value_type == "first_max", 
-      "First Maximum", 
+      value_type == "first_max",
+      "First Maximum",
       "Second Maximum"
     )
   )
@@ -452,46 +452,46 @@ pm10_dvs_sw <- pm10_dvs |> filter(site_name == "Bethel")
 
 pm10_dvs_jnu <- pm10_dvs |> filter(site_name == "Floyd Dryden")
 
-pm10_dvs_ms <- pm10_dvs |> 
+pm10_dvs_ms <- pm10_dvs |>
   filter(
-    site_name == "Butte" | 
+    site_name == "Butte" |
     site_name == "Palmer" |
     site_name == "Wasilla"
   )
 
-pm10_dvs_anc <- pm10_dvs |> 
+pm10_dvs_anc <- pm10_dvs |>
   filter(
     site_name == "Garden" |
     site_name == "Muldoon" |
-    site_name == "Tudor" | 
+    site_name == "Tudor" |
     site_name == "Laurel" |
-    site_name == "DHHS" | 
+    site_name == "DHHS" |
     site_name == "Parkgate" |
     site_name == "Oceanview"
   )
 
-pm10_dvs_fbx <- pm10_dvs |> 
+pm10_dvs_fbx <- pm10_dvs |>
   filter(site_name == "NCore" | site_name == "Fairbanks State Office Building")
 
 # Import CO DVs ----------------------------------------------------------------
 
 co_dvs <- read_csv(
   paste(
-    input_path_dv, 
-    "/CO_8hr_maximum.csv", 
+    input_path_dv,
+    "/CO_8hr_maximum.csv",
     sep=""
-  ), 
+  ),
   show_col_types = FALSE
-) |> 
-  select(site_name, year, "8 hour 1st maximum", "8 hour 2nd maximum") |> 
+) |>
+  select(site_name, year, "8 hour 1st maximum", "8 hour 2nd maximum") |>
   rename(
-    max_8hr = "8 hour 1st maximum", 
-    max_8hr_2 = "8 hour 2nd maximum", 
+    max_8hr = "8 hour 1st maximum",
+    max_8hr_2 = "8 hour 2nd maximum",
     Year = year
-  ) |> 
-  filter(!is.na(max_8hr), !is.na(max_8hr_2), !is.na(site_name)) |> 
-  mutate(site_name = ifelse(site_name == "Ncore", "NCore", site_name)) |> 
-  pivot_longer(cols = 3:4, names_to = "value_type", values_to = "value") |> 
+  ) |>
+  filter(!is.na(max_8hr), !is.na(max_8hr_2), !is.na(site_name)) |>
+  mutate(site_name = ifelse(site_name == "Ncore", "NCore", site_name)) |>
+  pivot_longer(cols = 3:4, names_to = "value_type", values_to = "value") |>
   mutate(
     value_type = ifelse(
       value_type == "max_8hr", "First Maximum", "Second Maximum"
@@ -499,7 +499,7 @@ co_dvs <- read_csv(
   )
 
 # Filter to FBX CO monitoring sites
-co_dvs_fbx <- co_dvs |> 
+co_dvs_fbx <- co_dvs |>
   filter(
     site_name == "Old Post Office" |
     site_name == "Fairbanks State Office Building" |
@@ -508,13 +508,13 @@ co_dvs_fbx <- co_dvs |>
 )
 
 # Filter to ANC CO monitoring sites
-co_dvs_anc <- co_dvs |> 
+co_dvs_anc <- co_dvs |>
   filter(
     site_name == "Garden" |
     site_name == "Benson and Spenard" |
-    site_name == "Benson and Seward Highway" | 
+    site_name == "Benson and Seward Highway" |
     site_name == "Turnagain" |
-    site_name == "Bowman Elementary" | 
+    site_name == "Bowman Elementary" |
     site_name == "Parkgate" |
     site_name == "DHHS"
 )
@@ -522,17 +522,17 @@ co_dvs_anc <- co_dvs |>
 # Import O3 DVs ----------------------------------------------------------------
 o3_dvs <- read_csv(
   paste(
-    input_path_dv, 
-    "/O3_8hr_maximum.csv", 
+    input_path_dv,
+    "/O3_8hr_maximum.csv",
     sep=""
   ),
   show_col_types = FALSE
-) |> 
-  select(site_name, year, "8 hour maximum", "3-year design value") |> 
+) |>
+  select(site_name, year, "8 hour maximum", "3-year design value") |>
   rename(max_8hr = "8 hour maximum", dv_3yr = "3-year design value",
-         Year = year) |> 
-  filter(!is.na(max_8hr) | !is.na(dv_3yr), !is.na(site_name)) |> 
-  pivot_longer(cols = 3:4, names_to = "value_type", values_to = "value") |> 
+         Year = year) |>
+  filter(!is.na(max_8hr) | !is.na(dv_3yr), !is.na(site_name)) |>
+  pivot_longer(cols = 3:4, names_to = "value_type", values_to = "value") |>
   mutate(
     value_type = ifelse(
       value_type == "max_8hr", "Fourth Maximum", "3-Year Design Value"
@@ -548,20 +548,20 @@ o3_dvs_ms <- o3_dvs |> filter(site_name == "Wasilla")
 # Import SO2 DVs ---------------------------------------------------------------
 so2_dvs <- read_csv(
   paste(
-    input_path_dv, 
-    "/SO2_1hr_maximum.csv", 
+    input_path_dv,
+    "/SO2_1hr_maximum.csv",
     sep=""
-  ), 
+  ),
   show_col_types = FALSE
-) |> 
-  select(site_name, year, "1 hr maximum", "3-year design value") |> 
+) |>
+  select(site_name, year, "1 hr maximum", "3-year design value") |>
   rename(
-    max_1hr = "1 hr maximum", 
-    dv_3yr = "3-year design value", 
+    max_1hr = "1 hr maximum",
+    dv_3yr = "3-year design value",
     Year = year
   ) |>
-  filter(!is.na(max_1hr), !is.na(dv_3yr)) |> 
-  pivot_longer(cols = 3:4, names_to = "value_type", values_to = "value") |> 
+  filter(!is.na(max_1hr), !is.na(dv_3yr)) |>
+  pivot_longer(cols = 3:4, names_to = "value_type", values_to = "value") |>
   mutate(
     value_type = ifelse(
       value_type == "max_1hr", "1-hr Maximum", "3-Year Design Value"
@@ -574,20 +574,20 @@ so2_dvs <- read_csv(
 # Import NO2 DVs ---------------------------------------------------------------
 no2_dvs <- read_csv(
   paste(
-    input_path_dv, 
+    input_path_dv,
     "/NO2_1hr_maximum.csv",
     sep=""
-  ), 
+  ),
   show_col_types = FALSE
-) |> 
-  select(site_name, year, "1 hour maximum", "3-year design value") |> 
+) |>
+  select(site_name, year, "1 hour maximum", "3-year design value") |>
   rename(
-    max_1hr = "1 hour maximum", 
-    dv_3yr = "3-year design value", 
+    max_1hr = "1 hour maximum",
+    dv_3yr = "3-year design value",
     Year = year
-  ) |> 
-  filter(!is.na(max_1hr), !is.na(dv_3yr)) |> 
-  pivot_longer(cols = 3:4, names_to = "value_type", values_to = "value") |> 
+  ) |>
+  filter(!is.na(max_1hr), !is.na(dv_3yr)) |>
+  pivot_longer(cols = 3:4, names_to = "value_type", values_to = "value") |>
   mutate(
     value_type = ifelse(
       value_type == "max_1hr", "1-hr Maximum", "3-Year Design Value"
