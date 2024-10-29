@@ -105,7 +105,7 @@ fbx_no2_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> is located in Downtown Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> began monitoring NO2 in 2012 and is located in Downtown Fairbanks, AK."
       )
     )
   )
