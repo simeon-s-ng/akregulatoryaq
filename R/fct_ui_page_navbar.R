@@ -1,9 +1,9 @@
-#' ui_page_navbar 
+#' ui_page_navbar
 #'
 #' @description Wrapper for main page navbar.
 #'
 #' @return A bslib::page_navbar()
-#' 
+#'
 #' @importFrom bsicons bs_icon
 #'
 #' @noRd
@@ -61,11 +61,11 @@ ui_page_navbar <- function() {
         bslib::accordion_panel(
           "Filters", icon = bsicons::bs_icon("filter"),
           # Fairbanks PM25 Filters ----
-          shiny::conditionalPanel(  
+          shiny::conditionalPanel(
             condition = "input.nav == 'Fairbanks' & input.fnsb == 'PM2.5'",
             # PM25 Year Filter Module
             mod_filter_data_ui(
-              "filter_data_fbx_pm25", 
+              "filter_data_fbx_pm25",
               range_pm25(),
               fbx_sites_pm25()
             ),
@@ -244,8 +244,8 @@ ui_page_navbar <- function() {
             fbx_pm25_desc()
           ),
           plot_card_pm25(
-            "pm25_avg_fbx", 
-            "pm25_epa_dv_fbx", 
+            "pm25_avg_fbx",
+            "pm25_epa_dv_fbx",
             "pm25_dec_dv_fbx",
             "pm25_table_fbx"
           )
@@ -257,7 +257,7 @@ ui_page_navbar <- function() {
             fbx_pm10_desc()
           ),
           plot_card(
-            mod_pm10_avg_ui("pm10_avg_fbx"), 
+            mod_pm10_avg_ui("pm10_avg_fbx"),
             mod_pm10_dv_ui("pm10_dv_fbx"),
             mod_naaqs_table_ui("pm10_table_fbx")
           )
@@ -269,7 +269,7 @@ ui_page_navbar <- function() {
             fbx_co_desc()
           ),
           plot_card(
-            mod_co_avg_ui("co_avg_fbx"), 
+            mod_co_avg_ui("co_avg_fbx"),
             mod_co_dv_ui("co_dv_fbx"),
             mod_naaqs_table_ui("co_table_fbx")
           )
@@ -281,7 +281,7 @@ ui_page_navbar <- function() {
             fbx_so2_desc()
           ),
           plot_card(
-            mod_so2_avg_ui("so2_avg_fbx"), 
+            mod_so2_avg_ui("so2_avg_fbx"),
             mod_so2_dv_ui("so2_dv_fbx"),
             mod_naaqs_table_ui("so2_table_fbx")
           )
@@ -293,7 +293,7 @@ ui_page_navbar <- function() {
             fbx_o3_desc()
           ),
           plot_card(
-            mod_o3_avg_ui("o3_avg_fbx"), 
+            mod_o3_avg_ui("o3_avg_fbx"),
             mod_o3_dv_ui("o3_dv_fbx"),
             mod_naaqs_table_ui("o3_table_fbx")
           )
@@ -305,7 +305,7 @@ ui_page_navbar <- function() {
             fbx_no2_desc()
           ),
           plot_card(
-            mod_no2_avg_ui("no2_avg_fbx"), 
+            mod_no2_avg_ui("no2_avg_fbx"),
             mod_no2_dv_ui("no2_dv_fbx"),
             mod_naaqs_table_ui("no2_table_fbx")
           )
@@ -326,8 +326,8 @@ ui_page_navbar <- function() {
             anc_pm25_desc()
           ),
           plot_card_pm25(
-            "pm25_avg_anc", 
-            "pm25_epa_dv_anc", 
+            "pm25_avg_anc",
+            "pm25_epa_dv_anc",
             "pm25_dec_dv_anc",
             "pm25_table_anc"
           )
@@ -339,7 +339,7 @@ ui_page_navbar <- function() {
             anc_pm10_desc()
           ),
           plot_card(
-            mod_pm10_avg_ui("pm10_avg_anc"), 
+            mod_pm10_avg_ui("pm10_avg_anc"),
             mod_pm10_dv_ui("pm10_dv_anc"),
             mod_naaqs_table_ui("pm10_table_anc")
           )
@@ -351,7 +351,7 @@ ui_page_navbar <- function() {
             anc_co_desc()
           ),
           plot_card(
-            mod_co_avg_ui("co_avg_anc"), 
+            mod_co_avg_ui("co_avg_anc"),
             mod_co_dv_ui("co_dv_anc"),
             mod_naaqs_table_ui("co_table_anc")
           )
@@ -372,8 +372,8 @@ ui_page_navbar <- function() {
             jnu_pm25_desc()
           ),
           plot_card_pm25(
-            "pm25_avg_jnu", 
-            "pm25_epa_dv_jnu", 
+            "pm25_avg_jnu",
+            "pm25_epa_dv_jnu",
             "pm25_dec_dv_jnu",
             "pm25_table_jnu"
           )
@@ -385,7 +385,7 @@ ui_page_navbar <- function() {
             jnu_pm10_desc()
           ),
           plot_card(
-            mod_pm10_avg_ui("pm10_avg_jnu"), 
+            mod_pm10_avg_ui("pm10_avg_jnu"),
             mod_pm10_dv_ui("pm10_dv_jnu"),
             mod_naaqs_table_ui("pm10_table_jnu")
           )
@@ -406,8 +406,8 @@ ui_page_navbar <- function() {
             ms_pm25_desc()
           ),
           plot_card_pm25(
-            "pm25_avg_ms", 
-            "pm25_epa_dv_ms", 
+            "pm25_avg_ms",
+            "pm25_epa_dv_ms",
             "pm25_dec_dv_ms",
             "pm25_table_ms"
           )
@@ -419,7 +419,7 @@ ui_page_navbar <- function() {
             ms_pm10_desc()
           ),
           plot_card(
-            mod_pm10_avg_ui("pm10_avg_ms"), 
+            mod_pm10_avg_ui("pm10_avg_ms"),
             mod_pm10_dv_ui("pm10_dv_ms"),
             mod_naaqs_table_ui("pm10_table_ms")
           )
@@ -440,7 +440,7 @@ ui_page_navbar <- function() {
             sw_pm25_desc()
           ),
           plot_card(
-            mod_pm25_avg_ui("pm25_avg_sw"), 
+            mod_pm25_avg_ui("pm25_avg_sw"),
             mod_pm25_dec_dv_ui("pm25_dec_dv_sw"),
             mod_naaqs_table_ui("pm25_table_sw")
           )
@@ -452,7 +452,7 @@ ui_page_navbar <- function() {
             sw_pm10_desc()
           ),
           plot_card(
-            mod_pm10_avg_ui("pm10_avg_sw"), 
+            mod_pm10_avg_ui("pm10_avg_sw"),
             mod_pm10_dv_ui("pm10_dv_sw"),
             mod_naaqs_table_ui("pm10_table_sw")
           )
@@ -461,16 +461,16 @@ ui_page_navbar <- function() {
       ui_footer()
     ),
     bslib::nav_spacer(),
-    # Link to realtime data ----
+    # Link to real-time data ----
     bslib::nav_item(
       htmltools::tags$a(
-        shiny::icon("wind"), 
-        "Alaska Real Time Air Quality Data", 
-        href = "https://dec.alaska.gov/air/air-monitoring/responsibilities/database-management/alaska-air-quality-real-time-data/", 
+        shiny::icon("wind"),
+        "Alaska Real Time Air Quality Data",
+        href = "https://dec.alaska.gov/air/air-monitoring/responsibilities/database-management/alaska-air-quality-real-time-data/",
         target = "_blank"
       )
     )
-  ) |> 
+  ) |>
     htmltools::tagAppendAttributes(
       .cssSelector = "nav",
       class = "navbar-expand"
