@@ -93,9 +93,9 @@ calc_no2_1hr_max <- function(data, site) {
 mean_valid_O3_8hr <- function(data) {
   if(sum(is.na(data)) > length(data) * 0.25) {
     calc_sub_8_hr <- data |>
-      replace_na(0.0025) |>
+      replace_na(0.0025) |> # substitute minimum detectable limit of sensor for missing values
       mean()
-    if(calc_sub_8_hr > 0.070) {
+    if(calc_sub_8_hr > 0.070) { # use value if greater than the NAAQS
       return(calc_sub_8_hr)
     }
     else {
@@ -107,6 +107,25 @@ mean_valid_O3_8hr <- function(data) {
   }
 }
 
+# valid day if 75% of 8-hour averages are available in 24-hours
+# If less than 75% are available, a day shall be counted if the maximum for that day is greater than the standard
+daily_valid <- function(data) {
+  if(sum(is.na(data)) > length(data) * 0.25) {
+    if(is.na(max(data))) {
+      return(NA)
+    }
+    if(max(data, na.rm = FALSE) > 0.070) { # use value if greater than the NAAQS
+      return(max(data, na.rm = FALSE))
+    }
+    else {
+      return(NA)
+    }
+  }
+  else {
+    return(max(data, na.rm = TRUE))
+  }
+}
+
 # calc_o3_8hr_avg
 # Ozone 8-hour averages.
 # 8-hr average is considered valid if at least 75% of the hourly averages for the
@@ -114,6 +133,10 @@ mean_valid_O3_8hr <- function(data) {
 # 8-hour periods with >= 3 hours of missing hours are ignored if after substituting
 # one-half of the minimum detectable limit for the missing hourly concentrations (0.005 ppm),
 # the 8-hour average concentration is greater than the level of the standard (0.070 ppm).
+# There are 24 possible 8-hour average concs per day. The daily max 8-hour is the highest of the 24.
+# A monitoring day shall be counted as valid day if 8-hour averages are available for 75% of the possible
+# hours in the day. If less than 75% are available, the day shall be counted if the max conc is greater
+# than the NAAQS
 calc_o3_8hr_avg <- function(data, site) {
   o3_data <- select(
       data,
@@ -130,6 +153,8 @@ calc_o3_8hr_avg <- function(data, site) {
     ) |>
     # Arrange by datetime
     arrange(date_local) |>
+    # Fill missing hours
+    complete(date_local = seq(min(date_local), max(date_local), 'hour')) |>
     mutate(date_local = date(date_local)) |>
     # Calculate rolling average
     mutate(
@@ -143,8 +168,17 @@ calc_o3_8hr_avg <- function(data, site) {
         ) * 1000
       ) / 1000
     ) |>
+    # Check for valid hours in a day
+    mutate(
+      daily_8hr = trunc(
+        rollapply(
+          rolling_avg_8hr, width = 24, by = 24, FUN = daily_valid, align = "left", fill = NA
+        ) * 1000
+      ) / 1000
+    ) |>
+    filter(time_local == hms("00:00:00")) |>
     group_by(date_local) |>
-    summarise(avg_8hr = max(rolling_avg_8hr)) |>
+    summarise(avg_8hr = max(daily_8hr)) |>
     mutate(site_name = site) |>
     rename(Date = date_local)
 
@@ -310,11 +344,7 @@ ncore_no2_1hr_max <- calc_no2_1hr_max(ncore_no2, "NCore") |>
 # Import PM25 DVs --------------------------------------------------------------
 
 pm25_dvs <- read_csv(
-  paste(
-    input_path_dv,
-    "/PM25_98th_percentile_24hr_design_value.csv",
-    sep=""
-  ),
+  "data-raw/Copies of DV/PM25_dv.csv",
   show_col_types = FALSE
 ) |>
   rename(
