@@ -1,4 +1,4 @@
-#' navbar_js 
+#' navbar_js
 #'
 #' @description Navbar formatting fct
 #'
@@ -13,7 +13,7 @@ navbar_js <- function() {
   }"
 }
 
-#' ui_footer 
+#' ui_footer
 #'
 #' @description A bslib::card_footer with DEC links.
 #'
@@ -25,7 +25,7 @@ ui_footer <- function() {
     "Alaska Department of Environmental Conservation | Division of Air Quality | ",
     bslib::tooltip(
       htmltools::a(
-        "https://dec.alaska.gov/air/", 
+        "https://dec.alaska.gov/air/",
         href = "https://dec.alaska.gov/air/",
         target = "_blank"
       ),
@@ -34,7 +34,7 @@ ui_footer <- function() {
   )
 }
 
-#' ui_theme 
+#' ui_theme
 #'
 #' @description A bs_theme based on DEC Theme
 #'
@@ -45,17 +45,17 @@ ui_theme <- function() {
   bslib::bs_theme(
     version = 5,
     preset = "bootstrap",
-    bg = "#F7F5F2",
+    bg = "#FFFFFF",
     fg = "#194A6B",
-    primary = "#000000",
-    secondary = "#194A6B",
+    primary = "#194A6B",
+    secondary = "#000000",
     "nav-link-font-size" = "14px",
     base_font = bslib::font_google("Open Sans", local = TRUE)
-  ) |> 
+  ) |>
     bslib::bs_add_variables(
       "border-radius" = 0,
       "spacer" = "0.5rem"
-    ) |> 
+    ) |>
     bslib::bs_add_rules(
       "
         .navbar .navbar-header,
@@ -67,6 +67,9 @@ ui_theme <- function() {
         .navbar-header {
           position: sticky;
           width: 0%
+        }
+        #nav > .nav-item > .nav-link {
+          color: #FFFFFF
         }
       "
     )

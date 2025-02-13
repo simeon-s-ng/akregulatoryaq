@@ -1,7 +1,7 @@
 #' plot_pm25
 #'
 #' @description Plots PM2.5 24-hour average concentration
-#' 
+#'
 #' @param pm25_data Cleaned PM2.5 24-hour average concentration dataset
 #' @param year Year to plot
 #'
@@ -40,21 +40,21 @@ plot_pm25 <- function(pm25_data, year) {
       # NAAQS 35ug/m3  limit
       # If year >= 2006, naaqs = 35
       # If year < 2006, naaqs = 65
-      {if(year >= 2006) 
+      {if(year >= 2006)
         ggplot2::geom_hline(
-          ggplot2::aes(yintercept = 35), 
-          color = "red", 
+          ggplot2::aes(yintercept = 35),
+          color = "red",
           linewidth = 0.2
         )
       } +
-      {if(year >= 2006) 
+      {if(year >= 2006)
         ggplot2::annotate(
-          'text', 
+          'text',
           x = lubridate::date(paste(year, "-06-30", sep = "")),
           y = 40, label = "2006 PM2.5 24-hr NAAQS (35 \u00B5g/m\u00B3)"
         )
       } +
-      {if(year < 2006) 
+      {if(year < 2006)
         ggplot2::geom_hline(
           ggplot2::aes(yintercept = 65),
           color = "red",
@@ -63,7 +63,7 @@ plot_pm25 <- function(pm25_data, year) {
       } +
       {if(year < 2006)
         ggplot2::annotate(
-          'text', 
+          'text',
           x = lubridate::date(paste(year, "-06-30", sep = "")),
           y = 70, label = "1997 PM2.5 24-hr NAAQS (35 \u00B5g/m\u00B3)"
         )
@@ -76,24 +76,24 @@ plot_pm25 <- function(pm25_data, year) {
         legend.position = "bottom",
         panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
         panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
-        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
+        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
+        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
       ),
     tooltip = c('Date', 'text')
-  ) |> 
-    plotly::layout(legend = list(orientation = 'h')) |> 
+  ) |>
+    plotly::layout(legend = list(orientation = 'h')) |>
     plotly::toWebGL()
 }
 
 #' plot_pm10
-#' 
+#'
 #' @description Plots PM10 24-hour average concentration
-#' 
+#'
 #' @param pm10_data Cleaned PM10 24-hour average concentration dataset
 #' @param year Year to plot
-#' 
+#'
 #' @return A ggplotly object to be output in a renderPlotly()
-#' 
+#'
 #' @noRd
 plot_pm10 <- function(pm10_data, year) {
   plotly::ggplotly(
@@ -117,7 +117,7 @@ plot_pm10 <- function(pm10_data, year) {
         shape = "Site Name"
       ) +
       ggplot2::scale_x_date(
-        date_labels = "%b '%y", 
+        date_labels = "%b '%y",
         date_breaks = "1 month",
         limits = c(
           lubridate::as_date(paste(year, "-01-01", sep="")),
@@ -132,8 +132,8 @@ plot_pm10 <- function(pm10_data, year) {
         linewidth = 0.2
       ) +
       ggplot2::annotate(
-        'text', 
-        x = lubridate::date(paste(year, "-06-30", sep = "")), 
+        'text',
+        x = lubridate::date(paste(year, "-06-30", sep = "")),
         y = 140,
         label = "24-hr PM10 NAAQS (150 \u00B5g/m\u00B3)"
       ) +
@@ -146,21 +146,21 @@ plot_pm10 <- function(pm10_data, year) {
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
         panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
-        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
+        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
+        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
       ),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h')) |> 
+    plotly::layout(legend = list(orientation = 'h')) |>
     plotly::toWebGL()
 }
 
 #' plot_co
-#' 
+#'
 #' @description Plots CO 8-hour average concentrations
-#' 
+#'
 #' @return A ggplotly object to be output in a renderPlotly()
-#' 
+#'
 #' @noRd
 plot_co <- function(co_data, year) {
   plotly::ggplotly(
@@ -193,14 +193,14 @@ plot_co <- function(co_data, year) {
       ggplot2::scale_y_continuous(breaks = seq(0, 10, 1), limits = c(0, 10)) +
       # NAAQS 9ppm limit
       ggplot2::geom_hline(
-        ggplot2::aes(yintercept = 9), 
-        color = "red", 
+        ggplot2::aes(yintercept = 9),
+        color = "red",
         linewidth = 0.2
       ) +
       ggplot2::annotate(
-        'text', 
-        x = lubridate::date(paste(year, "-06-30", sep = "")), 
-        y = 9.5, 
+        'text',
+        x = lubridate::date(paste(year, "-06-30", sep = "")),
+        y = 9.5,
         label = "1971 8-hr NAAQS (9 ppm)"
       ) +
       ggplot2::theme_minimal() +
@@ -212,17 +212,17 @@ plot_co <- function(co_data, year) {
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
         panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
-        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
+        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
+        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
       ),
     tooltip = c('Date', 'text')
-  ) |> 
-    plotly::layout(legend = list(orientation = 'h')) |> 
+  ) |>
+    plotly::layout(legend = list(orientation = 'h')) |>
     plotly::toWebGL()
 }
 
 #' plot_so2
-#' 
+#'
 #' @noRd
 plot_so2 <- function(so2_data, year) {
   plotly::ggplotly(
@@ -246,7 +246,7 @@ plot_so2 <- function(so2_data, year) {
         shape = "Site Name"
       ) +
       ggplot2::scale_x_date(
-        date_labels = "%b '%y", 
+        date_labels = "%b '%y",
         date_breaks = "1 month",
         limits = c(
           lubridate::as_date(paste(year, "-01-01", sep="")),
@@ -256,12 +256,12 @@ plot_so2 <- function(so2_data, year) {
       ggplot2::scale_y_continuous(breaks = seq(0, 80, 20), limits = c(0, 80)) +
       # NAAQS 100ppb limit
       ggplot2::geom_hline(
-        ggplot2::aes(yintercept = 75), 
-        color = "red", 
+        ggplot2::aes(yintercept = 75),
+        color = "red",
         linewidth = 0.2
       ) +
       ggplot2::annotate(
-        'text', 
+        'text',
         x = lubridate::date(paste(year, "-06-30", sep = "")),
         y = 65,
         label = "2010 SO2 1-hr NAAQS (75 ppb)"
@@ -275,24 +275,24 @@ plot_so2 <- function(so2_data, year) {
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
         panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
-        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
+        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
+        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
       ),
     tooltip = c('Date', 'text')
-  ) |> 
-    plotly::layout(legend = list(orientation = 'h')) |> 
+  ) |>
+    plotly::layout(legend = list(orientation = 'h')) |>
     plotly::toWebGL()
 }
 
 #' plot_o3
-#' 
+#'
 #' @noRd
 plot_o3 <- function(o3_data, year) {
   plotly::ggplotly(
     ggplot2::ggplot(o3_data) +
       ggplot2::geom_point(
         mapping = ggplot2::aes(
-          x = Date, 
+          x = Date,
           y = sample_measurement,
           color = site_name,
           shape = site_name,
@@ -309,7 +309,7 @@ plot_o3 <- function(o3_data, year) {
         shape = "Site Name"
       ) +
       ggplot2::scale_x_date(
-        date_labels = "%b '%y", 
+        date_labels = "%b '%y",
         date_breaks = "1 month",
         limits = c(
           lubridate::as_date(paste(year, "-01-01", sep="")),
@@ -318,31 +318,31 @@ plot_o3 <- function(o3_data, year) {
       ) +
       ggplot2::scale_y_continuous(breaks = seq(0, 0.1, 0.01), limits = c(0, 0.1)) +
       # NAAQS 0.070ppm limit
-      {if(year >= 2015) 
+      {if(year >= 2015)
         ggplot2::geom_hline(
           ggplot2::aes(yintercept = 0.070),
           color = "red",
           linewidth = 0.2
         )
       } +
-      {if(year >= 2015) 
+      {if(year >= 2015)
         ggplot2::annotate(
-          'text', 
+          'text',
           x = lubridate::date(paste(year, "-06-30", sep = "")),
           y = 0.08,
           label = "2015 O3 8-hr NAAQS (0.070 ppm)"
         )
       } +
-      {if(year < 2015) 
+      {if(year < 2015)
         ggplot2::geom_hline(
           ggplot2::aes(yintercept = 0.075),
           color = "red",
           linewidth = 0.2
         )
       } +
-      {if(year < 2015) 
+      {if(year < 2015)
         ggplot2::annotate(
-          'text', 
+          'text',
           x = lubridate::date(paste(year, "-06-30", sep = "")),
           y = 0.085,
           label = "2008 O3 8-hr NAAQS (0.075 ppm)"
@@ -357,17 +357,17 @@ plot_o3 <- function(o3_data, year) {
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
         panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
-        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
+        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
+        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
       ),
     tooltip = c('Date', 'text')
-  ) |> 
-    plotly::layout(legend = list(orientation = 'h')) |> 
+  ) |>
+    plotly::layout(legend = list(orientation = 'h')) |>
     plotly::toWebGL()
 }
 
 #' plot_no2
-#' 
+#'
 #' @noRd
 plot_no2 <- function(no2_data, year) {
   plotly::ggplotly(
@@ -391,7 +391,7 @@ plot_no2 <- function(no2_data, year) {
         shape = "Site Name"
       ) +
       ggplot2::scale_x_date(
-        date_labels = "%b '%y", 
+        date_labels = "%b '%y",
         date_breaks = "1 month",
         limits = c(
           lubridate::as_date(paste(year, "-01-01", sep="")),
@@ -406,9 +406,9 @@ plot_no2 <- function(no2_data, year) {
         linewidth = 0.2
       ) +
       ggplot2::annotate(
-        'text', 
-        x = lubridate::date(paste(year, "-06-30", sep = "")), 
-        y = 110, 
+        'text',
+        x = lubridate::date(paste(year, "-06-30", sep = "")),
+        y = 110,
         label = "2010 NO2 1-hr NAAQS (100 ppb)"
       ) +
       ggplot2::theme_minimal() +
@@ -420,12 +420,12 @@ plot_no2 <- function(no2_data, year) {
         legend.title = ggplot2::element_blank(),
         panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
         panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#F7F5F2"),
-        plot.background = ggplot2::element_rect(fil = "#F7F5F2")
+        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
+        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
       ),
     tooltip = c('Date', 'text')
-  ) |> 
-    plotly::layout(legend = list(orientation = 'h'))|> 
+  ) |>
+    plotly::layout(legend = list(orientation = 'h'))|>
     plotly::toWebGL()
 }
 

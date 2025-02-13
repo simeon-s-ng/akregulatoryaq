@@ -10,9 +10,27 @@
 ui_page_navbar <- function() {
   thematic::thematic_shiny(font = "auto")
 
+  js <- "
+  var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+          var attributeValue = $(mutation.target).prop(mutation.attributeName);
+          if (mutation.attributeName === 'tabindex' && attributeValue == '-1') {
+              $(mutation.target).prop(mutation.attributeName, '0');
+          }
+      });
+  });
+
+  $('*').each(function() {
+      observer.observe(this, {
+          attributes: true
+      });
+  });
+  "
+
   bslib::page_navbar(
     id = "nav",
     theme = ui_theme(),
+    header = tags$script(HTML(js)),
     inverse = TRUE,
     fillable = FALSE,
     # Styling for sidebar button and link
@@ -232,7 +250,7 @@ ui_page_navbar <- function() {
     ),
     # REGION PAGES -------------------------------------------------------------
     # Fairbanks ----
-    bslib::nav_panel(
+    htmltools::tagAppendAttributes(bslib::nav_panel(
       title = "Fairbanks",
       bslib::navset_card_underline(
         title = "Fairbanks North Star Borough",
@@ -312,9 +330,9 @@ ui_page_navbar <- function() {
         )
       ),
       ui_footer()
-    ),
+    ), .cssSelector = ".nav-item > .nav-link", tagindex = 1),
     # Anchorage ----
-    bslib::nav_panel(
+    htmltools::tagAppendAttributes(bslib::nav_panel(
       title = "Anchorage",
       bslib::navset_card_underline(
         title = "Municipality of Anchorage",
@@ -358,7 +376,7 @@ ui_page_navbar <- function() {
         )
       ),
       ui_footer()
-    ),
+    ), .cssSelector = ".nav-item > .nav-link", tagindex = 2),
     # Juneau ----
     bslib::nav_panel(
       title = "Juneau",
@@ -467,12 +485,18 @@ ui_page_navbar <- function() {
         shiny::icon("wind"),
         "Alaska Real Time Air Quality Data",
         href = "https://dec.alaska.gov/air/air-monitoring/responsibilities/database-management/alaska-air-quality-real-time-data/",
-        target = "_blank"
+        target = "_blank",
+        tabindex = "0",
+        role = "tab"
       )
     )
   ) |>
     htmltools::tagAppendAttributes(
       .cssSelector = "nav",
       class = "navbar-expand"
+    ) |>
+    htmltools::tagAppendAttributes(
+      .cssSelector = "#fnsb > .nav-item > .nav-link",
+      tabIndex = "0"
     )
 }
