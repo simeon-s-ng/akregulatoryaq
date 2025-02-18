@@ -74,7 +74,7 @@ plot_pm25 <- function(pm25_data, year) {
         axis.title.x = ggplot2::element_blank(),
         axis.ticks.x = ggplot2::element_line(),
         legend.position = "bottom",
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
+        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
         panel.grid.major.x = ggplot2::element_blank(),
         panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
         plot.background = ggplot2::element_rect(fil = "#FFFFFF")
@@ -144,7 +144,7 @@ plot_pm10 <- function(pm10_data, year) {
         axis.ticks.x = ggplot2::element_line(),
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
+        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
         panel.grid.major.x = ggplot2::element_blank(),
         panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
         plot.background = ggplot2::element_rect(fil = "#FFFFFF")
@@ -210,7 +210,7 @@ plot_co <- function(co_data, year) {
         axis.ticks.x = ggplot2::element_line(),
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
+        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
         panel.grid.major.x = ggplot2::element_blank(),
         panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
         plot.background = ggplot2::element_rect(fil = "#FFFFFF")
@@ -273,7 +273,7 @@ plot_so2 <- function(so2_data, year) {
         axis.ticks.x = ggplot2::element_line(),
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
+        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
         panel.grid.major.x = ggplot2::element_blank(),
         panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
         plot.background = ggplot2::element_rect(fil = "#FFFFFF")
@@ -355,7 +355,7 @@ plot_o3 <- function(o3_data, year) {
         axis.ticks.x = ggplot2::element_line(),
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
+        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
         panel.grid.major.x = ggplot2::element_blank(),
         panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
         plot.background = ggplot2::element_rect(fil = "#FFFFFF")
@@ -418,7 +418,7 @@ plot_no2 <- function(no2_data, year) {
         axis.ticks.x = ggplot2::element_line(),
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
+        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
         panel.grid.major.x = ggplot2::element_blank(),
         panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
         plot.background = ggplot2::element_rect(fil = "#FFFFFF")

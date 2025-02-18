@@ -144,7 +144,7 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
         axis.ticks.x = ggplot2::element_line(),
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
+        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
         panel.grid.major.x = ggplot2::element_blank(),
         panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
         plot.background = ggplot2::element_rect(fill = "#FFFFFF"),
@@ -298,7 +298,7 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
         axis.ticks.x = ggplot2::element_line(),
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
+        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
         panel.grid.major.x = ggplot2::element_blank(),
         panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
         plot.background = ggplot2::element_rect(fil = "#FFFFFF"),
@@ -393,7 +393,7 @@ plot_pm10_dv <- function(pm10_data, region) {
         axis.ticks.x = ggplot2::element_line(),
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
+        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
         panel.grid.major.x = ggplot2::element_blank(),
         panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
         plot.background = ggplot2::element_rect(fil = "#FFFFFF")
@@ -473,7 +473,7 @@ plot_co_dv <- function(co_data, region) {
         axis.ticks.x = ggplot2::element_line(),
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
+        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
         panel.grid.major.x = ggplot2::element_blank(),
         panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
         plot.background = ggplot2::element_rect(fil = "#FFFFFF")
@@ -553,7 +553,7 @@ plot_so2_dv <- function(so2_data, region) {
         axis.ticks.x = ggplot2::element_line(),
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
+        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
         panel.grid.major.x = ggplot2::element_blank(),
         panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
         plot.background = ggplot2::element_rect(fil = "#FFFFFF")
@@ -693,7 +693,7 @@ plot_o3_dv <- function(o3_data, region) {
         axis.ticks.x = ggplot2::element_line(),
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
+        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
         panel.grid.major.x = ggplot2::element_blank(),
         panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
         plot.background = ggplot2::element_rect(fil = "#FFFFFF")
@@ -774,7 +774,7 @@ plot_no2_dv <- function(no2_data, region) {
         axis.ticks.x = ggplot2::element_line(),
         legend.position = "bottom",
         legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA),
+        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
         panel.grid.major.x = ggplot2::element_blank(),
         panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
         plot.background = ggplot2::element_rect(fil = "#FFFFFF")
