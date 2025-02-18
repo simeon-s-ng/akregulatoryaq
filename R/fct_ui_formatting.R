@@ -30,7 +30,19 @@ ui_footer <- function() {
         target = "_blank"
       ),
       shiny::markdown("Alaska DEC Air Quality Homepage")
-    )
+    ),
+    bsicons::bs_icon("box-arrow-up-right"),
+    htmltools::br(),
+    "Open in ",
+    bslib::tooltip(
+      htmltools::a(
+        "shinyapps.io",
+        href = "https://alaska-dec-air-monitoring-quality-assurance.shinyapps.io/akregulatoryaq/",
+        target = "_blank"
+      ),
+      shiny::markdown("shinyapps.io External Page")
+    ),
+    bsicons::bs_icon("box-arrow-up-right")
   )
 }
 
