@@ -446,7 +446,7 @@ pm25_dvs_fbx <- pm25_dvs |>
     site_name == "A Street" |
     site_name == "Woodriver" |
     site_name == "Hurst Road"
-  )
+  ) |> arrange(site_name, Year)
 
 pm25_dvs_np <- pm25_dvs |>
   filter(

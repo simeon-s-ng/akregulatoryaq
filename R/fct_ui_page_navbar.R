@@ -250,7 +250,7 @@ ui_page_navbar <- function() {
     ),
     # REGION PAGES -------------------------------------------------------------
     # Fairbanks ----
-    htmltools::tagAppendAttributes(bslib::nav_panel(
+    bslib::nav_panel(
       title = "Fairbanks",
       bslib::navset_card_underline(
         title = "Fairbanks North Star Borough",
@@ -330,9 +330,9 @@ ui_page_navbar <- function() {
         )
       ),
       ui_footer()
-    ), .cssSelector = ".nav-item > .nav-link", tagindex = 1),
+    ),
     # Anchorage ----
-    htmltools::tagAppendAttributes(bslib::nav_panel(
+    bslib::nav_panel(
       title = "Anchorage",
       bslib::navset_card_underline(
         title = "Municipality of Anchorage",
@@ -376,7 +376,7 @@ ui_page_navbar <- function() {
         )
       ),
       ui_footer()
-    ), .cssSelector = ".nav-item > .nav-link", tagindex = 2),
+    ),
     # Juneau ----
     bslib::nav_panel(
       title = "Juneau",
