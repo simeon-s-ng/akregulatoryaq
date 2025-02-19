@@ -61,6 +61,7 @@ ui_theme <- function() {
     fg = "#194A6B",
     primary = "#194A6B",
     secondary = "#000000",
+    font_scale = 0.9,
     "nav-link-font-size" = "14px",
     base_font = bslib::font_google("Open Sans", local = TRUE)
   ) |>
