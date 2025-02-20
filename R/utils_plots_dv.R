@@ -65,6 +65,10 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
       ) +
       ggplot2::scale_x_continuous(breaks = function(x) unique(floor(pretty(x)))) +
       ggplot2::scale_y_continuous(breaks = seq(0, 100, 10), limits = c(0, 100)) +
+      # Scale to 200ug/m3 for Fairbanks
+      {if(region == "Fairbanks")
+        ggplot2::scale_y_continuous(breaks = seq(0, 200, 20), limits = c(0, 200))
+      } +
       # NAAQS 35µg/m³ limit if max(year) >= 2006
       # NAAQS 65µg/m³ limit if max(year < 2006)
       # If range < 2006
@@ -152,7 +156,7 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
       ),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h')) |>
+    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
     plotly::toWebGL()
   )
 }
@@ -220,6 +224,10 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
       ) +
       ggplot2::scale_x_continuous(breaks = function(x) unique(floor(pretty(x)))) +
       ggplot2::scale_y_continuous(breaks = seq(0, 100, 10), limits = c(0, 100)) +
+      # Scale to 200ug/m3 for Fairbanks
+      {if(region == "Fairbanks")
+        ggplot2::scale_y_continuous(breaks = seq(0, 200, 20), limits = c(0, 200))
+      } +
       # NAAQS 35µg/m³ limit if max(year) >= 2006
       # NAAQS 65µg/m³ limit if max(year < 2006)
       # If range < 2006
@@ -306,7 +314,7 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
       ),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h')) |>
+    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
     plotly::toWebGL()
   )
 }
@@ -480,7 +488,7 @@ plot_co_dv <- function(co_data, region) {
       ),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h')) |>
+    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
     plotly::toWebGL()
   )
 }
@@ -560,7 +568,7 @@ plot_so2_dv <- function(so2_data, region) {
       ),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h')) |>
+    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
     plotly::toWebGL()
   )
 }
@@ -700,7 +708,7 @@ plot_o3_dv <- function(o3_data, region) {
       ),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h')) |>
+    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
     plotly::toWebGL()
   )
 }
@@ -781,7 +789,7 @@ plot_no2_dv <- function(no2_data, region) {
       ),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h')) |>
+    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
     plotly::toWebGL()
   )
 }

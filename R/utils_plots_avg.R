@@ -81,7 +81,7 @@ plot_pm25 <- function(pm25_data, year) {
       ),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h')) |>
+    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
     plotly::toWebGL()
 }
 
@@ -151,7 +151,7 @@ plot_pm10 <- function(pm10_data, year) {
       ),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h')) |>
+    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
     plotly::toWebGL()
 }
 
@@ -217,7 +217,7 @@ plot_co <- function(co_data, year) {
       ),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h')) |>
+    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
     plotly::toWebGL()
 }
 
@@ -280,7 +280,7 @@ plot_so2 <- function(so2_data, year) {
       ),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h')) |>
+    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
     plotly::toWebGL()
 }
 
@@ -362,7 +362,7 @@ plot_o3 <- function(o3_data, year) {
       ),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h')) |>
+    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
     plotly::toWebGL()
 }
 
@@ -425,7 +425,7 @@ plot_no2 <- function(no2_data, year) {
       ),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h'))|>
+    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1))|>
     plotly::toWebGL()
 }
 
