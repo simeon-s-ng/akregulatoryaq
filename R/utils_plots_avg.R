@@ -21,13 +21,14 @@ plot_pm25 <- function(pm25_data, year) {
         ),
         alpha = 0.6
       ) +
-      ggthemes::scale_color_colorblind() +
+      ggplot2::scale_color_manual(values = avg_palette()) +
+      # ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
         title = paste(year, "PM<sub>2.5</sub> 24-hr Average Concentrations", sep = ' '),
         y = "PM<sub>2.5</sub> 24-hr Average Concentration (\u00B5g/m\u00B3)",
-        color = "Site Name",
-        shape = "Site Name"
+        color = NULL,
+        shape = NULL
       ) +
       ggplot2::scale_x_date(
         date_labels = "%b '%y", date_breaks = "1 month",
@@ -81,7 +82,7 @@ plot_pm25 <- function(pm25_data, year) {
       ),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
+    plotly::layout(legend = list(orientation = 'h', xanchor = "center", x = 0.5, bordercolor = "#1E4E6E", borderwidth = 1)) |>
     plotly::toWebGL()
 }
 
@@ -113,8 +114,8 @@ plot_pm10 <- function(pm10_data, year) {
       ggplot2::labs(
         title = paste(year, "PM<sub>10</sub> 24-hr Average Concentrations", sep = ' '),
         y = "PM<sub>10</sub> 24-hr Average Concentration (\u00B5g/m\u00B3)",
-        color = "Site Name",
-        shape = "Site Name"
+        color = NULL,
+        shape = NULL
       ) +
       ggplot2::scale_x_date(
         date_labels = "%b '%y",
@@ -151,7 +152,7 @@ plot_pm10 <- function(pm10_data, year) {
       ),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
+    plotly::layout(legend = list(orientation = 'h', xanchor = "center", x = 0.5, bordercolor = "#1E4E6E", borderwidth = 1)) |>
     plotly::toWebGL()
 }
 
@@ -179,8 +180,8 @@ plot_co <- function(co_data, year) {
       ggplot2::labs(
         title = paste(year, "CO 8-hr Average Concentrations", sep = ' '),
         y = "CO 8-hr Concentration (ppm)",
-        color = "Site Name",
-        shape = "Site Name"
+        color = NULL,
+        shape = NULL
       ) +
       ggplot2::scale_x_date(
         date_labels = "%b '%y",
@@ -217,7 +218,7 @@ plot_co <- function(co_data, year) {
       ),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
+    plotly::layout(legend = list(orientation = 'h', xanchor = "center", x = 0.5, bordercolor = "#1E4E6E", borderwidth = 1)) |>
     plotly::toWebGL()
 }
 
@@ -242,8 +243,8 @@ plot_so2 <- function(so2_data, year) {
       ggplot2::labs(
         title = paste(year, "SO<sub>2</sub> 1-hr Maximum Concentrations", sep = ' '),
         y = "SO<sub>2</sub> 1-hr Max Concentration (ppb)",
-        color = "Site Name",
-        shape = "Site Name"
+        color = NULL,
+        shape = NULL
       ) +
       ggplot2::scale_x_date(
         date_labels = "%b '%y",
@@ -280,7 +281,7 @@ plot_so2 <- function(so2_data, year) {
       ),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
+    plotly::layout(legend = list(orientation = 'h', xanchor = "center", x = 0.5, bordercolor = "#1E4E6E", borderwidth = 1)) |>
     plotly::toWebGL()
 }
 
@@ -305,8 +306,8 @@ plot_o3 <- function(o3_data, year) {
       ggplot2::labs(
         title = paste(year, "O<sub>3</sub> 8-hr Average Concentrations", sep = ' '),
         y = "O<sub>3</sub> 8-hr Concentration (ppm)",
-        color = "Site Name",
-        shape = "Site Name"
+        color = NULL,
+        shape = NULL
       ) +
       ggplot2::scale_x_date(
         date_labels = "%b '%y",
@@ -362,7 +363,7 @@ plot_o3 <- function(o3_data, year) {
       ),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
+    plotly::layout(legend = list(orientation = 'h', xanchor = "center", x = 0.5, bordercolor = "#1E4E6E", borderwidth = 1)) |>
     plotly::toWebGL()
 }
 
@@ -387,8 +388,8 @@ plot_no2 <- function(no2_data, year) {
       ggplot2::labs(
         title = paste(year, "NO<sub>2</sub> 1-hr Maximum Concentrations", sep = ' '),
         y = "NO<sub>2</sub> 1-hr Max Concentration (ppb)",
-        color = "Site Name",
-        shape = "Site Name"
+        color = NULL,
+        shape = NULL
       ) +
       ggplot2::scale_x_date(
         date_labels = "%b '%y",
@@ -425,7 +426,7 @@ plot_no2 <- function(no2_data, year) {
       ),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1))|>
+    plotly::layout(legend = list(orientation = 'h', xanchor = "center", x = 0.5, bordercolor = "#1E4E6E", borderwidth = 1))|>
     plotly::toWebGL()
 }
 

@@ -6,7 +6,7 @@ fbx_pm25_desc <- function() {
     "
     The Fairbanks area is a <a href='https://dec.alaska.gov/air/anpms/communities/fbks-particulate-matter/' target='_blank'>Nonattainment area for PM2.5</a>. The State Office Building monitor was used to originally designate the FNSB PM2.5 Nonattainment Area in 2009. The charts below show historical data from this monitor and the downtown Fairbanks NCore monitor located nearby. The <a href='https://dec.alaska.gov/air/air-monitoring/guidance/monitoring-plans/' target='_blank'>Alaska Air Monitoring Plan</a> contains more information about these sites and <a href='https://dec.alaska.gov/air/air-monitoring/responsibilities/database-management/alaska-air-quality-real-time-data/' target='_blank'>Realtime Air Quality Data</a> is available for the public.<br><br>
 
-    **Note:** The vertical axis of these charts extends to **100 \u00B5g/m\u00B3**. The PM2.5 concentrations represent the concentration at local conditions and have not been corrected for local temperature and pressure.
+    **Note:** The vertical axis of these charts extends to **200 \u00B5g/m\u00B3**. The PM2.5 concentrations represent the concentration at local conditions and have not been corrected for local temperature and pressure.
     "
   )
 }

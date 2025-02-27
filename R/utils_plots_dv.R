@@ -13,13 +13,16 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
     dplyr::filter(value_type == "percentile_EPA_ex" | value_type == "dv_24hr_EPA_ex") |>
     dplyr::mutate(
       value_type = ifelse(
-        value_type == "percentile_EPA_ex", "98th Percentile", "Design Value"
+        value_type == "percentile_EPA_ex", "98th", "DV"
       )
-    )
+    ) |>
+    dplyr::filter(!is.na(value)) |>
+    dplyr::mutate(category = paste(site_name, value_type))
 
+  # Get & Set NAAQS reference line years
   xrng <- range(plot_data$Year)
   naaqs_label <- plot_data |>
-    dplyr::filter(Year >= 2006, value_type == "98th Percentile")
+    dplyr::filter(Year >= 2006, value_type == "98th")
   max_naaqs_epa <- max(naaqs_label$value)
   max_naaqs_epa <- ifelse(max_naaqs_epa < 35, 40, max_naaqs_epa + 5)
 
@@ -29,39 +32,27 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
       ggplot2::aes(
         x = Year,
         y = value,
-        group = value_type,
-        color = site_name,
-        shape = site_name,
+        color = category,
+        shape = factor(value_type),
+        linetype = factor(value_type),
+        # alpha = factor(value_type),
         text = paste(site_name, value_type, ":", value, "\u00B5g/m\u00B3")
       )
     ) +
-      ggplot2::geom_line(
-        data = subset(plot_data, value_type == "Design Value"),
-        linetype = 1,
-        alpha = 1
-      ) +
-      ggplot2::geom_point(
-        data = subset(plot_data, value_type == "Design Value"),
-        alpha = 1,
-        size = 2
-      ) +
-      ggplot2::geom_line(
-        data = subset(plot_data, value_type == "98th Percentile"),
-        linetype = 2,
-        alpha = 0.5
-      ) +
-      ggplot2::geom_point(
-        data = subset(plot_data, value_type == "98th Percentile"),
-        alpha = 0.5,
-        size = 2
-      ) +
-      ggthemes::scale_color_colorblind() +
+      ggplot2::geom_line(ggplot2::aes(group = factor(category)), linewidth = 1) +
+      ggplot2::geom_point(size = 2.5) +
+      ggplot2::scale_color_manual(values = dv_palette()) +
+      # ggplot2::scale_shape_manual(values = 1:length(unique(plot_data$category))) +
+      ggplot2::scale_linetype_manual(values = c("dashed", "solid")) +
+      # ggplot2::scale_alpha_manual(values = c(0.75, 1)) +
       # Axis settings
       ggplot2::labs(
         title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup> Percentiles<br> (EPA Concurred Exceptional Events Excluded)", sep = ' '),
         y = "PM<sub>2.5</sub> 24-hr Concentration (\u00B5g/m\u00B3)",
-        color = "Site Name",
-        shape = "Site Name"
+        color = NULL,
+        shape = NULL,
+        linetype = NULL,
+        # alpha = NULL
       ) +
       ggplot2::scale_x_continuous(breaks = function(x) unique(floor(pretty(x)))) +
       ggplot2::scale_y_continuous(breaks = seq(0, 100, 10), limits = c(0, 100)) +
@@ -76,7 +67,8 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
         ggplot2::geom_segment(
           ggplot2::aes(x = xrng[1], xend = max(Year), y = 65, yend = 65),
           color = "red",
-          linewidth = 0.2
+          linewidth = 0.2,
+          inherit.aes = FALSE
         )
       } +
       {if(xrng[2] < 2006)
@@ -93,7 +85,8 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
         ggplot2::geom_segment(
           ggplot2::aes(x = xrng[1], xend = 2006, y = 65, yend = 65),
           color = "red",
-          linewidth = 0.2
+          linewidth = 0.2,
+          inherit.aes = FALSE
         )
       } +
       {if(xrng[2] >= 2006 & xrng[1] < 2006)
@@ -110,7 +103,8 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
         ggplot2::geom_segment(
           ggplot2::aes(x = xrng[1], xend = max(Year), y = 35, yend = 35),
           color = "red",
-          linewidth = 0.2
+          linewidth = 0.2,
+          inherit.aes = FALSE
         )
       } +
       {if(xrng[2] >= 2006 & xrng[1] >= 2006)
@@ -127,7 +121,8 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
         ggplot2::geom_segment(
           ggplot2::aes(x = 2006, xend = max(Year), y = 35, yend = 35),
           color = "red",
-          linewidth = 0.2
+          linewidth = 0.2,
+          inherit.aes = FALSE
         )
       } +
       {if(xrng[2] >= 2006 & xrng[1] < 2006)
@@ -140,7 +135,11 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
           size = 3
         )
       } +
-      ggplot2::guides(color = "none") +
+      ggplot2::guides(
+        shape = "none",
+        linetype = "none",
+        alpha = "none"
+      ) +
       ggplot2::theme_minimal() +
       # Visual formatting
       ggplot2::theme(
@@ -156,7 +155,7 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
       ),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
+    plotly::layout(legend = list(orientation = 'h', xanchor = "center", x = 0.5, bordercolor = "#1E4E6E", borderwidth = 1, tracegroupgap = 0, traceorder = "grouped")) |>
     plotly::toWebGL()
   )
 }
@@ -173,12 +172,14 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
     dplyr::filter(value_type == "percentile_DEC_ex" | value_type == "dv_24hr_DEC_ex") |>
     dplyr::mutate(
       value_type = ifelse(
-        value_type == "percentile_DEC_ex", "98th Percentile", "Design Value"
+        value_type == "percentile_DEC_ex", "98th", "DV"
       )
-    )
+    ) |>
+    dplyr::filter(!is.na(value)) |>
+    dplyr::mutate(category = paste(site_name, value_type))
 
   xrng <- range(plot_data$Year)
-  naaqs_label <- plot_data |> dplyr::filter(Year >= 2006)
+  naaqs_label <- plot_data |> dplyr::filter(Year >= 2006, value_type == "98th")
   max_naaqs_dec <- max(naaqs_label$percentile_DEC_ex)
   max_naaqs_dec <- ifelse(max_naaqs_dec < 35, 40, max_naaqs_dec + 5)
 
@@ -188,39 +189,27 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
       ggplot2::aes(
         x = Year,
         y = value,
-        group = value_type,
-        color = site_name,
-        shape = site_name,
+        color = category,
+        shape = category,
+        linetype = factor(value_type),
+        alpha = factor(value_type),
         text = paste(site_name, value_type, ":", value, "\u00B5g/m\u00B3")
       )
     ) +
-      ggplot2::geom_line(
-        data = subset(plot_data, value_type == "Design Value"),
-        linetype = 1,
-        alpha = 1
-      ) +
-      ggplot2::geom_point(
-        data = subset(plot_data, value_type == "Design Value"),
-        alpha = 1,
-        size = 2
-      ) +
-      ggplot2::geom_line(
-        data = subset(plot_data, value_type == "98th Percentile"),
-        linetype = 2,
-        alpha = 0.5
-      ) +
-      ggplot2::geom_point(
-        data = subset(plot_data, value_type == "98th Percentile"),
-        alpha = 0.5,
-        size = 2
-      ) +
-      ggthemes::scale_color_colorblind() +
+      ggplot2::geom_line(ggplot2::aes(group = factor(category)), linewidth = 1) +
+      ggplot2::geom_point(size = 2.5) +
+      ggplot2::scale_color_manual(values = dv_palette()) +
+      ggplot2::scale_shape_manual(values = 1:length(unique(plot_data$category))) +
+      ggplot2::scale_linetype_manual(values = c("dashed", "solid")) +
+      ggplot2::scale_alpha_manual(values = c(0.75, 1)) +
       # Axis settings
       ggplot2::labs(
         title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup> Percentiles<br> (DEC Exceptional Events Excluded)", sep = ' '),
         y = "PM<sub>2.5</sub> 24-hr Concentration (\u00B5g/m\u00B3)",
-        color = "Site Name",
-        shape = "Site Name"
+        color = NULL,
+        shape = NULL,
+        linetype = NULL,
+        alpha = NULL
       ) +
       ggplot2::scale_x_continuous(breaks = function(x) unique(floor(pretty(x)))) +
       ggplot2::scale_y_continuous(breaks = seq(0, 100, 10), limits = c(0, 100)) +
@@ -235,7 +224,8 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
         ggplot2::geom_segment(
           ggplot2::aes(x = xrng[1], xend = max(Year), y = 65, yend = 65),
           color = "red",
-          linewidth = 0.2
+          linewidth = 0.2,
+          inherit.aes = FALSE
         )
       } +
       {if(xrng[2] < 2006)
@@ -252,7 +242,8 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
         ggplot2::geom_segment(
           ggplot2::aes(x = xrng[1], xend = 2006, y = 65, yend = 65),
           color = "red",
-          linewidth = 0.2
+          linewidth = 0.2,
+          inherit.aes = FALSE
         )
       } +
       {if(xrng[2] >= 2006 & xrng[1] < 2006)
@@ -268,7 +259,8 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
         ggplot2::geom_segment(
           ggplot2::aes(x = xrng[1], xend = max(Year), y = 35, yend = 35),
           color = "red",
-          linewidth = 0.2
+          linewidth = 0.2,
+          inherit.aes = FALSE
         )
       } +
       {if(xrng[2] >= 2006 & xrng[1] >= 2006)
@@ -285,7 +277,8 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
         ggplot2::geom_segment(
           ggplot2::aes(x = 2006, xend = max(Year), y = 35, yend = 35),
           color = "red",
-          linewidth = 0.2
+          linewidth = 0.2,
+          inherit.aes = FALSE
         )
       } +
       {if(xrng[2] >= 2006 & xrng[1] < 2006)
@@ -298,7 +291,11 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
           size = 3
         )
       } +
-      ggplot2::guides(color = "none") +
+      ggplot2::guides(
+        shape = "none",
+        linetype = "none",
+        alpha = "none"
+      ) +
       ggplot2::theme_minimal() +
       # Visual formatting
       ggplot2::theme(
@@ -314,7 +311,7 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
       ),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
+    plotly::layout(legend = list(orientation = 'h', xanchor = "center", x = 0.5, bordercolor = "#1E4E6E", borderwidth = 1, tracegroupgap = 0, traceorder = "grouped")) |>
     plotly::toWebGL()
   )
 }

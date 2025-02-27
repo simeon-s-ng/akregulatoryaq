@@ -421,14 +421,14 @@ pm25_dvs_jnu <- pm25_dvs |>
   filter(
     site_name == "Floyd Dryden" |
     site_name == "Lemon Creek"
-  )
+  ) |> arrange(site_name, Year)
 
 pm25_dvs_ms <- pm25_dvs |>
   filter(
     site_name == "Butte" |
     site_name == "Palmer" |
     site_name == "Wasilla"
-  )
+  ) |> arrange(site_name, Year)
 
 pm25_dvs_anc <- pm25_dvs |>
   filter(
@@ -436,7 +436,7 @@ pm25_dvs_anc <- pm25_dvs |>
     site_name == "Tudor" |
     site_name == "DHHS" |
     site_name == "Parkgate"
-  )
+  ) |> arrange(site_name, Year)
 
 pm25_dvs_fbx <- pm25_dvs |>
   filter(
@@ -452,7 +452,7 @@ pm25_dvs_np <- pm25_dvs |>
   filter(
     site_name == "North Pole Elementary" |
     site_name == "North Pole Water"
-)
+) |> arrange(site_name, Year)
 
 # Import PM10 DVs --------------------------------------------------------------
 

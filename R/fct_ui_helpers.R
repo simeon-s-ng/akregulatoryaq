@@ -16,6 +16,51 @@ gaf_palette <- function() {
   )
 }
 
+#' Manual Avg Color Palette
+#'
+#' @description
+#' Color palette for avg plots.
+#'
+#'
+#' @return Color Palette for avg plots
+#' @export
+avg_palette <- function() {
+  c(
+    "#233b64",
+    "#5bef8f",
+    "#db11ac",
+    "#08a9e5",
+    "#82185f",
+    "#c0e087",
+    "#6a45c2"
+  )
+}
+
+#' Manual DV Color Palette
+#'
+#' @description
+#' Color palette for DV plots.
+#'
+#'
+#' @return Color Palette for DV plots
+#' @export
+dv_palette <- function() {
+  c(
+    "#000000",
+    "#eebe08",
+    "#233b64",
+    "#52e9e6",
+    "#0b522e",
+    "#09c553",
+    "#99d683",
+    "#169294",
+    "#b3d9fa",
+    "#3e2690",
+    "#8489e0",
+    "#b144d6"
+  )
+}
+
 #' get_glossary
 #'
 #' @description Get glossary in markdown format
