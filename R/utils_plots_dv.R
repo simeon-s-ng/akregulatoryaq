@@ -1,3 +1,44 @@
+#' legend_settings
+#'
+#' @noRd
+legend_settings <- function() {
+  list(
+    orientation = 'h',
+    xanchor = "center",
+    x = 0.5,
+    bordercolor = "#1E4E6E",
+    borderwidth = 1,
+    tracegroupgap = 0,
+    traceorder = "grouped"
+  )
+}
+
+#' plot_config for plotly
+#'
+#' @noRd
+plot_config <- function(p) {
+  plotly::config(
+    p = p,
+    toImageButtonOptions = list(format = "webp")
+  )
+}
+
+#' plot_theme
+#'
+#' @noRd
+plot_theme <- function() {
+  ggplot2::theme(
+    axis.title.x = ggplot2::element_blank(),
+    axis.ticks.x = ggplot2::element_line(),
+    legend.position = "bottom",
+    legend.title = ggplot2::element_blank(),
+    panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
+    panel.grid.major.x = ggplot2::element_blank(),
+    panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
+    plot.background = ggplot2::element_rect(fill = "#FFFFFF")
+  )
+}
+
 #' plot_pm25_epa_dv
 #'
 #' @description Plot of PM2.5 EPA EEs Excluded DVs
@@ -35,16 +76,13 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
         color = category,
         shape = factor(value_type),
         linetype = factor(value_type),
-        # alpha = factor(value_type),
         text = paste(site_name, value_type, ":", value, "\u00B5g/m\u00B3")
       )
     ) +
       ggplot2::geom_line(ggplot2::aes(group = factor(category)), linewidth = 1) +
       ggplot2::geom_point(size = 2.5) +
       ggplot2::scale_color_manual(values = dv_palette()) +
-      # ggplot2::scale_shape_manual(values = 1:length(unique(plot_data$category))) +
       ggplot2::scale_linetype_manual(values = c("dashed", "solid")) +
-      # ggplot2::scale_alpha_manual(values = c(0.75, 1)) +
       # Axis settings
       ggplot2::labs(
         title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup> Percentiles<br> (EPA Concurred Exceptional Events Excluded)", sep = ' '),
@@ -138,25 +176,16 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
       ggplot2::guides(
         shape = "none",
         linetype = "none",
-        alpha = "none"
       ) +
       ggplot2::theme_minimal() +
       # Visual formatting
-      ggplot2::theme(
-        axis.title.x = ggplot2::element_blank(),
-        axis.ticks.x = ggplot2::element_line(),
-        legend.position = "bottom",
-        legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
-        panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
-        plot.background = ggplot2::element_rect(fill = "#FFFFFF"),
-        plot.title = ggplot2::element_text(size = 11)
-      ),
+      plot_theme() +
+      ggplot2::theme(plot.title = ggplot2::element_text(size = 11)),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', xanchor = "center", x = 0.5, bordercolor = "#1E4E6E", borderwidth = 1, tracegroupgap = 0, traceorder = "grouped")) |>
-    plotly::toWebGL()
+    plotly::layout(font = list(font_family = "Arial"), legend = legend_settings()) |>
+    plotly::toWebGL() |>
+    plot_config()
   )
 }
 
@@ -190,18 +219,15 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
         x = Year,
         y = value,
         color = category,
-        shape = category,
+        shape = factor(value_type),
         linetype = factor(value_type),
-        alpha = factor(value_type),
         text = paste(site_name, value_type, ":", value, "\u00B5g/m\u00B3")
       )
     ) +
       ggplot2::geom_line(ggplot2::aes(group = factor(category)), linewidth = 1) +
       ggplot2::geom_point(size = 2.5) +
       ggplot2::scale_color_manual(values = dv_palette()) +
-      ggplot2::scale_shape_manual(values = 1:length(unique(plot_data$category))) +
       ggplot2::scale_linetype_manual(values = c("dashed", "solid")) +
-      ggplot2::scale_alpha_manual(values = c(0.75, 1)) +
       # Axis settings
       ggplot2::labs(
         title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup> Percentiles<br> (DEC Exceptional Events Excluded)", sep = ' '),
@@ -209,7 +235,6 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
         color = NULL,
         shape = NULL,
         linetype = NULL,
-        alpha = NULL
       ) +
       ggplot2::scale_x_continuous(breaks = function(x) unique(floor(pretty(x)))) +
       ggplot2::scale_y_continuous(breaks = seq(0, 100, 10), limits = c(0, 100)) +
@@ -294,24 +319,14 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
       ggplot2::guides(
         shape = "none",
         linetype = "none",
-        alpha = "none"
       ) +
       ggplot2::theme_minimal() +
       # Visual formatting
-      ggplot2::theme(
-        axis.title.x = ggplot2::element_blank(),
-        axis.ticks.x = ggplot2::element_line(),
-        legend.position = "bottom",
-        legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
-        panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
-        plot.background = ggplot2::element_rect(fil = "#FFFFFF"),
-        plot.title = ggplot2::element_text(size = 11)
-      ),
+      plot_theme() +
+      ggplot2::theme(plot.title = ggplot2::element_text(size = 11)),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', xanchor = "center", x = 0.5, bordercolor = "#1E4E6E", borderwidth = 1, tracegroupgap = 0, traceorder = "grouped")) |>
+    plotly::layout(legend = legend_settings()) |>
     plotly::toWebGL()
   )
 }
@@ -393,19 +408,10 @@ plot_pm10_dv <- function(pm10_data, region) {
       ggplot2::guides(color = "none", linetype = "none") +
       ggplot2::theme_minimal() +
       # Visual formatting
-      ggplot2::theme(
-        axis.title.x = ggplot2::element_blank(),
-        axis.ticks.x = ggplot2::element_line(),
-        legend.position = "bottom",
-        legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
-        panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
-        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
-      ),
+      plot_theme(),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h')) |>
+    plotly::layout(legend = legend_settings()) |>
     plotly::toWebGL()
   )
 }
@@ -414,47 +420,37 @@ plot_pm10_dv <- function(pm10_data, region) {
 #'
 #' @noRd
 plot_co_dv <- function(co_data, region) {
+  plot_data <- co_data |>
+    dplyr::mutate(value_type = dplyr::if_else(value_type == "First Maximum", "1st Max", "2nd Max")) |>
+    dplyr::mutate(category = paste(site_name, value_type))
+
   xrng <- range(co_data$Year)
 
   return(plotly::ggplotly(
     ggplot2::ggplot(
-      co_data,
+      plot_data,
       ggplot2::aes(
         x = Year,
         y = value,
-        group = value_type,
-        color = site_name,
-        shape = site_name,
+        color = category,
+        shape = factor(value_type),
+        linetype = factor(value_type),
         text = paste(site_name, value_type, ":", value, "ppm")
       )
     ) +
       ggplot2::geom_line(
-        data = subset(co_data, value_type == "First Maximum"),
-        linetype = 1,
-        alpha = 1
+        ggplot2::aes(group = factor(value_type)), linewidth = 1
       ) +
-      ggplot2::geom_point(
-        data = subset(co_data, value_type == "First Maximum"),
-        alpha = 1,
-        size = 2
-      ) +
-      ggplot2::geom_line(
-        data = subset(co_data, value_type == "Second Maximum"),
-        linetype = 2,
-        alpha = 0.5
-      ) +
-      ggplot2::geom_point(
-        data = subset(co_data, value_type == "Second Maximum"),
-        alpha = 0.5,
-        size = 2
-      ) +
-      ggthemes::scale_color_colorblind() +
+      ggplot2::geom_point(size = 2.5) +
+      ggplot2::scale_color_manual(values = dv_palette_16()) +
+      ggplot2::scale_linetype_manual(values = c("solid", "dashed")) +
       # Axis settings
       ggplot2::labs(
         title = paste(region, "CO 8-hr Maximum Values", sep = ' '),
         y = "CO 8-hr Concentration (ppm)",
-        color = "Site Name",
-        shape = "Site Name"
+        color = NULL,
+        shape = NULL,
+        linetype = NULL
       ) +
       ggplot2::scale_y_continuous(breaks = seq(0, 10, 1), limits = c(0, 10)) +
       # NAAQS 9ppm limit
@@ -470,22 +466,13 @@ plot_co_dv <- function(co_data, region) {
         label = "1971 CO 8-hr NAAQS (9 ppm)",
         size = 3
       ) +
-      ggplot2::guides(color = "none", linetype = "none") +
+      ggplot2::guides(shape = "none", linetype = "none") +
       ggplot2::theme_minimal() +
       # Visual formatting
-      ggplot2::theme(
-        axis.title.x = ggplot2::element_blank(),
-        axis.ticks.x = ggplot2::element_line(),
-        legend.position = "bottom",
-        legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
-        panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
-        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
-      ),
+      plot_theme(),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
+    plotly::layout(legend = legend_settings()) |>
     plotly::toWebGL()
   )
 }
@@ -553,19 +540,10 @@ plot_so2_dv <- function(so2_data, region) {
       ggplot2::guides(color = "none", linetype = "none") +
       ggplot2::theme_minimal() +
       # Visual formatting
-      ggplot2::theme(
-        axis.title.x = ggplot2::element_blank(),
-        axis.ticks.x = ggplot2::element_line(),
-        legend.position = "bottom",
-        legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
-        panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
-        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
-      ),
+      plot_theme(),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
+    plotly::layout(legend = legend_settings()) |>
     plotly::toWebGL()
   )
 }
@@ -693,19 +671,10 @@ plot_o3_dv <- function(o3_data, region) {
       ggplot2::guides(color = "none", linetype = "none") +
       ggplot2::theme_minimal() +
       # Visual formatting
-      ggplot2::theme(
-        axis.title.x = ggplot2::element_blank(),
-        axis.ticks.x = ggplot2::element_line(),
-        legend.position = "bottom",
-        legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
-        panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
-        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
-      ),
+      plot_theme(),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
+    plotly::layout(legend = legend_settings()) |>
     plotly::toWebGL()
   )
 }
@@ -774,19 +743,10 @@ plot_no2_dv <- function(no2_data, region) {
       ggplot2::guides(color = "none", linetype = "none") +
       ggplot2::theme_minimal() +
       # Visual formatting
-      ggplot2::theme(
-        axis.title.x = ggplot2::element_blank(),
-        axis.ticks.x = ggplot2::element_line(),
-        legend.position = "bottom",
-        legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
-        panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
-        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
-      ),
+      plot_theme(),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', bordercolor = "#1E4E6E", borderwidth = 1)) |>
+    plotly::layout(legend = legend_settings()) |>
     plotly::toWebGL()
   )
 }

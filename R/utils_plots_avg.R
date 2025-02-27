@@ -21,8 +21,8 @@ plot_pm25 <- function(pm25_data, year) {
         ),
         alpha = 0.6
       ) +
-      ggplot2::scale_color_manual(values = avg_palette()) +
-      # ggthemes::scale_color_colorblind() +
+      # ggplot2::scale_color_manual(values = avg_palette()) +
+      ggthemes::scale_color_colorblind() +
       # Axis settings
       ggplot2::labs(
         title = paste(year, "PM<sub>2.5</sub> 24-hr Average Concentrations", sep = ' '),
@@ -71,18 +71,10 @@ plot_pm25 <- function(pm25_data, year) {
       } +
       ggplot2::theme_minimal() +
       # Visual formatting
-      ggplot2::theme(
-        axis.title.x = ggplot2::element_blank(),
-        axis.ticks.x = ggplot2::element_line(),
-        legend.position = "bottom",
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
-        panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
-        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
-      ),
+      plot_theme(),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', xanchor = "center", x = 0.5, bordercolor = "#1E4E6E", borderwidth = 1)) |>
+    plotly::layout(legend = legend_settings()) |>
     plotly::toWebGL()
 }
 
@@ -140,19 +132,10 @@ plot_pm10 <- function(pm10_data, year) {
       ) +
       ggplot2::theme_minimal() +
       # Visual formatting
-      ggplot2::theme(
-        axis.title.x = ggplot2::element_blank(),
-        axis.ticks.x = ggplot2::element_line(),
-        legend.position = "bottom",
-        legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
-        panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
-        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
-      ),
+      plot_theme(),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', xanchor = "center", x = 0.5, bordercolor = "#1E4E6E", borderwidth = 1)) |>
+    plotly::layout(legend = legend_settings()) |>
     plotly::toWebGL()
 }
 
@@ -206,19 +189,10 @@ plot_co <- function(co_data, year) {
       ) +
       ggplot2::theme_minimal() +
       # Visual formatting
-      ggplot2::theme(
-        axis.title.x = ggplot2::element_blank(),
-        axis.ticks.x = ggplot2::element_line(),
-        legend.position = "bottom",
-        legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
-        panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
-        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
-      ),
+      plot_theme(),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', xanchor = "center", x = 0.5, bordercolor = "#1E4E6E", borderwidth = 1)) |>
+    plotly::layout(legend = legend_settings()) |>
     plotly::toWebGL()
 }
 
@@ -269,19 +243,10 @@ plot_so2 <- function(so2_data, year) {
       ) +
       ggplot2::theme_minimal() +
       # Visual formatting
-      ggplot2::theme(
-        axis.title.x = ggplot2::element_blank(),
-        axis.ticks.x = ggplot2::element_line(),
-        legend.position = "bottom",
-        legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
-        panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
-        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
-      ),
+      plot_theme(),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', xanchor = "center", x = 0.5, bordercolor = "#1E4E6E", borderwidth = 1)) |>
+    plotly::layout(legend = legend_settings()) |>
     plotly::toWebGL()
 }
 
@@ -351,19 +316,10 @@ plot_o3 <- function(o3_data, year) {
       } +
       ggplot2::theme_minimal() +
       # Visual formatting
-      ggplot2::theme(
-        axis.title.x = ggplot2::element_blank(),
-        axis.ticks.x = ggplot2::element_line(),
-        legend.position = "bottom",
-        legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
-        panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
-        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
-      ),
+      plot_theme(),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', xanchor = "center", x = 0.5, bordercolor = "#1E4E6E", borderwidth = 1)) |>
+    plotly::layout(legend = legend_settings()) |>
     plotly::toWebGL()
 }
 
@@ -414,19 +370,10 @@ plot_no2 <- function(no2_data, year) {
       ) +
       ggplot2::theme_minimal() +
       # Visual formatting
-      ggplot2::theme(
-        axis.title.x = ggplot2::element_blank(),
-        axis.ticks.x = ggplot2::element_line(),
-        legend.position = "bottom",
-        legend.title = ggplot2::element_blank(),
-        panel.border = ggplot2::element_rect(color = "#194A6B", fill = NA, linewidth = 1),
-        panel.grid.major.x = ggplot2::element_blank(),
-        panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
-        plot.background = ggplot2::element_rect(fil = "#FFFFFF")
-      ),
+      plot_theme(),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = list(orientation = 'h', xanchor = "center", x = 0.5, bordercolor = "#1E4E6E", borderwidth = 1))|>
+    plotly::layout(legend = legend_settings())|>
     plotly::toWebGL()
 }
 

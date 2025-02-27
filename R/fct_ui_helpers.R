@@ -21,9 +21,7 @@ gaf_palette <- function() {
 #' @description
 #' Color palette for avg plots.
 #'
-#'
-#' @return Color Palette for avg plots
-#' @export
+#' @noRd
 avg_palette <- function() {
   c(
     "#233b64",
@@ -41,9 +39,7 @@ avg_palette <- function() {
 #' @description
 #' Color palette for DV plots.
 #'
-#'
-#' @return Color Palette for DV plots
-#' @export
+#' @noRd
 dv_palette <- function() {
   c(
     "#000000",
@@ -58,6 +54,30 @@ dv_palette <- function() {
     "#3e2690",
     "#8489e0",
     "#b144d6"
+  )
+}
+
+#' dv_palette_16
+#'
+#' @noRd
+dv_palette_16 <- function() {
+  c(
+    "#000000",
+    "#eebe08",
+    "#233b64",
+    "#79e3f9",
+    "#258387",
+    "#83e9a3",
+    "#134424",
+    "#3e9539",
+    "#add51f",
+    "#aebf8a",
+    "#3a187b",
+    "#94abe1",
+    "#4859ea",
+    "#d093f4",
+    "#b43695",
+    "#fe74fe"
   )
 }
 
