@@ -74,7 +74,7 @@ plot_pm25 <- function(pm25_data, year) {
       plot_theme(),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = legend_settings()) |>
+    layout_settings() |>
     plotly::toWebGL()
 }
 
@@ -135,7 +135,7 @@ plot_pm10 <- function(pm10_data, year) {
       plot_theme(),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = legend_settings()) |>
+    layout_settings() |>
     plotly::toWebGL()
 }
 
@@ -192,7 +192,7 @@ plot_co <- function(co_data, year) {
       plot_theme(),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = legend_settings()) |>
+    layout_settings() |>
     plotly::toWebGL()
 }
 
@@ -246,7 +246,7 @@ plot_so2 <- function(so2_data, year) {
       plot_theme(),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = legend_settings()) |>
+    layout_settings() |>
     plotly::toWebGL()
 }
 
@@ -319,7 +319,7 @@ plot_o3 <- function(o3_data, year) {
       plot_theme(),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = legend_settings()) |>
+    layout_settings() |>
     plotly::toWebGL()
 }
 
@@ -373,7 +373,7 @@ plot_no2 <- function(no2_data, year) {
       plot_theme(),
     tooltip = c('Date', 'text')
   ) |>
-    plotly::layout(legend = legend_settings())|>
+    layout_settings() |>
     plotly::toWebGL()
 }
 

@@ -1,3 +1,31 @@
+#' layout_settings
+#'
+#' @noRd
+layout_settings <- function(plot) {
+  plotly::layout(
+    p = plot,
+    font = list(family = "Open Sans"),
+    title = list(font = list(family = "Open Sans")),
+    xaxis = list(
+      title = list(font = list(family = "Open Sans")),
+      tickfont = list(family = "Open Sans")
+    ),
+    yaxis = list(
+      title = list(font = list(family = "Open Sans")),
+      tickfont = list(family = "Open Sans")
+    ),
+    legend = list(
+      font = list(family = "Open Sans"),
+      orientation = 'h',
+      xanchor = "center",
+      x = 0.5,
+      bordercolor = "#1E4E6E",
+      borderwidth = 1,
+      tracegroupgap = 2
+    )
+  )
+}
+
 #' legend_settings
 #'
 #' @noRd
@@ -183,9 +211,8 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
       ggplot2::theme(plot.title = ggplot2::element_text(size = 11)),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(font = list(font_family = "Arial"), legend = legend_settings()) |>
-    plotly::toWebGL() |>
-    plot_config()
+    layout_settings() |>
+    plotly::toWebGL()
   )
 }
 
@@ -326,7 +353,7 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
       ggplot2::theme(plot.title = ggplot2::element_text(size = 11)),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = legend_settings()) |>
+    layout_settings() |>
     plotly::toWebGL()
   )
 }
@@ -411,7 +438,7 @@ plot_pm10_dv <- function(pm10_data, region) {
       plot_theme(),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = legend_settings()) |>
+    layout_settings() |>
     plotly::toWebGL()
   )
 }
@@ -457,7 +484,8 @@ plot_co_dv <- function(co_data, region) {
       ggplot2::geom_hline(
         ggplot2::aes(yintercept = 9),
         color = "red",
-        linewidth = 0.2
+        linewidth = 0.2,
+        inherit.aes = FALSE
       ) +
       ggplot2::annotate(
         'text',
@@ -472,7 +500,7 @@ plot_co_dv <- function(co_data, region) {
       plot_theme(),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = legend_settings()) |>
+    layout_settings() |>
     plotly::toWebGL()
   )
 }
@@ -543,7 +571,7 @@ plot_so2_dv <- function(so2_data, region) {
       plot_theme(),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = legend_settings()) |>
+    layout_settings() |>
     plotly::toWebGL()
   )
 }
@@ -674,7 +702,7 @@ plot_o3_dv <- function(o3_data, region) {
       plot_theme(),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = legend_settings()) |>
+    layout_settings() |>
     plotly::toWebGL()
   )
 }
@@ -746,7 +774,7 @@ plot_no2_dv <- function(no2_data, region) {
       plot_theme(),
     tooltip = c('Year', 'text')
   ) |>
-    plotly::layout(legend = legend_settings()) |>
+    layout_settings() |>
     plotly::toWebGL()
   )
 }
