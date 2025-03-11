@@ -362,47 +362,35 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
 #'
 #' @noRd
 plot_pm10_dv <- function(pm10_data, region) {
+  plot_data <- pm10_data |>
+    dplyr::mutate(value_type = dplyr::if_else(value_type == "First Maximum", "1st Max", "2nd Max")) |>
+    dplyr::mutate(category = paste(site_name, value_type))
+
   xrng <- range(pm10_data$Year)
 
   return(plotly::ggplotly(
     ggplot2::ggplot(
-      pm10_data,
+      plot_data,
       ggplot2::aes(
         x = Year,
         y = value,
-        group = value_type,
-        color = site_name,
-        shape = site_name,
+        color = category,
+        shape = factor(value_type),
+        linetype = factor(value_type),
         text = paste(site_name, value_type, ":", value, "\u00B5g/m\u00B3")
       )
     ) +
-      ggplot2::geom_line(
-        data = subset(pm10_data, value_type == "First Maximum"),
-        linetype = 1,
-        alpha = 1
-      ) +
-      ggplot2::geom_point(
-        data = subset(pm10_data, value_type == "First Maximum"),
-        alpha = 1,
-        size = 2
-      ) +
-      ggplot2::geom_line(
-        data = subset(pm10_data, value_type == "Second Maximum"),
-        linetype = 2,
-        alpha = 0.5
-      ) +
-      ggplot2::geom_point(
-        data = subset(pm10_data, value_type == "Second Maximum"),
-        alpha = 0.5,
-        size = 2
-      ) +
-      ggthemes::scale_color_colorblind() +
+      ggplot2::geom_line(ggplot2::aes(group = factor(category)), linewidth = 1) +
+      ggplot2::geom_point(size = 2.5) +
+      ggplot2::scale_color_manual(values = dv_palette_16()) +
+      ggplot2::scale_linetype_manual(values = c("dashed", "solid")) +
       # Axis settings
       ggplot2::labs(
         title = paste(region, "PM<sub>10</sub> 24-hr Maximum Values", sep = ' '),
         y = "PM<sub>10</sub> 24-hr Concentration (\u00B5g/m\u00B3)",
-        color = "Site Name",
-        shape = "Site Name"
+        color = NULL,
+        shape = NULL,
+        linetype = NULL
       ) +
       ggplot2::scale_x_continuous(breaks = function(x) unique(floor(pretty(x)))) +
       ggplot2::scale_y_continuous(breaks = seq(0, 260, 20), limits = c(0, 260)) +
@@ -410,7 +398,8 @@ plot_pm10_dv <- function(pm10_data, region) {
       ggplot2::geom_hline(
         ggplot2::aes(yintercept = 150),
         color = "red",
-        linewidth = 0.2
+        linewidth = 0.2,
+        inherit.aes = FALSE,
       ) +
       {if(region == "Anchorage")
         ggplot2::annotate(
@@ -432,7 +421,7 @@ plot_pm10_dv <- function(pm10_data, region) {
           size = 3
         )
       } +
-      ggplot2::guides(color = "none", linetype = "none") +
+      ggplot2::guides(shape = "none", linetype = "none") +
       ggplot2::theme_minimal() +
       # Visual formatting
       plot_theme(),
@@ -509,54 +498,45 @@ plot_co_dv <- function(co_data, region) {
 #'
 #' @noRd
 plot_so2_dv <- function(so2_data, region) {
+  plot_data <- so2_data |>
+    dplyr::mutate(value_type = dplyr::if_else(value_type == "1-hr Maximum", "1-hr Max", "3-Yr DV")) |>
+    dplyr::mutate(category = paste(site_name, value_type))
+
   xrng <- range(so2_data$Year)
 
   return(plotly::ggplotly(
     ggplot2::ggplot(
-      so2_data,
+      plot_data,
       ggplot2::aes(
         x = Year,
         y = value,
-        group = value_type,
-        color = site_name,
-        shape = site_name,
+        color = category,
+        shape = factor(value_type),
+        linetype = factor(value_type),
         text = paste(site_name, value_type, ":", value, "ppb")
       )
     ) +
       ggplot2::geom_line(
-        data = subset(so2_data, value_type == "3-Year Design Value"),
-        linetype = 1,
-        alpha = 1
+        ggplot2::aes(group = factor(value_type)), linewidth = 1
       ) +
-      ggplot2::geom_point(
-        data = subset(so2_data, value_type == "3-Year Design Value"),
-        alpha = 1,
-        size = 2
-      ) +
-      ggplot2::geom_line(
-        data = subset(so2_data, value_type == "1-hr Maximum"),
-        linetype = 2,
-        alpha = 0.5
-      ) +
-      ggplot2::geom_point(
-        data = subset(so2_data, value_type == "1-hr Maximum"),
-        alpha = 0.5,
-        size = 2
-      ) +
-      ggthemes::scale_color_colorblind() +
+      ggplot2::geom_point(size = 2.5) +
+      ggplot2::scale_color_manual(values = dv_palette()) +
+      ggplot2::scale_linetype_manual(values = c("solid", "dashed")) +
       # Axis settings
       ggplot2::labs(
         title = paste(region, "SO<sub>2</sub> Design Values & Maximums", sep = ' '),
         y = "SO<sub>2</sub> 1-hr Concentrations (ppb)",
-        color = "Site Name",
-        shape = "Site Name"
+        color = NULL,
+        shape = NULL,
+        linetype = NULL
       ) +
       ggplot2::scale_y_continuous(breaks = seq(0, 80, 20), limits = c(0, 80)) +
       # NAAQS 75ppb limit
       ggplot2::geom_hline(
         ggplot2::aes(yintercept = 75),
         color = "red",
-        linewidth = 0.2
+        linewidth = 0.2,
+        inherit.aes = FALSE
       ) +
       ggplot2::annotate(
         'text',
@@ -565,7 +545,7 @@ plot_so2_dv <- function(so2_data, region) {
         label = "2010 SO2 1-hr NAAQS (75 ppb)",
         size = 3
       ) +
-      ggplot2::guides(color = "none", linetype = "none") +
+      ggplot2::guides(shape = "none", linetype = "none") +
       ggplot2::theme_minimal() +
       # Visual formatting
       plot_theme(),
@@ -580,47 +560,44 @@ plot_so2_dv <- function(so2_data, region) {
 #'
 #' @noRd
 plot_o3_dv <- function(o3_data, region) {
+  plot_data <- o3_data |>
+    dplyr::mutate(
+      value_type = dplyr::if_else(
+        value_type == "3-Year Design Value",
+        "3-Yr DV",
+        "4th Max"
+      )
+    ) |>
+    dplyr::mutate(category = paste(site_name, value_type))
+
   xrng <- range(o3_data$Year)
 
   return(plotly::ggplotly(
     ggplot2::ggplot(
-      o3_data,
+      plot_data,
       ggplot2::aes(
         x = Year,
         y = value,
-        group = value_type,
-        color = site_name,
-        shape = site_name,
+        color = category,
+        shape = factor(value_type),
+        linetype = factor(value_type),
         text = paste(site_name, value_type, ":", value, "ppb")
       )
     ) +
       ggplot2::geom_line(
-        data = subset(o3_data, value_type == "3-Year Design Value"),
-        linetype = 1,
-        alpha = 1
+        ggplot2::aes(group = factor(value_type)), linewidth = 1
       ) +
-      ggplot2::geom_point(
-        data = subset(o3_data, value_type == "3-Year Design Value"),
-        alpha = 1,
-        size = 2
-      ) +
-      ggplot2::geom_line(
-        data = subset(o3_data, value_type == "Fourth Maximum"),
-        linetype = 2,
-        alpha = 0.5
-      ) +
-      ggplot2::geom_point(
-        data = subset(o3_data, value_type == "Fourth Maximum"),
-        alpha = 0.5,
-        size = 2
-      ) +
-      ggthemes::scale_color_colorblind() +
+      ggplot2::geom_point(size = 2.5) +
+      ggplot2::scale_color_manual(values = dv_palette()) +
+      ggplot2::scale_linetype_manual(values = c("solid", "dashed")) +
       # Axis settings
       ggplot2::labs(
         title = paste(region, "O<sub>3</sub> 8-hr Design Values & Maximum Values", sep = ' '),
         y = "O<sub>3</sub> 8-hr Concentrations (ppm)",
-        color = "Site Name",
-        shape = "Site Name") +
+        color = NULL,
+        shape = NULL,
+        linetype = NULL
+      ) +
       ggplot2::scale_y_continuous(breaks = seq(0, 0.1, 0.01), limits = c(0, 0.1)) +
       # NAAQS 9ppm limit
       # Annotate if max(years) < 2015
@@ -635,7 +612,8 @@ plot_o3_dv <- function(o3_data, region) {
             yend = 0.075
           ),
           color = "red",
-          linewidth = 0.2
+          linewidth = 0.2,
+          inherit.aes = FALSE
         )
       } +
       {if(xrng[2] < 2015)
@@ -652,7 +630,8 @@ plot_o3_dv <- function(o3_data, region) {
         ggplot2::geom_segment(
           ggplot2::aes(x = 2015, xend = max(Year), y = 0.07, yend = 0.07),
           color = "red",
-          linewidth = 0.2
+          linewidth = 0.2,
+          inherit.aes = FALSE
         )
       } +
       {if(xrng[2] >= 2015 & xrng[1] < 2015)
@@ -668,7 +647,8 @@ plot_o3_dv <- function(o3_data, region) {
         ggplot2::geom_segment(
           ggplot2::aes(x = xrng[1], xend = 2015, y = 0.075, yend = 0.075),
           color = "red",
-          linewidth = 0.2
+          linewidth = 0.2,
+          inherit.aes = FALSE
         )
       } +
       {if(xrng[2] >= 2015 & xrng[1] < 2015)
@@ -684,7 +664,8 @@ plot_o3_dv <- function(o3_data, region) {
         ggplot2::geom_segment(
           ggplot2::aes(x = xrng[1], xend = max(Year), y = 0.07, yend = 0.07),
           color = "red",
-          linewidth = 0.2
+          linewidth = 0.2,
+          inherit.aes = FALSE
         )
       } +
       {if(xrng[2] >= 2015 & xrng[1] >= 2015)
@@ -696,7 +677,7 @@ plot_o3_dv <- function(o3_data, region) {
           size = 3
         )
       } +
-      ggplot2::guides(color = "none", linetype = "none") +
+      ggplot2::guides(shape = "none", linetype = "none") +
       ggplot2::theme_minimal() +
       # Visual formatting
       plot_theme(),
@@ -711,47 +692,43 @@ plot_o3_dv <- function(o3_data, region) {
 #'
 #' @noRd
 plot_no2_dv <- function(no2_data, region) {
+  plot_data <- no2_data |>
+    dplyr::mutate(
+      value_type = dplyr::if_else(
+        value_type == "3-Year Design Value",
+        "3-Yr DV",
+        "1-hr Max"
+      )
+    ) |>
+    dplyr::mutate(category = paste(site_name, value_type))
+
   xrng <- range(no2_data$Year)
 
   return(plotly::ggplotly(
     ggplot2::ggplot(
-      no2_data,
+      plot_data,
       ggplot2::aes(
         x = Year,
         y = value,
-        group = value_type,
-        color = site_name,
-        shape = site_name,
+        color = category,
+        shape = factor(value_type),
+        linetype = factor(value_type),
         text = paste(site_name, value_type, ":", value, "ppb")
       )
     ) +
       ggplot2::geom_line(
-        data = subset(no2_data, value_type == "3-Year Design Value"),
-        linetype = 1,
-        alpha = 1
+        ggplot2::aes(group = factor(value_type)), linewidth = 1
       ) +
-      ggplot2::geom_point(
-        data = subset(no2_data, value_type == "3-Year Design Value"),
-        alpha = 1,
-        size = 2
-      ) +
-      ggplot2::geom_line(
-        data = subset(no2_data, value_type == "1-hr Maximum"),
-        linetype = 2,
-        alpha = 0.5
-      ) +
-      ggplot2::geom_point(
-        data = subset(no2_data, value_type == "1-hr Maximum"),
-        alpha = 0.5,
-        size = 2
-      ) +
-      ggthemes::scale_color_colorblind() +
+      ggplot2::geom_point(size = 2.5) +
+      ggplot2::scale_color_manual(values = dv_palette()) +
+      ggplot2::scale_linetype_manual(values = c("solid", "dashed")) +
       # Axis settings
       ggplot2::labs(
         title = paste(region, "NO<sub>2</sub> Design Values & Maximums", sep = ' '),
         y = "NO<sub>2</sub> 1-hr Concentrations (ppb)",
-        color = "Site Name",
-        shape = "Site Name"
+        color = NULL,
+        shape = NULL,
+        linetype = NULL
       ) +
       ggplot2::scale_x_continuous(breaks = function(x) unique(floor(pretty(x)))) +
       ggplot2::scale_y_continuous(breaks = seq(0, 120, 20), limits = c(0, 120)) +
@@ -759,7 +736,8 @@ plot_no2_dv <- function(no2_data, region) {
       ggplot2::geom_hline(
         ggplot2::aes(yintercept = 100),
         color = "red",
-        linewidth = 0.2
+        linewidth = 0.2,
+        inherit.aes = FALSE
       ) +
       ggplot2::annotate(
         'text',
@@ -768,7 +746,7 @@ plot_no2_dv <- function(no2_data, region) {
         label = "2010 NO2 1-hr NAAQS (100 ppb)",
         size = 3
       ) +
-      ggplot2::guides(color = "none", linetype = "none") +
+      ggplot2::guides(shape = "none", linetype = "none") +
       ggplot2::theme_minimal() +
       # Visual formatting
       plot_theme(),

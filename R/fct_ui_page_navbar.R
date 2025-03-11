@@ -40,8 +40,10 @@ ui_page_navbar <- function() {
           "
             .bslib-sidebar-layout > .collapse-toggle {
               margin-top: 10px;
+              padding: 10px 0px;
               background-color: #194A6B;
-              border: 2px outset #F7F5F2;
+              border: 2px #F7F5F2;
+              box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.19)
             }
             .bslib-sidebar-layout > .collapse-toggle > .collapse-icon {
               fill: white !important;
@@ -72,8 +74,8 @@ ui_page_navbar <- function() {
     ## SIDEBAR -----------------------------------------------------------------
     sidebar = bslib::sidebar(
       open = FALSE,
-      padding = c(10, 15),
-      gap = 10,
+      padding = c(65, 15),
+      # gap = 10,
       width = "40%",
       bslib::accordion(
         bslib::accordion_panel(
