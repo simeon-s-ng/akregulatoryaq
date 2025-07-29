@@ -1,5 +1,6 @@
 # regulatory_data_raw.R
 # Cleaning regulatory data for Shiny App
+# Updated 7/23/25
 
 library(tidyverse)
 library(zoo)
@@ -9,6 +10,9 @@ library(usethis)
 input_path    <- "//decan-srvfile/decan-srvfile/Groups/AQ/Monitor/Data/Data_Analysis/2024_Web_Figure_Update/input"
 input_path_dv <- "//decan-srvfile/decan-srvfile/Groups/AQ/Monitor/Data/Data_Analysis/2024_Web_Figure_Update/24-hour design value"
 input_clean   <- "//decan-srvfile/decan-srvfile/Groups/AQ/Monitor/Data/Data_Analysis/2024_Web_Figure_Update/input_clean"
+
+# NEW Global Input Path ----
+input_data_raw <- "//decan-srvfile/decan-srvfile/Groups/AQ/Monitor/Data/Data_Analysis/2024_Web_Figure_Update/data-raw/"
 
 ## NAAQS Calculation Functions -------------------------------------------------
 
@@ -219,6 +223,13 @@ import_files <- function(file_ex) {
 # import_pm
 import_pm <- function(file_ex) {
   files <- fs::dir_ls(path = input_clean, glob = file_ex)
+  import <- read_csv(files, id = "path")
+  return(import)
+}
+
+# import_data_raw
+import_data_raw <- function(file_ex) {
+  files <- fs::dir_ls(path = input_data_raw, glob = file_ex)
   import <- read_csv(files, id = "path")
   return(import)
 }

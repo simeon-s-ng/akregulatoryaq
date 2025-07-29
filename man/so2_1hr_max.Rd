@@ -5,7 +5,7 @@
 \alias{so2_1hr_max}
 \title{so2_1hr_max}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 5198 rows and 3 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 5930 rows and 3 columns.
 }
 \usage{
 so2_1hr_max

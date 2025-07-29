@@ -1,0 +1,1137 @@
+---
+title: Cleaning regulatory data for Shiny App
+date: "`r Sys.Date()`"
+output:
+  html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r Setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  out.width = "100%"
+)
+```
+
+```{r Libraries}
+library(tidyverse)
+library(zoo)
+library(usethis)
+```
+
+# Helper Functions
+
+```{r Import Functions}
+input_data_raw <- "//decan-srvfile/decan-srvfile/Groups/AQ/Monitor/Data/Data_Analysis/2024_Web_Figure_Update/data-raw/"
+
+column_list <- c(
+  "state_code",
+  "county_code",
+  "site_number",
+  "parameter_code",
+  "poc",
+  "duration_code",
+  "unit_code",
+  "method_code",
+  "sample_begin_date",
+  "sample_begin_time",
+  "sample_measurement",
+  "null_code",
+  "qualifier_code_one",
+  "qualifier_code_two",
+  "qualifier_code_three",
+  "qualifier_code_four",
+  "qualifier_code_five",
+  "qualifier_code_six",
+  "qualifier_code_seven",
+  "qualifier_code_eight",
+  "qualifier_code_nine",
+  "qualifier_code_ten",
+  "reported_sample_measurement",
+  "reported_unit_code",
+  "monitoring_agency"
+)
+
+import_data_raw <- function(file_ex) {
+  files <- fs::dir_ls(path = input_data_raw, glob = file_ex)
+  import <- read_csv(files, id = "path") |>
+    select(column_list) |>
+    mutate(sample_begin_date = lubridate::parse_date_time(sample_begin_date, "ymd")) |>
+    mutate(sample_begin_date = lubridate::parse_date_time(paste(sample_begin_date, sample_begin_time), "ymd HMS")) |>
+    rename(Date = sample_begin_date) |>
+    select(-sample_begin_time)
+  return(import)
+}
+```
+
+```{r Helper Functions}
+convert_date <- function(data) {
+  data <- data |> 
+    mutate(Date = as.Date(Date)) |> 
+    complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+  return(data)
+}
+
+# PM25 ----
+
+mean_valid_pm25_24hr <- function(data) {
+  if(sum(is.na(data)) > length(data) * 0.25) {
+    calc_sub_24_hr <- data |>
+      replace_na(0) |> # sub with 0
+      mean()
+    if(calc_sub_24_hr > 35) {
+      return(calc_sub_24_hr)
+    }
+    else{
+      return(NA)
+    }
+  }
+  else {
+    return(mean(data, na.rm = TRUE))
+  }
+}
+
+calc_pm25_24hr_avg <- function(data) {
+  return(
+    arrange(data, Date) |>
+    complete(Date = seq(floor_date(min(Date), "day"), max(Date), 'hour')) |>
+    mutate(
+      sample_measurement = trunc(
+        rollapply(
+          sample_measurement,
+          width = 24,
+          by = 24,
+          FUN = mean_valid_pm25_24hr,
+          align = "left",
+          fill = NA
+        ) * 10
+      ) / 10
+    ) |> 
+    filter(!is.na(sample_measurement))
+  )
+}
+
+# PM10 ----
+
+mean_valid_pm10_24hr <- function(data) {
+  if(sum(is.na(data)) > length(data) * 0.25) {
+    calc_sub_24_hr <- data |>
+      replace_na(0) |> # sub with 0
+      mean()
+    if(calc_sub_24_hr > 150) {
+      return(calc_sub_24_hr)
+    }
+    else{
+      return(NA)
+    }
+  }
+  else {
+    return(mean(data, na.rm = TRUE))
+  }
+}
+
+calc_pm10_24hr_avg <- function(data) {
+  return(
+    arrange(data, Date) |>
+    complete(Date = seq(floor_date(min(Date), "day"), max(Date), 'hour')) |>
+    mutate(
+      sample_measurement = trunc(
+        rollapply(
+          sample_measurement,
+          width = 24,
+          by = 24,
+          FUN = mean_valid_pm10_24hr,
+          align = "left",
+          fill = NA
+        ) * 10
+      ) / 10
+    ) |> 
+    filter(!is.na(sample_measurement))
+  )
+}
+
+# CO ----
+
+mean_valid_CO_8hr <- function(data) {
+  if(sum(is.na(data)) > length(data) * 0.25) {
+    return(NA)
+  }
+  else {
+    mean(data, na.rm = TRUE)
+  }
+}
+
+calc_co_8hr_avg <- function(data) {
+  co_data <- select(data, Date, sample_measurement) |>
+    # Arrange by datetime
+    arrange(Date) |>
+    complete(Date = seq(floor_date(min(Date), "day"), max(Date), 'hour')) |>
+    # Calc rolling avg
+    mutate(
+      rolling_avg_8hr = round(
+        rollapply(
+          sample_measurement,
+          width = 8,
+          FUN = mean_valid_CO_8hr,
+          align = "right",
+          fill = NA
+        ),
+        digits = 1
+      )
+    ) |> 
+    group_by(Date = as.Date(Date)) |> 
+    summarise(sample_measurement = max(rolling_avg_8hr))
+
+  return(co_data)
+}
+
+# SO2 ----
+
+calc_so2_1hr_max <- function(data) {
+  so2_data <- filter(data) |>
+    select(Date, sample_measurement) |>
+    arrange(Date) |>
+    mutate(Date = date(Date)) |>
+    group_by(Date) |>
+    summarise(max_1hr = max(sample_measurement))
+
+  return(so2_data)
+}
+# O3 ----
+
+mean_valid_O3_8hr <- function(data) {
+  if(sum(is.na(data)) > length(data) * 0.25) {
+    calc_sub_8_hr <- data |>
+      replace_na(0.0025) |> # substitute minimum detectable limit of sensor for missing values
+      mean()
+    if(calc_sub_8_hr > 0.070) { # use value if greater than the NAAQS
+      return(calc_sub_8_hr)
+    }
+    else {
+      return(NA)
+    }
+  }
+  else {
+    mean(data, na.rm = TRUE)
+  }
+}
+
+# valid day if 75% of 8-hour averages are available in 24-hours
+# If less than 75% are available, a day shall be counted if the maximum for that day is greater than the standard
+daily_valid <- function(data) {
+  if(sum(is.na(data)) > length(data) * 0.25) {
+    if(is.na(max(data))) {
+      return(NA)
+    }
+    if(max(data, na.rm = FALSE) > 0.070) { # use value if greater than the NAAQS
+      return(max(data, na.rm = FALSE))
+    }
+    else {
+      return(NA)
+    }
+  }
+  else {
+    return(max(data, na.rm = TRUE))
+  }
+}
+
+# calc_o3_8hr_avg
+# Ozone 8-hour averages.
+# 8-hr average is considered valid if at least 75% of the hourly averages for the
+# 8-hour period are available. If 6/7, then use 6/7 hours as the divisor.
+# 8-hour periods with >= 3 hours of missing hours are ignored if after substituting
+# one-half of the minimum detectable limit for the missing hourly concentrations (0.005 ppm),
+# the 8-hour average concentration is greater than the level of the standard (0.070 ppm).
+# There are 24 possible 8-hour average concs per day. The daily max 8-hour is the highest of the 24.
+# A monitoring day shall be counted as valid day if 8-hour averages are available for 75% of the possible
+# hours in the day. If less than 75% are available, the day shall be counted if the max conc is greater
+# than the NAAQS
+calc_o3_8hr_avg <- function(data) {
+  o3_data <- select(data, Date, sample_measurement) |>
+    # Arrange by datetime
+    arrange(Date) |>
+    # Fill missing hours
+    complete(Date = seq(min(Date), max(Date), 'hour')) |>
+    # Calculate rolling average
+    mutate(
+      rolling_avg_8hr = trunc(
+        rollapply(
+          sample_measurement,
+          8,
+          FUN = mean_valid_O3_8hr,
+          align = "left",
+          fill = NA
+        ) * 1000
+      ) / 1000
+    ) |>
+    # Check for valid hours in a day
+    mutate(
+      daily_8hr = trunc(
+        rollapply(
+          rolling_avg_8hr, width = 24, by = 24, FUN = daily_valid, align = "left", fill = NA
+        ) * 1000
+      ) / 1000
+    ) |>
+    group_by(Date) |>
+    summarise(avg_8hr = max(daily_8hr))
+
+  return(o3_data)
+}
+
+# NO2 ----
+
+calc_no2_1hr_max <- function(data) {
+  no2_data <- select(data, Date, sample_measurement) |>
+    arrange(Date) |>
+    mutate(Date = date(Date)) |>
+    group_by(Date) |>
+    summarise(max_1hr = max(sample_measurement, na.rm = TRUE)) |> 
+    mutate(max_1hr = if_else(max_1hr == "-Inf", NA, as.numeric(max_1hr)))
+
+  return(no2_data)
+}
+```
+
+# Import PM25
+
+```{r A Street PM25}
+Ast_pm25_ex <- "*AStreet*PM25*csv"
+Ast_pm25_import <- import_data_raw(Ast_pm25_ex)
+
+Ast_pm25_1 <- Ast_pm25_import |>
+  filter(poc == 1) |>
+  mutate(Date = as.Date(Date)) |>
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+Ast_pm25_3 <- Ast_pm25_import |>
+  filter(poc == 3) |>
+  calc_pm25_24hr_avg()
+
+Ast_pm25 <- full_join(Ast_pm25_1, Ast_pm25_3, by = "Date") |>
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    ),
+    site_name = "A Street"
+  ) |>
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Bethel PM25}
+Bethel_pm25_ex <- "*Bethel*PM25*csv"
+Bethel_pm25_import <- import_data_raw(Bethel_pm25_ex)
+
+Bethel_pm25 <- Bethel_pm25_import |>
+  calc_pm25_24hr_avg() |>
+  filter(!is.na(sample_measurement)) |>
+  mutate(site_name = "Bethel") |>
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Butte PM25}
+Butte_pm25_ex <- "*Butte*PM25*csv"
+Butte_pm25_import <- import_data_raw(Butte_pm25_ex)
+
+Butte_pm25_1 <- Butte_pm25_import |>
+  filter(poc == 1) |>
+  mutate(Date = as.Date(Date)) |>
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+Butte_pm25_3 <- Butte_pm25_import |>
+  filter(poc == 3) |>
+  calc_pm25_24hr_avg()
+
+Butte_pm25 <- full_join(Butte_pm25_1, Butte_pm25_3, by = "Date") |>
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    ),
+    site_name = "Butte"
+  ) |>
+  select(Date, sample_measurement, site_name)
+```
+
+```{r DHHS PM25}
+DHHS_pm25_ex <- "*DHHS*PM25*csv"
+DHHS_pm25_import <- import_data_raw(DHHS_pm25_ex)
+
+DHHS_pm25 <- DHHS_pm25_import |>
+  calc_pm25_24hr_avg() |> 
+  mutate(site_name = "DHHS") |>
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Floyd Dryden PM25}
+FloydDryden_pm25_ex <- "*FloydDryden*PM25*csv"
+FloydDryden_pm25_import <- import_data_raw(FloydDryden_pm25_ex)
+
+FloydDryden_pm25_1 <- FloydDryden_pm25_import |>
+  filter(poc == 1) |> 
+  mutate(Date = as.Date(Date)) |>
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+FloydDryden_pm25_2 <- FloydDryden_pm25_import |> 
+  filter(poc == 2) |> 
+  mutate(Date = as.Date(Date))
+
+FloydDryden_pm25_3 <- FloydDryden_pm25_import |> 
+  filter(poc == 3) |> 
+  calc_pm25_24hr_avg()
+
+FloydDryden_pm25_23 <- FloydDryden_pm25_import |> 
+  filter(poc == 23) |> 
+  calc_pm25_24hr_avg()
+
+FloydDryden_pm25 <- full_join(FloydDryden_pm25_1, FloydDryden_pm25_2, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    )
+  ) |>
+  select(Date, sample_measurement) |> 
+  full_join(FloydDryden_pm25_3, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    ),
+    site_name = "Floyd Dryden"
+  ) |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Garden PM25}
+Garden_pm25_ex <- "*Garden*PM25*csv"
+Garden_pm25_import <- import_data_raw(Garden_pm25_ex)
+
+Garden_pm25_1 <- Garden_pm25_import |> 
+  filter(poc == 1) |>
+  mutate(Date = as.Date(Date)) |>
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+Garden_pm25_2 <- Garden_pm25_import |> 
+  filter(poc == 2)
+
+Garden_pm25_3 <- Garden_pm25_import |> 
+  filter(poc == 3) |> 
+  calc_pm25_24hr_avg()
+
+Garden_pm25 <- full_join(Garden_pm25_1, Garden_pm25_2, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    )
+  ) |> 
+  select(Date, sample_measurement) |> 
+  full_join(Garden_pm25_3, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    ),
+    site_name = "Garden"
+  ) |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Hurst Road PM25}
+Hurst_pm25_ex <- "*Hurst*PM25*csv"
+Hurst_pm25_import <- import_data_raw(Hurst_pm25_ex)
+
+Hurst_pm25_1 <- Hurst_pm25_import |> 
+  filter(poc == 1) |> 
+  mutate(Date = as.Date(Date)) |> 
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+Hurst_pm25_2 <- Hurst_pm25_import |> 
+  filter(poc == 2)
+  
+Hurst_pm25_4 <- Hurst_pm25_import |> 
+  filter(poc == 4)
+
+Hurst_pm25 <- full_join(Hurst_pm25_1, Hurst_pm25_2, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    )
+  ) |> 
+  select(Date, sample_measurement) |> 
+  full_join(Hurst_pm25_4, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    ),
+    site_name = "Hurst Road"
+  ) |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Lemon Creek PM25}
+LemonCreek_pm25_ex <- "*LemonCreek*PM25*csv"
+LemonCreek_pm25_import <- import_data_raw(LemonCreek_pm25_ex) |>
+  mutate(site_name = "Lemon Creek")
+
+LemonCreek_pm25 <- select(LemonCreek_pm25_import, Date, sample_measurement, site_name)
+```
+
+```{r NCore PM25}
+NCore_pm25_ex <- "*NCore*PM25*csv"
+NCore_pm25_import <- import_data_raw(NCore_pm25_ex)
+
+NCore_pm25_1 <- NCore_pm25_import |> 
+  filter(poc == 1) |> 
+  mutate(Date = as.Date(Date)) |> 
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+NCore_pm25_2 <- NCore_pm25_import |> 
+  filter(poc == 2)
+
+NCore_pm25_4 <- NCore_pm25_import |> 
+  filter(poc == 4)
+
+NCore_pm25_6 <- NCore_pm25_import |> 
+  filter(poc == 6)
+
+NCore_pm25 <- full_join(NCore_pm25_1, NCore_pm25_2, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    )
+  ) |> 
+  select(Date, sample_measurement) |> 
+  full_join(NCore_pm25_4, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    )
+  ) |> 
+  select(Date, sample_measurement) |> 
+  full_join(NCore_pm25_6, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    ),
+    site_name = "NCore"
+  ) |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Palmer PM25}
+Palmer_pm25_ex <- "*Palmer*PM25*csv"
+Palmer_pm25_import <- import_data_raw(Palmer_pm25_ex)
+
+Palmer_pm25_1 <- Palmer_pm25_import |> 
+  filter(poc == 1) |> 
+  mutate(Date = as.Date(Date)) |> 
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+Palmer_pm25_3 <- Palmer_pm25_import |> 
+  filter(poc == 3) |> 
+  calc_pm25_24hr_avg() |> 
+  mutate(Date = as.Date(Date)) |> 
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+Palmer_pm25 <- full_join(Palmer_pm25_3, Palmer_pm25_1, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.y),
+      trunc(sample_measurement.x * 10) / 10,
+      trunc(sample_measurement.y * 10) / 10
+    ),
+    site_name = "Palmer"
+  ) |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Parkgate PM25}
+Parkgate_pm25_ex <- "*Parkgate*PM25*csv"
+Parkgate_pm25_import <- import_data_raw(Parkgate_pm25_ex) |>
+  mutate(site_name = "Parkgate")
+
+Parkgate_pm25 <- Parkgate_pm25_import |> 
+  calc_pm25_24hr_avg() |>
+  select(Date, sample_measurement, site_name)
+```
+
+```{r PMC PM25}
+PMC_pm25_ex <- "*PMC*PM25*csv"
+PMC_pm25_import <- import_data_raw(PMC_pm25_ex) |>
+  mutate(site_name = "Plant Materials Center")
+
+PMC_pm25 <- PMC_pm25_import |> 
+  calc_pm25_24hr_avg() |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r SOB PM25}
+SOB_pm25_ex <- "*SOB*PM25*csv"
+SOB_pm25_import <- import_data_raw(SOB_pm25_ex)
+
+SOB_pm25_1 <- SOB_pm25_import |> 
+  filter(poc == 1) |> 
+  mutate(Date = as.Date(Date)) |> 
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+SOB_pm25_2 <- SOB_pm25_import |> 
+  filter(poc == 2) |> 
+  mutate(Date = as.Date(Date)) |> 
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+SOB_pm25 <- full_join(SOB_pm25_1, SOB_pm25_2, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    ),
+    site_name = "FSOB"
+  ) |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Soldotna PM25}
+Soldotna_pm25_ex <- "*Soldotna*PM25*csv"
+Soldotna_pm25_import <- import_data_raw(Soldotna_pm25_ex)
+
+Soldotna_pm25 <- Soldotna_pm25_import |> 
+  calc_pm25_24hr_avg() |> 
+  mutate(site_name = "Soldotna") |>
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Tudor PM25}
+Tudor_pm25_ex <- "*Tudor*PM25*csv"
+Tudor_pm25_import <- import_data_raw(Tudor_pm25_ex) |> 
+  mutate(site_name = "Tudor")
+
+Tudor_pm25 <- select(Tudor_pm25_import, Date, sample_measurement, site_name)
+```
+
+```{r Wasilla PM25}
+Wasilla_pm25_ex <- "*Wasilla*PM25*csv"
+Wasilla_pm25_import <- import_data_raw(Wasilla_pm25_ex)
+
+Wasilla_pm25_1 <- Wasilla_pm25_import |> 
+  filter(poc == 1) |> 
+  mutate(Date = as.Date(Date)) |> 
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+Wasilla_pm25_3 <- Wasilla_pm25_import |> 
+  filter(poc == 3) |> 
+  calc_pm25_24hr_avg() |> 
+  mutate(Date = as.Date(Date)) |> 
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+Wasilla_pm25 <- full_join(Wasilla_pm25_3, Wasilla_pm25_1, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.y),
+      trunc(sample_measurement.x * 10) / 10,
+      trunc(sample_measurement.y * 10) / 10
+    ),
+    site_name = "Wasilla"
+  ) |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Bind PM25}
+pm25_import_named <- bind_rows(
+  Ast_pm25,
+  Bethel_pm25,
+  Butte_pm25,
+  DHHS_pm25,
+  FloydDryden_pm25,
+  Garden_pm25,
+  Hurst_pm25,
+  LemonCreek_pm25,
+  NCore_pm25,
+  Palmer_pm25,
+  Parkgate_pm25,
+  PMC_pm25,
+  SOB_pm25,
+  Soldotna_pm25,
+  Tudor_pm25,
+  Wasilla_pm25
+) |>
+  mutate(Date = as.Date(Date))
+
+usethis::use_data(pm25_import_named, overwrite = TRUE)
+```
+
+# Import PM10
+
+```{r Bethel PM10}
+Bethel_pm10_ex <- "*Bethel*PM10*csv"
+Bethel_pm10_import <- import_data_raw(Bethel_pm10_ex)
+
+Bethel_pm10 <- Bethel_pm10_import |> 
+  calc_pm10_24hr_avg() |> 
+  mutate(site_name = "Bethel") |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Butte PM10}
+Butte_pm10_ex <- "*Butte*PM10*csv"
+Butte_pm10_import <- import_data_raw(Butte_pm10_ex)
+
+Butte_pm10_1 <- Butte_pm10_import |> 
+  filter(poc == 1) |> 
+  mutate(Date = as.Date(Date)) |> 
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+Butte_pm10_3 <- Butte_pm10_import |> 
+  filter(poc == 3) |> 
+  calc_pm10_24hr_avg() |> 
+  mutate(Date = as.Date(Date)) |> 
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+Butte_pm10 <- full_join(Butte_pm10_1, Butte_pm10_3, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    ),
+    site_name = "Butte"
+  ) |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r DHHS PM10}
+DHHS_pm10_ex <- "*DHHS*PM10*csv"
+DHHS_pm10_import <- import_data_raw(DHHS_pm10_ex)
+
+DHHS_pm10 <- DHHS_pm10_import |> 
+  calc_pm10_24hr_avg() |> 
+  mutate(site_name = "DHHS") |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Floyd Dryden PM10}
+FloydDryden_pm10_ex <- "*FloydDryden*PM10*csv"
+FloydDryden_pm10_import <- import_data_raw(FloydDryden_pm10_ex)
+
+FloydDryden_pm10_1 <- FloydDryden_pm10_import |> 
+  filter(poc == 1) |> 
+  mutate(Date = as.Date(Date)) |> 
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+FloydDryden_pm10_2 <- FloydDryden_pm10_import |> 
+  filter(poc == 2) |> 
+  mutate(Date = as.Date(Date)) |> 
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+FloydDryden_pm10_3 <- FloydDryden_pm10_import |> 
+  filter(poc == 3) |> 
+  calc_pm10_24hr_avg() |> 
+  mutate(Date = as.Date(Date)) |> 
+  complete(Date = seq.Date(min(Date), max(Date), by = "day"))
+
+FloydDryden_pm10 <- full_join(FloydDryden_pm10_1, FloydDryden_pm10_2, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    )
+  ) |>
+  select(Date, sample_measurement) |> 
+  full_join(y = FloydDryden_pm10_3, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    ),
+    site_name = "Floyd Dryden"
+  ) |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Garden PM10}
+Garden_pm10_ex <- "*Garden*PM10*csv"
+Garden_pm10_import <- import_data_raw(Garden_pm10_ex)
+
+Garden_pm10_1 <- Garden_pm10_import |> 
+  filter(poc == 1) |> 
+  convert_date()
+
+Garden_pm10_2 <- Garden_pm10_import |> 
+  filter(poc == 2) |> 
+  convert_date()
+
+Garden_pm10_3 <- Garden_pm10_import |> 
+  filter(poc == 3) |> 
+  calc_pm10_24hr_avg() |> 
+  convert_date()
+
+Garden_pm10 <- full_join(Garden_pm10_1, Garden_pm10_2, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    )
+  ) |> 
+  select(Date, sample_measurement) |> 
+  convert_date() |> 
+  full_join(y = Garden_pm10_3, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    ),
+    site_name = "Garden"
+  ) |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Laurel PM10}
+Laurel_pm10_ex <- "*Laurel*PM10*csv"
+Laurel_pm10_import <- import_data_raw(Laurel_pm10_ex)
+
+Laurel_pm10 <- Laurel_pm10_import |> 
+  calc_pm10_24hr_avg() |> 
+  mutate(site_name = "Laurel") |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Muldoon PM10}
+Muldoon_pm10_ex <- "*Muldoon*PM10*csv"
+Muldoon_pm10_import <- import_data_raw(Muldoon_pm10_ex) |> 
+  mutate(site_name = "Muldoon")
+
+Muldoon_pm10 <- Muldoon_pm10_import |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r NCore PM10}
+NCore_pm10_ex <- "*NCore*PM10*csv"
+NCore_pm10_import <- import_data_raw(NCore_pm10_ex)
+
+NCore_pm10_1 <- NCore_pm10_import |> 
+  filter(poc == 1) |> 
+  convert_date()
+
+NCore_pm10_3 <- NCore_pm10_import |> 
+  filter(poc == 3) |> 
+  calc_pm10_24hr_avg() |> 
+  convert_date()
+
+NCore_pm10 <- full_join(NCore_pm10_1, NCore_pm10_3, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    ),
+    site_name = "NCore"
+  ) |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Palmer PM10}
+Palmer_pm10_ex <- "*Palmer*PM10*csv"
+Palmer_pm10_import <- import_data_raw(Palmer_pm10_ex) |>
+  mutate(site_name = "Palmer")
+
+Palmer_pm10 <- Palmer_pm10_import |> 
+  calc_pm10_24hr_avg() |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Parkgate PM10}
+Parkgate_pm10_ex <- "*Parkgate*PM10*csv"
+Parkgate_pm10_import <- import_data_raw(Parkgate_pm10_ex)
+
+Parkgate_pm10_1 <- Parkgate_pm10_import |> 
+  filter(poc == 1) |> 
+  convert_date()
+
+Parkgate_pm10_3 <- Parkgate_pm10_import |> 
+  filter(poc == 3) |> 
+  calc_pm10_24hr_avg() |>
+  convert_date()
+
+Parkgate_pm10 <- full_join(Parkgate_pm10_1, Parkgate_pm10_3, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    ),
+    site_name = "Parkgate"
+  ) |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r PMC PM10}
+PMC_pm10_ex <- "*PMC*PM10*csv"
+PMC_pm10_import <- import_data_raw(PMC_pm10_ex) |>
+  mutate(site_name = "Plant Materials Center")
+
+PMC_pm10 <- PMC_pm10_import |> 
+  calc_pm10_24hr_avg() |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Tudor PM10} 
+Tudor_pm10_ex <- "*Tudor*PM10*csv"
+Tudor_pm10_import <- import_data_raw(Tudor_pm10_ex)
+
+Tudor_pm10_1 <- Tudor_pm10_import |> 
+  filter(poc == 1) |> 
+  convert_date()
+
+Tudor_pm10_2 <- Tudor_pm10_import |> 
+  filter(poc == 2) |> 
+  convert_date()
+
+Tudor_pm10_3 <- Tudor_pm10_import |> 
+  filter(poc == 3) |> 
+  calc_pm10_24hr_avg() |> 
+  convert_date()
+
+Tudor_pm10 <- full_join(Tudor_pm10_1, Tudor_pm10_2, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    )
+  ) |> 
+  select(Date, sample_measurement) |>
+  convert_date() |> 
+  full_join(Tudor_pm10_3, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    ),
+    site_name = "Tudor"
+  ) |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Wasilla PM10}
+Wasilla_pm10_ex <- "*Wasilla*PM10*csv"
+Wasilla_pm10_import <- import_data_raw(Wasilla_pm10_ex)
+
+Wasilla_pm10 <- Wasilla_pm10_import |> 
+  calc_pm10_24hr_avg() |> 
+  mutate(site_name = "Wasilla") |> 
+  select(Date, sample_measurement, site_name)
+```
+
+```{r Bind PM10}
+pm10_import_named <- bind_rows(
+  Bethel_pm10,
+  Butte_pm10,
+  DHHS_pm10,
+  FloydDryden_pm10,
+  Garden_pm10,
+  Laurel_pm10,
+  Muldoon_pm10,
+  NCore_pm10,
+  Palmer_pm10,
+  Parkgate_pm10,
+  PMC_pm10,
+  Tudor_pm10,
+  Wasilla_pm10
+) |> 
+  mutate(Date = as.Date(Date))
+
+usethis::use_data(pm10_import_named, overwrite = TRUE)
+```
+
+# Import CO
+
+```{r Armory CO}
+Armory_co_ex <- "*Armory*CO*csv"
+Armory_co_import <- import_data_raw(Armory_co_ex)
+
+Armory_co <- Armory_co_import |> 
+  calc_co_8hr_avg() |> 
+  mutate(site_name = "Armory")
+```
+
+```{r DHHS CO}
+DHHS_co_ex <- "*DHHS*CO*csv"
+DHHS_co_import <- import_data_raw(DHHS_co_ex)
+
+DHHS_co <- DHHS_co_import |> 
+  calc_co_8hr_avg() |> 
+  mutate(site_name = "DHHS")
+```
+
+```{r Garden CO}
+Garden_co_ex <- "*Garden*CO*csv"
+Garden_co_import <- import_data_raw(Garden_co_ex)
+
+Garden_co <- Garden_co_import |> 
+  calc_co_8hr_avg() |> 
+  mutate(site_name = "Garden")
+```
+
+```{r Hunter CO}
+Hunter_co_ex <- "*Hunter*CO*csv"
+Hunter_co_import <- import_data_raw(Hunter_co_ex)
+
+Hunter_co <- Hunter_co_import |> 
+  calc_co_8hr_avg() |> 
+  mutate(site_name = "Hunter")
+```
+
+```{r NCore CO}
+NCore_co_ex <- "*NCore*CO*csv"
+NCore_co_import <- import_data_raw(NCore_co_ex)
+
+NCore_co <- NCore_co_import |> 
+  calc_co_8hr_avg() |> 
+  mutate(site_name = "NCore")
+```
+
+```{r Old Post Office CO}
+OldPostOffice_co_ex <- "*OldPostOffice*CO*csv"
+OldPostOffice_co_import <- import_data_raw(OldPostOffice_co_ex)
+
+OldPostOffic_co <- OldPostOffice_co_import |> 
+  calc_co_8hr_avg() |> 
+  mutate(site_name = "Old Post Office")
+```
+
+```{r Parkgate CO}
+Parkgate_co_ex <- "*Parkgate*CO*csv"
+Parkgate_co_import <- import_data_raw(Parkgate_co_ex)
+
+Parkgate_co <- Parkgate_co_import |> 
+  calc_co_8hr_avg() |> 
+  mutate(site_name = "Parkgate")
+```
+
+```{r SOB CO}
+SOB_co_ex <- "*SOB*CO*csv"
+SOB_co_import <- import_data_raw(SOB_co_ex)
+
+SOB_co <- SOB_co_import |> 
+  calc_co_8hr_avg() |> 
+  mutate(site_name = "FSOB")
+```
+
+```{r Turnagain CO}
+Turnagain_co_ex <- "*Turnagain*CO*csv"
+Turnagain_co_import <- import_data_raw(Turnagain_co_ex) 
+
+Turnagain_co <- Turnagain_co_import |> 
+  calc_co_8hr_avg() |> 
+  mutate(site_name = "FSOB")
+```
+
+```{r Bind CO}
+co_8hr_avg <- bind_rows(
+  Armory_co,
+  DHHS_co,
+  Garden_co,
+  Hunter_co,
+  NCore_co,
+  OldPostOffic_co,
+  Parkgate_co,
+  SOB_co,
+  Turnagain_co
+) |> 
+  mutate(Date = as.Date(Date))
+
+usethis::use_data(co_8hr_avg, overwrite = TRUE)
+```
+
+# Import SO2
+
+```{r Hurst SO2}
+Hurst_so2_ex <- "*Hurst*SO2*csv"
+Hurst_so2_import <- import_data_raw(Hurst_so2_ex)
+
+Hurst_so2_1 <- Hurst_so2_import |> 
+  filter(duration_code == "1") |> 
+  calc_so2_1hr_max() |> 
+  mutate(site_name = "Hurst Road")
+```
+
+```{r NCore SO2}
+NCore_so2_ex <- "*NCore*SO2*csv"
+NCore_so2_import <- import_data_raw(NCore_so2_ex)
+
+NCore_so2_1 <- NCore_so2_import |> 
+  filter(duration_code == "1") |> 
+  calc_so2_1hr_max() |> 
+  mutate(site_name = "NCore")
+```
+
+```{r Bind SO2}
+so2_1hr_max <- bind_rows(
+  Hurst_so2_1,
+  NCore_so2_1
+) |> 
+  rename(sample_measurement = max_1hr) |> 
+  mutate(Date = as.Date(Date))
+
+usethis::use_data(so2_1hr_max, overwrite = TRUE)
+```
+
+
+# Import O3
+
+```{r NCore O3}
+NCore_o3_ex <- "*NCore*O3*csv"
+NCore_o3_import <- import_data_raw(NCore_o3_ex) |>
+  mutate(site_name = "NCore")
+
+ncore_o3_8hr_avg <- NCore_o3_import |> 
+  calc_o3_8hr_avg() |>
+  filter(hour(Date) == 0) |> 
+  mutate(Date = as.Date(Date)) |> 
+  mutate(site_name = "NCore") |> 
+  rename(sample_measurement = avg_8hr)
+
+usethis::use_data(ncore_o3_8hr_avg, overwrite = TRUE)
+```
+
+# Import NO2
+
+```{r NCore NO2}
+NCore_no2_ex <- "*NCore*NO2*csv"
+NCore_no2_import <- import_data_raw(NCore_no2_ex)
+
+ncore_no2_1hr_max <- NCore_no2_import |> 
+  calc_no2_1hr_max() |> 
+  mutate(Date = as.Date(Date)) |> 
+  mutate(site_name = "NCore") |> 
+  rename(sample_measurement = max_1hr)
+
+usethis::use_data(ncore_no2_1hr_max, overwrite = TRUE)
+```
+

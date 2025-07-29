@@ -5,7 +5,7 @@
 \alias{ncore_o3_8hr_avg}
 \title{ncore_o3_8hr_avg}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 4530 rows and 3 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 4900 rows and 3 columns.
 }
 \usage{
 ncore_o3_8hr_avg

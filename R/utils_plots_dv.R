@@ -109,7 +109,7 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
     ) +
       ggplot2::geom_line(ggplot2::aes(group = factor(category)), linewidth = 1) +
       ggplot2::geom_point(size = 2.5) +
-      ggplot2::scale_color_manual(values = dv_palette()) +
+      ggplot2::scale_color_manual(values = dv_palette_16()) +
       ggplot2::scale_linetype_manual(values = c("dashed", "solid")) +
       # Axis settings
       ggplot2::labs(
@@ -253,7 +253,7 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
     ) +
       ggplot2::geom_line(ggplot2::aes(group = factor(category)), linewidth = 1) +
       ggplot2::geom_point(size = 2.5) +
-      ggplot2::scale_color_manual(values = dv_palette()) +
+      ggplot2::scale_color_manual(values = dv_palette_16()) +
       ggplot2::scale_linetype_manual(values = c("dashed", "solid")) +
       # Axis settings
       ggplot2::labs(
@@ -520,7 +520,7 @@ plot_so2_dv <- function(so2_data, region) {
         ggplot2::aes(group = factor(value_type)), linewidth = 1
       ) +
       ggplot2::geom_point(size = 2.5) +
-      ggplot2::scale_color_manual(values = dv_palette()) +
+      ggplot2::scale_color_manual(values = dv_palette_16()) +
       ggplot2::scale_linetype_manual(values = c("solid", "dashed")) +
       # Axis settings
       ggplot2::labs(
@@ -588,7 +588,7 @@ plot_o3_dv <- function(o3_data, region) {
         ggplot2::aes(group = factor(value_type)), linewidth = 1
       ) +
       ggplot2::geom_point(size = 2.5) +
-      ggplot2::scale_color_manual(values = dv_palette()) +
+      ggplot2::scale_color_manual(values = dv_palette_16()) +
       ggplot2::scale_linetype_manual(values = c("solid", "dashed")) +
       # Axis settings
       ggplot2::labs(
@@ -720,7 +720,7 @@ plot_no2_dv <- function(no2_data, region) {
         ggplot2::aes(group = factor(value_type)), linewidth = 1
       ) +
       ggplot2::geom_point(size = 2.5) +
-      ggplot2::scale_color_manual(values = dv_palette()) +
+      ggplot2::scale_color_manual(values = dv_palette_16()) +
       ggplot2::scale_linetype_manual(values = c("solid", "dashed")) +
       # Axis settings
       ggplot2::labs(

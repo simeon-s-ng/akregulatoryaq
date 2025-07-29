@@ -9,60 +9,60 @@
 #'
 #' @noRd
 range_pm25 <- function() {
-  get_range("2000", "2023")
+  get_range("2000", "2024")
 }
 
 #' range_pm10
-#' 
+#'
 #' @noRd
 range_pm10 <- function() {
-  get_range("2000", "2023")
+  get_range("2000", "2024")
 }
 
 #' range_co
-#' 
+#'
 #' @noRd
 range_co <- function() {
-  get_range("2000", "2023")
+  get_range("2000", "2024")
 }
 
 #' range_so2
-#' 
+#'
 #' @noRd
 range_so2 <- function() {
-  get_range("2011", "2023")
+  get_range("2011", "2024")
 }
 
 #' range_o3
-#' 
+#'
 #' @noRd
 range_o3 <- function() {
-  get_range("2011", "2023")
+  get_range("2011", "2024")
 }
 
 #' range_no2
-#' 
+#'
 #' @noRd
 range_no2 <- function() {
   get_range("2014", "2019")
 }
 
 #' range_pm10_fbx
-#' 
+#'
 #' @noRd
 range_pm10_fbx <- function() {
-  get_range("2012", "2023")
+  get_range("2012", "2024")
 }
 
 #' range_pm25_bethel
-#' 
+#'
 #' @noRd
 range_pm25_bethel <- function() {
   get_range("2018", "2019")
 }
 
 #' range_pm10_bethel
-#' 
+#'
 #' @noRd
 range_pm10_bethel <- function() {
   get_range("2018", "2019")

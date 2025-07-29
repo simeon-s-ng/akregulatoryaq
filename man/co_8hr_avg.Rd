@@ -5,7 +5,7 @@
 \alias{co_8hr_avg}
 \title{co_8hr_avg}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 14605 rows and 3 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 44682 rows and 3 columns.
 }
 \usage{
 co_8hr_avg
