@@ -82,26 +82,26 @@ get_glossary <- function() {
     "
     **24-hour Design Value (DV)**<br>
     A three-year average of the 98th percentile value. An area is in
-    violation of the NAAQS when the Design Values is greater than the
-    24-hour NAAQS for PM2.5, which is currently set at 35 \u00B5g/m\u00B3.
+    violation of the <abbr title='National Ambient Air Quality Standards'>NAAQS</abbr> when the Design Values is greater than the
+    24-hour <abbr title='National Ambient Air Quality Standards'>NAAQS</abbr> for <abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr>, which is currently set at 35 <abbr title='micrograms per meter cubed'>µg/m<sup>3</sup></abbr>.
     <a href='https://dec.alaska.gov/media/7666/40-cfr-50-appx-n.pdf' target='_blank'>40 CFR 50 Appendix N - see section 4.5(b) (PDF)</a><br>
     <br>
     **98th Percentile**<br>
-    The daily value out of a year of PM2.5 monitoring data below which 98
+    The daily value out of a year of <abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr> monitoring data below which 98
     percent of all daily values fall.
     <a href='https://dec.alaska.gov/media/7666/40-cfr-50-appx-n.pdf' target='_blank'>40 CFR 50 Appendix N - see section 4.5(a) (PDF)</a><br>
     <br>
     **Clean Data Year**<br>
-    A year when the 98th percentile value is less than the NAAQS.<br>
+    A year when the 98th percentile value is less than the <abbr title='National Ambient Air Quality Standards'>NAAQS</abbr>.<br>
     <br>
-    **Compliance with PM2.5 NAAQS**<br>
+    **Compliance with <abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr> <abbr title='National Ambient Air Quality Standards'>NAAQS</abbr>**<br>
     *24-Hour* - 98th percentile, averaged over 3 years, must be below the
     standard.<br>
     *Annual* - Annual arithmetic mean, averaged over 3 years,
     must be below the standard.
     <a href='https://dec.alaska.gov/media/7666/40-cfr-50-appx-n.pdf' target='_blank'>40 CFR 50 Appendix N - see sections 4.1 and 4.2 (PDF)</a><br>
     <br>
-    **Concentration, \u00B5g/m\u00B3**<br>
+    **Concentration, <abbr title='micrograms per meter cubed'>µg/m<sup>3</sup></abbr>**<br>
     The amount of pollutants in the air at a specific location.<br>
     <br>
     **Exceedance**<br>
@@ -110,16 +110,16 @@ get_glossary <- function() {
     **Exceptional Events**<br>
     Unusual or naturally occurring events that can affect air quality
     but are not reasonably controllable.<br>
-    <a href='https://www.epa.gov/air-quality-analysis/treatment-air-quality-monitoring-data-influenced-exceptional-events/' target='_blank'>EPA's Exceptional Events Webpage</a><br>
-    <a href='https://dec.alaska.gov/air/air-monitoring/guidance/exceptional-events/' target='_blank'>DEC's Exceptional Events Webpage</a><br>
+    <a href='https://www.epa.gov/air-quality-analysis/treatment-air-quality-monitoring-data-influenced-exceptional-events/' target='_blank'><abbr title='U.S. Environmental Protection Agency'>EPA</abbr>'s Exceptional Events Webpage</a><br>
+    <a href='https://dec.alaska.gov/air/air-monitoring/guidance/exceptional-events/' target='_blank'><abbr title='Department of Environmental Conservation'>DEC</abbr>'s Exceptional Events Webpage</a><br>
     <br>
-    **NAAQS**<br>
+    **<abbr title='National Ambient Air Quality Standards'>NAAQS</abbr>**<br>
     National Ambient Air Quality Standard - A health-based air quality
-    standard set by EPA based on a review of available scientific information.
-    NAAQS exist for criteria pollutants including Particulate Matter
-    (PM2.5 and PM10), Carbon Monoxide (CO), Sulfur Dioxide (SO2),
-    Nitrogen Dioxide (NO2), Ozone (O3), and Lead (Pb).<br>
-    <a href='https://www.epa.gov/naaqs' target='_blank'>EPA's NAAQS Webpage</a>
+    standard set by <abbr title='U.S. Environmental Protection Agency'>EPA</abbr> based on a review of available scientific information.
+    <abbr title='National Ambient Air Quality Standards'>NAAQS</abbr> exist for criteria pollutants including Particulate Matter
+    (<abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr> and <abbr title='particulate matter less than 10 microns in size'>PM<sub>10</sub></abbr>), Carbon Monoxide (<abbr title='carbon monoxide'>CO</abbr>), Sulfur Dioxide (<abbr title='sulfur dioxide'>SO<sub>2</sub></abbr>),
+    Nitrogen Dioxide (<abbr title='nitrogen dioxide'>NO<sub>2</sub></abbr>), Ozone (<abbr title='ozone'>O<sub>3</sub></abbr>), and Lead (<abbr title='lead'>Pb</abbr>).<br>
+    <a href='https://www.epa.gov/naaqs' target='_blank'><abbr title='U.S. Environmental Protection Agency'>EPA</abbr>'s <abbr title='National Ambient Air Quality Standards'>NAAQS</abbr> Webpage</a>
     "
   )
 }
@@ -140,7 +140,7 @@ get_howto <- function() {
     click the site(s) in the site dropdown.
     - Additional site information, can be found in the 'Site Information' box below the site selection dropdown.
     Click on the site name link to be redirected to the monitoring site's webpage for further information.
-    - To download data (2000 and after), select the site and year from the Filters section; You are limited to downloading one pollutant and one year at a time for the selected sites. To view data of various pollutants (PM2.5, PM10, CO, SO2, O3, or NO2)
+    - To download data (2000 and after), select the site and year from the Filters section; You are limited to downloading one pollutant and one year at a time for the selected sites. To view data of various pollutants (<abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr>, <abbr title='particulate matter less than 10 microns in size'>PM<sub>10</sub></abbr>, <abbr title='carbon monoxide'>CO</abbr>, <abbr title='sulfur dioxide'>SO<sub>2</sub></abbr>, <abbr title='ozone'>O<sub>3</sub></abbr>, or <abbr title='nitrogen dioxide'>NO<sub>2</sub></abbr>)
     select a pollutant above the data graph.
 
     <!-- end of the list -->
@@ -175,12 +175,12 @@ get_howto <- function() {
     <!-- end of the list -->
 
     For more details expand the Glossary by clicking the **Glossary dropdown [\u2228]** below the data figure.
-    To see the National Ambient Air Quality Standards (NAAQS) set forth by EPA
-    expand the NAAQS Table by clicking the **NAAQS Table dropdown [\u2228]** below the data figure.<br><br>
+    To see the National Ambient Air Quality Standards (<abbr title='National Ambient Air Quality Standards'>NAAQS</abbr>) set forth by <abbr title='U.S. Environmental Protection Agency'>EPA</abbr>
+    expand the <abbr title='National Ambient Air Quality Standards'>NAAQS</abbr> Table by clicking the **<abbr title='National Ambient Air Quality Standards'>NAAQS</abbr> Table dropdown [\u2228]** below the data figure.<br><br>
     All displayed design value data excludes exceptional events (generally wildfire)
-    as considered by DEC, except when otherwise noted. For example, Fairbanks North Star
-    Borough data includes data without DEC considered exceptional events AND without
-    EPA concurred exceptional events.<br><br>
+    as considered by <abbr title='Department of Environmental Conservation'>DEC</abbr>, except when otherwise noted. For example, Fairbanks North Star
+    Borough data includes data without <abbr title='Department of Environmental Conservation'>DEC</abbr> considered exceptional events AND without
+    <abbr title='U.S. Environmental Protection Agency'>EPA</abbr> concurred exceptional events.<br><br>
     For questions or to obtain data beyond what is offered here for download please email
     <a href='mailto:amqa-data-inquiries@alaska.gov' target='_blank'>AMQA-Data-Inquiries@alaska.gov<a/> or visit our
     <a href='https://dec.alaska.gov/air/air-monitoring/contacts/' target='_blank'>contacts page</a>
@@ -289,7 +289,17 @@ plot_card <- function(avg_mod, dv_mod, table_mod) {
     ),
     # Panel for NAAQS table
     bslib::accordion_panel(
-      "NAAQS Table for PM2.5",
+      value = 'NAAQStable',
+      htmltools::tags$abbr(
+        title='National Ambient Air Quality Standards', 'NAAQS',
+        .noWS = "outside"
+      ),
+      " Table for",
+      htmltools::tags$abbr(
+        title='particulate matter less than 2.5 microns in size', 'PM',
+        htmltools::tags$sub(2.5, .noWS = "outside"),
+        .noWS = "outside"
+      ),
       table_mod
     ),
     open = "Air Quality Monitoring Data",
@@ -349,7 +359,17 @@ plot_card_pm25 <- function(avg_ns, epa_dv_ns, dec_dv_ns, table_ns) {
     ),
     # Panel for NAAQS table
     bslib::accordion_panel(
-      "NAAQS Table for PM2.5",
+      value = "NAAQStable",
+      htmltools::tags$abbr(
+        title='National Ambient Air Quality Standards', 'NAAQS',
+        .noWS = "outside"
+      ),
+      " Table for",
+      htmltools::tags$abbr(
+        title='particulate matter less than 2.5 microns in size', 'PM',
+        htmltools::tags$sub(2.5, .noWS = "outside"),
+        .noWS = "outside"
+      ),
       mod_naaqs_table_ui(table_ns)
     ),
     open = "Air Quality Monitoring Data",

@@ -82,7 +82,7 @@ ui_page_navbar <- function() {
           "Filters", icon = bsicons::bs_icon("filter"),
           # Fairbanks PM25 Filters ----
           shiny::conditionalPanel(
-            condition = "input.nav == 'Fairbanks' & input.fnsb == 'PM2.5'",
+            condition = "input.nav == 'Fairbanks' & input.fnsb == 'pm25'",
             # PM25 Year Filter Module
             mod_filter_data_ui(
               "filter_data_fbx_pm25",
@@ -94,7 +94,7 @@ ui_page_navbar <- function() {
           ),
           # Fairbanks PM10 Filters ----
           shiny::conditionalPanel(
-            condition = "input.nav == 'Fairbanks' & input.fnsb == 'PM10'",
+            condition = "input.nav == 'Fairbanks' & input.fnsb == 'pm10'",
             mod_filter_data_ui(
               "filter_data_fbx_pm10",
               range_pm10_fbx(),
@@ -105,7 +105,7 @@ ui_page_navbar <- function() {
           ),
           # Fairbanks CO Filters ----
           shiny::conditionalPanel(
-            condition = "input.nav == 'Fairbanks' & input.fnsb == 'CO'",
+            condition = "input.nav == 'Fairbanks' & input.fnsb == 'co'",
             mod_filter_data_ui(
               "filter_data_fbx_co",
               range_co(),
@@ -116,7 +116,7 @@ ui_page_navbar <- function() {
           ),
           # Fairbanks SO2 Filter ----
           shiny::conditionalPanel(
-            condition = "input.nav == 'Fairbanks' & input.fnsb == 'SO2'",
+            condition = "input.nav == 'Fairbanks' & input.fnsb == 'so2'",
             mod_filter_data_ui(
               "filter_data_fbx_so2",
               range_so2(),
@@ -127,7 +127,7 @@ ui_page_navbar <- function() {
           ),
           # Fairbanks O3 Filter ----
           shiny::conditionalPanel(
-            condition = "input.nav == 'Fairbanks' & input.fnsb == 'O3'",
+            condition = "input.nav == 'Fairbanks' & input.fnsb == 'o3'",
             mod_filter_data_ui(
               "filter_data_fbx_o3",
               range_o3(),
@@ -138,7 +138,7 @@ ui_page_navbar <- function() {
           ),
           # Fairbanks NO2 Filter ----
           shiny::conditionalPanel(
-            condition = "input.nav == 'Fairbanks' & input.fnsb == 'NO2'",
+            condition = "input.nav == 'Fairbanks' & input.fnsb == 'no2'",
             mod_filter_data_ui(
               "filter_data_fbx_no2",
               range_no2(),
@@ -149,7 +149,7 @@ ui_page_navbar <- function() {
           ),
           # Anchorage PM25 Filters ----
           shiny::conditionalPanel(
-            condition = "input.nav == 'Anchorage' & input.anc == 'PM2.5'",
+            condition = "input.nav == 'Anchorage' & input.anc == 'pm25'",
             mod_filter_data_ui(
               "filter_data_anc_pm25",
               range_pm25(),
@@ -160,7 +160,7 @@ ui_page_navbar <- function() {
           ),
           # Anchorage PM10 Filters ----
           shiny::conditionalPanel(
-            condition = "input.nav == 'Anchorage' & input.anc == 'PM10'",
+            condition = "input.nav == 'Anchorage' & input.anc == 'pm10'",
             mod_filter_data_ui(
               "filter_data_anc_pm10",
               range_pm10(),
@@ -171,7 +171,7 @@ ui_page_navbar <- function() {
           ),
           # Anchorage CO Filters ----
           shiny::conditionalPanel(
-            condition = "input.nav == 'Anchorage' & input.anc == 'CO'",
+            condition = "input.nav == 'Anchorage' & input.anc == 'co'",
             mod_filter_data_ui(
               "filter_data_anc_co",
               range_co(),
@@ -182,7 +182,7 @@ ui_page_navbar <- function() {
           ),
           # Juneau PM25 Filters ----
           shiny::conditionalPanel(
-            condition = "input.nav == 'Juneau' & input.jnu == 'PM2.5'",
+            condition = "input.nav == 'Juneau' & input.jnu == 'pm25'",
             mod_filter_data_ui(
               "filter_data_jnu_pm25",
               range_pm25(),
@@ -193,7 +193,7 @@ ui_page_navbar <- function() {
           ),
           # Juneau PM10 Filters ----
           shiny::conditionalPanel(
-            condition = "input.nav == 'Juneau' & input.jnu == 'PM10'",
+            condition = "input.nav == 'Juneau' & input.jnu == 'pm10'",
             mod_filter_data_ui(
               "filter_data_jnu_pm10",
               range_pm10(),
@@ -204,7 +204,7 @@ ui_page_navbar <- function() {
           ),
           # Mat-Su PM25 Filters ----
           shiny::conditionalPanel(
-            condition = "input.nav == 'Mat-Su' & input.ms == 'PM2.5'",
+            condition = "input.nav == 'Mat-Su' & input.ms == 'pm25'",
             mod_filter_data_ui(
               "filter_data_ms_pm25",
               range_pm25(),
@@ -215,7 +215,7 @@ ui_page_navbar <- function() {
           ),
           # Mat-Su PM10 Filters ----
           shiny::conditionalPanel(
-            condition = "input.nav == 'Mat-Su' & input.ms == 'PM10'",
+            condition = "input.nav == 'Mat-Su' & input.ms == 'pm10'",
             mod_filter_data_ui(
               "filter_data_ms_pm10",
               range_pm10(),
@@ -226,7 +226,7 @@ ui_page_navbar <- function() {
           ),
           # Bethel PM25 Filters ----
           shiny::conditionalPanel(
-            condition = "input.nav == 'Bethel' & input.sw == 'PM2.5'",
+            condition = "input.nav == 'Bethel' & input.sw == 'pm25'",
             mod_filter_data_ui(
               "filter_data_sw_pm25",
               range_pm25_bethel(),
@@ -237,7 +237,7 @@ ui_page_navbar <- function() {
           ),
           # Bethel PM10 Filters ----
           shiny::conditionalPanel(
-            condition = "input.nav == 'Bethel' & input.sw == 'PM10'",
+            condition = "input.nav == 'Bethel' & input.sw == 'pm10'",
             mod_filter_data_ui(
               "filter_data_sw_pm10",
               range_pm25_bethel(),
@@ -258,9 +258,21 @@ ui_page_navbar <- function() {
         title = "Fairbanks North Star Borough",
         id = "fnsb",
         bslib::nav_panel(
-          title = "PM2.5",
+          title = htmltools::tags$abbr(
+            title="particulate matter less than 2.5 microns in size", 'PM',
+            htmltools::tags$sub('2.5', .noWS = "outside"),
+            .noWS = "outside"
+          ),
+          value = 'pm25',
           bslib::card(
-            bslib::card_header("Fairbanks Particulate Matter 2.5 (PM2.5)"),
+            bslib::card_header(
+              "Fairbanks",
+              htmltools::tags$abbr(
+                title='particulate matter less than 2.5 microns in size', 'PM',
+                htmltools::tags$sub('2.5', .noWS = "outside"),
+                .noWS = "outside"
+              ),
+            ),
             fbx_pm25_desc()
           ),
           plot_card_pm25(
@@ -271,9 +283,21 @@ ui_page_navbar <- function() {
           )
         ),
         bslib::nav_panel(
-          title = "PM10",
+          title = htmltools::tags$abbr(
+            title='particulate matter less than 10 microns in size', 'PM',
+            htmltools::tags$sub('10', .noWS = "outside"),
+            .noWS = "outside"
+          ),
+          value = "pm10",
           bslib::card(
-            bslib::card_header("Fairbanks Particulate Matter 10 (PM10)"),
+            bslib::card_header(
+              "Fairbanks",
+              htmltools::tags$abbr(
+                title='particulate matter less than 10 microns in size', 'PM',
+                htmltools::tags$sub('10', .noWS = "outside"),
+                .noWS = "outside"
+              ),
+            ),
             fbx_pm10_desc()
           ),
           plot_card(
@@ -283,9 +307,19 @@ ui_page_navbar <- function() {
           )
         ),
         bslib::nav_panel(
-          title = "CO",
+          title = htmltools::tags$abbr(
+            title='carbon monoxide', 'CO',
+            .noWS = "outside"
+          ),
+          value = "co",
           bslib::card(
-            bslib::card_header("Fairbanks Carbon Monoxide (CO)"),
+            bslib::card_header(
+              "Fairbanks ",
+              htmltools::tags$abbr(
+                title='carbon monoxide', 'CO',
+                .noWS = "outside"
+              ),
+            ),
             fbx_co_desc()
           ),
           plot_card(
@@ -295,9 +329,21 @@ ui_page_navbar <- function() {
           )
         ),
         bslib::nav_panel(
-          title = "SO2",
+          title = htmltools::tags$abbr(
+            title='sulfur dioxide', 'SO',
+            htmltools::tags$sub('2', .noWS = "outside"),
+            .noWS = "outside"
+          ),
+          value = "so2",
           bslib::card(
-            bslib::card_header("Fairbanks Sulfur Dioxide (SO2)"),
+            bslib::card_header(
+              "Fairbanks",
+              htmltools::tags$abbr(
+                title='sulfur dioxide', 'SO',
+                htmltools::tags$sub('2', .noWS = "outside"),
+                .noWS = "outside"
+              ),
+            ),
             fbx_so2_desc()
           ),
           plot_card(
@@ -307,9 +353,21 @@ ui_page_navbar <- function() {
           )
         ),
         bslib::nav_panel(
-          title = "O3",
+          title = htmltools::tags$abbr(
+            title='ozone', 'O',
+            htmltools::tags$sub('3', .noWS = "outside"),
+            .noWS = "outside"
+          ),
+          value = "o3",
           bslib::card(
-            bslib::card_header("Fairbanks Ozone (O3)"),
+            bslib::card_header(
+              "Fairbanks",
+              htmltools::tags$abbr(
+                title='ozone', 'O',
+                htmltools::tags$sub('3', .noWS = "outside"),
+                .noWS = "outside"
+              ),
+            ),
             fbx_o3_desc()
           ),
           plot_card(
@@ -319,9 +377,21 @@ ui_page_navbar <- function() {
           )
         ),
         bslib::nav_panel(
-          title = "NO2",
+          title = htmltools::tags$abbr(
+            title='nitrogen dioxide', 'NO',
+            htmltools::tags$sub('2', .noWS = "outside"),
+            .noWS = "outside"
+          ),
+          value = 'no2',
           bslib::card(
-            bslib::card_header("Fairbanks Nitrogen Dioxide (NO2)"),
+            bslib::card_header(
+              "Fairbanks",
+              htmltools::tags$abbr(
+                title='nitrogen dioxide', 'NO',
+                htmltools::tags$sub('2', .noWS = "outside"),
+                .noWS = "outside"
+              ),
+            ),
             fbx_no2_desc()
           ),
           plot_card(
@@ -340,9 +410,22 @@ ui_page_navbar <- function() {
         title = "Municipality of Anchorage",
         id = "anc",
         bslib::nav_panel(
-          title = "PM2.5",
+          title = htmltools::tags$abbr(
+            title="particulate matter less than 2.5 microns in size", 'PM',
+            htmltools::tags$sub('2.5', .noWS = "outside"),
+            .noWS = "outside"
+          ),
+          value = "pm25",
           bslib::card(
-            bslib::card_header("Anchorage Particulate Matter 2.5 (PM2.5)"),
+            bslib::card_header(
+              "Anchorage",
+              htmltools::tags$abbr(
+                title='particulate matter less than 2.5 microns in size',
+                'PM',
+                htmltools::tags$sub('2.5', .noWS = "outside"),
+                .noWS = "outside"
+              ),
+            ),
             anc_pm25_desc()
           ),
           plot_card_pm25(
@@ -353,9 +436,21 @@ ui_page_navbar <- function() {
           )
         ),
         bslib::nav_panel(
-          title = "PM10",
+          title = htmltools::tags$abbr(
+            title='particulate matter less than 10 microns in size', 'PM',
+            htmltools::tags$sub('10', .noWS = "outside"),
+            .noWS = "outside"
+          ),
+          value = 'pm10',
           bslib::card(
-            bslib::card_header("Anchorage Particulate Matter 10 (PM10)"),
+            bslib::card_header(
+              "Anchorage",
+              htmltools::tags$abbr(
+                title='particulate matter less than 10 microns in size', 'PM',
+                htmltools::tags$sub('10', .noWS = "outside"),
+                .noWS = "outside"
+              ),
+            ),
             anc_pm10_desc()
           ),
           plot_card(
@@ -365,9 +460,19 @@ ui_page_navbar <- function() {
           )
         ),
         bslib::nav_panel(
-          title = "CO",
+          title = htmltools::tags$abbr(
+            title='carbon monoxide', 'CO',
+            .noWS = "outside"
+          ),
+          value = 'co',
           bslib::card(
-            bslib::card_header("Anchorage Carbon Monoxide (CO)"),
+            bslib::card_header(
+              "Anchorage ",
+              htmltools::tags$abbr(
+                title='carbon monoxide', 'CO',
+                .noWS = "outside"
+              ),
+            ),
             anc_co_desc()
           ),
           plot_card(
@@ -386,9 +491,21 @@ ui_page_navbar <- function() {
         title = "City and Borough of Juneau",
         id = "jnu",
         bslib::nav_panel(
-          title = "PM2.5",
+          title = htmltools::tags$abbr(
+            title='particulate matter less than 2.5 microns in size', 'PM',
+            htmltools::tags$sub('2.5', .noWS = "outside"),
+            .noWS = "outside"
+          ),
+          value = "pm25",
           bslib::card(
-            bslib::card_header("Juneau Particulate Matter 2.5 (PM2.5)"),
+            bslib::card_header(
+              "Juneau",
+              htmltools::tags$abbr(
+                title='particulate matter less than 2.5 microns in size', 'PM',
+                htmltools::tags$sub('2.5', .noWS = "outside"),
+                .noWS = "outside"
+              ),
+            ),
             jnu_pm25_desc()
           ),
           plot_card_pm25(
@@ -399,9 +516,21 @@ ui_page_navbar <- function() {
           )
         ),
         bslib::nav_panel(
-          title = "PM10",
+          title = htmltools::tags$abbr(
+            title='particulate matter less than 10 microns in size', 'PM',
+            htmltools::tags$sub('10', .noWS = "outside"),
+            .noWS = "outside"
+          ),
+          value = 'pm10',
           bslib::card(
-            bslib::card_header("Juneau Particulate Matter 10 (PM10)"),
+            bslib::card_header(
+              "Juneau",
+              htmltools::tags$abbr(
+                title='particulate matter less than 10 microns in size', 'PM',
+                htmltools::tags$sub('10', .noWS = "outside"),
+                .noWS = "outside"
+              ),
+            ),
             jnu_pm10_desc()
           ),
           plot_card(
@@ -420,9 +549,21 @@ ui_page_navbar <- function() {
         title = "Matanuska-Susitna Borough",
         id = "ms",
         bslib::nav_panel(
-          title = "PM2.5",
+          title = htmltools::tags$abbr(
+            title='particulate matter less than 2.5 microns in size', 'PM',
+            htmltools::tags$sub('2.5', .noWS = "outside"),
+            .noWS = "outside"
+          ),
+          value = 'pm25',
           bslib::card(
-            bslib::card_header("Mat-Su Particulate Matter 2.5 (PM2.5)"),
+            bslib::card_header(
+              "Mat-Su",
+              htmltools::tags$abbr(
+                title='particulate matter less than 2.5 microns in size', 'PM',
+                htmltools::tags$sub('2.5', .noWS = "outside"),
+                .noWS = "outside"
+              ),
+            ),
             ms_pm25_desc()
           ),
           plot_card_pm25(
@@ -433,9 +574,21 @@ ui_page_navbar <- function() {
           )
         ),
         bslib::nav_panel(
-          title = "PM10",
+          title = htmltools::tags$abbr(
+            title='particulate matter less than 10 microns in size', 'PM',
+            htmltools::tags$sub('10', .noWS = "outside"),
+            .noWS = "outside"
+          ),
+          value = 'pm10',
           bslib::card(
-            bslib::card_header("Mat-Su Particulate Matter 10 (PM10)"),
+            bslib::card_header(
+              "Mat-Su",
+              htmltools::tags$abbr(
+                title='particulate matter less than 10 microns in size', 'PM',
+                htmltools::tags$sub('10', .noWS = "outside"),
+                .noWS = "outside"
+              ),
+            ),
             ms_pm10_desc()
           ),
           plot_card(
@@ -454,9 +607,21 @@ ui_page_navbar <- function() {
         title = "Southwest Alaska",
         id = "sw",
         bslib::nav_panel(
-          title = "PM2.5",
+          title = htmltools::tags$abbr(
+            title='particulate matter less than 2.5 microns in size', 'PM',
+            htmltools::tags$sub('2.5', .noWS = "outside"),
+            .noWS = "outside"
+          ),
+          value = 'pm25',
           bslib::card(
-            bslib::card_header("Bethel Particulate Matter 2.5 (PM2.5)"),
+            bslib::card_header(
+              "Bethel",
+              htmltools::tags$abbr(
+                title='particulate matter less than 2.5 microns in size', 'PM',
+                htmltools::tags$sub('2.5', .noWS = "outside"),
+                .noWS = "outside"
+              ),
+            ),
             sw_pm25_desc()
           ),
           plot_card(
@@ -466,9 +631,21 @@ ui_page_navbar <- function() {
           )
          ),
         bslib::nav_panel(
-          title = "PM10",
+          title = htmltools::tags$abbr(
+            title='particulate matter less than 10 microns in size', 'PM',
+            htmltools::tags$sub('10', .noWS = "outside"),
+            .noWS = "outside"
+          ),
+          value = 'pm10',
           bslib::card(
-            bslib::card_header("Bethel Particulate Matter 10 (PM10)"),
+            bslib::card_header(
+              "Bethel",
+              htmltools::tags$abbr(
+                title='particulate matter less than 10 microns in size', 'PM',
+                htmltools::tags$sub('10', .noWS = "outside"),
+                .noWS = "outside"
+              ),
+            ),
             sw_pm10_desc()
           ),
           plot_card(

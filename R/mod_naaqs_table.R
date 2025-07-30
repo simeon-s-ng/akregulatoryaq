@@ -10,9 +10,12 @@
 mod_naaqs_table_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    gt::gt_output(ns("naaqs_table")),
+    shinycssloaders::withSpinner(
+      gt::gt_output(ns("naaqs_table")),
+      type = 1
+    ),
     shiny::markdown(
-      "<a href='https://www.epa.gov/criteria-air-pollutants/naaqs-table' target='_blank'>NAAQS Table for other Criteria Pollutants</a>"
+      "<a href='https://www.epa.gov/criteria-air-pollutants/naaqs-table' target='_blank'><abbr title='National Ambient Air Quality Standards'>NAAQS</abbr> Table for other Criteria Pollutants</a>"
     )
   )
 }

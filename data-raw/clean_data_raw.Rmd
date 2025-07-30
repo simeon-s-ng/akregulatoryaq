@@ -383,7 +383,8 @@ FloydDryden_pm25_2 <- FloydDryden_pm25_import |>
 
 FloydDryden_pm25_3 <- FloydDryden_pm25_import |> 
   filter(poc == 3) |> 
-  calc_pm25_24hr_avg()
+  calc_pm25_24hr_avg() |> 
+  filter(Date <= "2020-12-31")
 
 FloydDryden_pm25_23 <- FloydDryden_pm25_import |> 
   filter(poc == 23) |> 
@@ -399,6 +400,15 @@ FloydDryden_pm25 <- full_join(FloydDryden_pm25_1, FloydDryden_pm25_2, by = "Date
   ) |>
   select(Date, sample_measurement) |> 
   full_join(FloydDryden_pm25_3, by = "Date") |> 
+  mutate(
+    sample_measurement = if_else(
+      is.na(sample_measurement.x),
+      trunc(sample_measurement.y * 10) / 10,
+      trunc(sample_measurement.x * 10) / 10
+    )
+  ) |> 
+  select(Date, sample_measurement) |> 
+  full_join(FloydDryden_pm25_23, by = "Date") |> 
   mutate(
     sample_measurement = if_else(
       is.na(sample_measurement.x),
@@ -579,7 +589,7 @@ Parkgate_pm25 <- Parkgate_pm25_import |>
 ```{r PMC PM25}
 PMC_pm25_ex <- "*PMC*PM25*csv"
 PMC_pm25_import <- import_data_raw(PMC_pm25_ex) |>
-  mutate(site_name = "Plant Materials Center")
+  mutate(site_name = "PMC")
 
 PMC_pm25 <- PMC_pm25_import |> 
   calc_pm25_24hr_avg() |> 
@@ -892,7 +902,7 @@ Parkgate_pm10 <- full_join(Parkgate_pm10_1, Parkgate_pm10_3, by = "Date") |>
 ```{r PMC PM10}
 PMC_pm10_ex <- "*PMC*PM10*csv"
 PMC_pm10_import <- import_data_raw(PMC_pm10_ex) |>
-  mutate(site_name = "Plant Materials Center")
+  mutate(site_name = "PMC")
 
 PMC_pm10 <- PMC_pm10_import |> 
   calc_pm10_24hr_avg() |> 

@@ -51,12 +51,12 @@ app_server <- function(input, output, session) {
   mod_pm10_avg_server("pm10_avg_jnu", proxy_pm10_jnu)
   mod_pm10_dv_server("pm10_dv_jnu", "Juneau")
   mod_download_server("dl_pm10_jnu", "PM10", "Juneau", proxy_pm10_jnu)
-  
+
   proxy_pm10_ms <- mod_filter_data_server("filter_data_ms_pm10")
   mod_pm10_avg_server("pm10_avg_ms", proxy_pm10_ms)
   mod_pm10_dv_server("pm10_dv_ms", "Mat-Su")
   mod_download_server("dl_pm10_ms", "PM10", "MatSu", proxy_pm10_ms)
-  
+
   proxy_pm10_sw <- mod_filter_data_server("filter_data_sw_pm10")
   mod_pm10_avg_server("pm10_avg_sw", proxy_pm10_sw)
   mod_pm10_dv_server("pm10_dv_sw", "Bethel")
@@ -116,6 +116,6 @@ app_server <- function(input, output, session) {
   mod_naaqs_table_server("pm25_table_sw")
   mod_naaqs_table_server("pm10_table_sw")
 
-  # Data Download ----
-  mod_download_server("download")
+  # # Data Download ----
+  # mod_download_server("download")
 }

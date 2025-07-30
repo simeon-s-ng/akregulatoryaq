@@ -10,22 +10,22 @@ fbx_pm25_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> began monitoring PM2.5 in 2009 and is located in Downtown Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**<abbr title='National Core Multi-Pollutant Monitoring Station'>NCore</abbr> Site**</a> began monitoring <abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr> in 2009 and is located in Downtown Fairbanks, AK."
       ),
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-a-street/' target='_blank'>**A Street Site**</a> began monitoring PM2.5 in 2019 and is located in Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-a-street/' target='_blank'>**A Street Site**</a> began monitoring <abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr> in 2019 and is located in Fairbanks, AK."
       ),
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/north-pole-hurst-road/' target='_blank'>**Hurst Road Site**</a> began monitoring PM2.5 in 2012 and is located in North Pole, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/north-pole-hurst-road/' target='_blank'>**Hurst Road Site**</a> began monitoring <abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr> in 2012 and is located in North Pole, AK."
       ),
       shiny::markdown(
-        "The **Fairbanks State Office Building** Site monitored PM2.5 in Fairbanks, AK between 2000-2020.<br>"
+        "The **Fairbanks State Office Building** Site monitored <abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr> in Fairbanks, AK between 2000-2020.<br>"
       ),
       shiny::markdown(
-        "The **Nordale** Site monitored PM2.5 in Fairbanks, AK between 2007-2009.<br>"
+        "The **Nordale** Site monitored <abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr> in Fairbanks, AK between 2007-2009.<br>"
       ),
       shiny::markdown(
-        "The **Woodriver** Site monitored PM2.5 in Fairbanks, AK between 2010-2011.<br>"
+        "The **Woodriver** Site monitored <abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr> in Fairbanks, AK between 2010-2011.<br>"
       )
     )
   )
@@ -39,7 +39,7 @@ fbx_pm10_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> began monitoring PM10 in 2011 and is located in Downtown Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**<abbr title='National Core Multi-Pollutant Monitoring Station'>NCore</abbr> Site**</a> began monitoring <abbr title='particulate matter less than 10 microns in size'>PM<sub>10</sub></abbr> in 2011 and is located in Downtown Fairbanks, AK."
       )
     )
   )
@@ -53,15 +53,15 @@ fbx_co_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> began monitoring CO in 2011 and is located in Downtown Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**<abbr title='National Core Multi-Pollutant Monitoring Station'>NCore</abbr> Site**</a> began monitoring <abbr title='carbon monoxide'>CO</abbr> in 2011 and is located in Downtown Fairbanks, AK."
       ),
       shiny::markdown(
-        "The **Armory** Site monitored CO in Fairbanks, AK between 2002-2007."
+        "The **Armory** Site monitored <abbr title='carbon monoxide'>CO</abbr> in Fairbanks, AK between 2002-2007."
       ),
       shiny::markdown(
-        "The **Hunter Elementary** Site monitored CO in Fairbanks, AK between 2000-2009."),
+        "The **Hunter Elementary** Site monitored <abbr title='carbon monoxide'>CO</abbr> in Fairbanks, AK between 2000-2009."),
       shiny::markdown(
-        "The **Old Post Office** Site monitored CO in Fairbanks, AK between 2000-2014."
+        "The **Old Post Office** Site monitored <abbr title='carbon monoxide'>CO</abbr> in Fairbanks, AK between 2000-2014."
       )
     )
   )
@@ -75,10 +75,10 @@ fbx_so2_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/north-pole-hurst-road/' target='_blank'>**Hurst Road Site**</a> began monitoring SO2 in 2022 and is located in North Pole, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/north-pole-hurst-road/' target='_blank'>**Hurst Road Site**</a> began monitoring <abbr title='sulfur dioxide'>SO<sub>2</sub></abbr> in 2022 and is located in North Pole, AK."
       ),
       shiny::markdown(
-        "The [**NCore Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/) began monitoring SO2 in 2011 and is located in Downtown Fairbanks, AK.")
+        "The [**<abbr title='National Core Multi-Pollutant Monitoring Station'>NCore</abbr> Site**](https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/) began monitoring <abbr title='sulfur dioxide'>SO<sub>2</sub></abbr> in 2011 and is located in Downtown Fairbanks, AK.")
     )
   )
 }
@@ -91,7 +91,7 @@ fbx_o3_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> began monitoring O3 in 2011 and is located in Downtown Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**<abbr title='National Core Multi-Pollutant Monitoring Station'>NCore</abbr> Site**</a> began monitoring <abbr title='ozone'>O<sub>3</sub></abbr> in 2011 and is located in Downtown Fairbanks, AK."
       )
     )
   )
@@ -105,7 +105,7 @@ fbx_no2_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**NCore Site**</a> began monitoring NO2 in 2012 and is located in Downtown Fairbanks, AK."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/fairbanks-ncore/' target='_blank'>**<abbr title='National Core Multi-Pollutant Monitoring Station'>NCore</abbr> Site**</a> began monitoring <abbr title='nitrogen dioxide'>NO<sub>2</sub></abbr> in 2012 and is located in Downtown Fairbanks, AK."
       )
     )
   )
@@ -125,10 +125,10 @@ anc_pm25_info <- function() {
         "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/eagle-river-parkgate/' target='_blank'>**Parkgate Site**</a> is located in Eagle River, AK."
       ),
       shiny::markdown(
-        "The **DHHS** Site monitored PM2.5 in Anchorage, AK between 2009-2012."
+        "The **DHHS** Site monitored <abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr> in Anchorage, AK between 2009-2012."
       ),
       shiny::markdown(
-        "The **Tudor** Site monitored PM2.5 in Anchorage, AK between 2000-2002"
+        "The **Tudor** Site monitored <abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr> in Anchorage, AK between 2000-2002"
       )
     )
   )
@@ -148,13 +148,13 @@ anc_pm10_info <- function() {
         "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/eagle-river-parkgate/' target='_blank'>**Parkgate Site**</a> is located in Eagle River, AK."
       ),
       shiny::markdown(
-        "The **DHHS** Site monitored PM10 in Anchorage, AK between 2009-2012."
+        "The **DHHS** Site monitored <abbr title='particulate matter less than 10 microns in size'>PM<sub>10</sub></abbr> in Anchorage, AK between 2009-2012."
       ),
       shiny::markdown(
-        "The **Muldoon** Site monitored PM10 in Anchorage, AK between 2000-2005."
+        "The **Muldoon** Site monitored <abbr title='particulate matter less than 10 microns in size'>PM<sub>10</sub></abbr> in Anchorage, AK between 2000-2005."
       ),
       shiny::markdown(
-        "The **Tudor** Site monitored PM10 in Anchorage, AK between 2000-2014."
+        "The **Tudor** Site monitored <abbr title='particulate matter less than 10 microns in size'>PM<sub>10</sub></abbr> in Anchorage, AK between 2000-2014."
       )
     )
   )
@@ -185,7 +185,7 @@ jnu_pm25_info <- function() {
         "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/juneau-floyd-dryden/' target='_blank'>**Floyd Dryden Site**</a> is located in Juneau, AK."
       ),
       shiny::markdown(
-        "The **Lemon Creek** Site monitored PM2.5 in Juneau, AK between 2000-2001."
+        "The **Lemon Creek** Site monitored <abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr> in Juneau, AK between 2000-2001."
       )
     )
   )
@@ -213,13 +213,16 @@ ms_pm25_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The **Butte** Site monitored PM2.5 in Butte, AK between 2000-2023."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/palmer-pmc/' target='_blank'>**<abbr title='Plant Materials Center'>PMC</abbr> Site**</a> is located in Palmer, AK"
       ),
       shiny::markdown(
-        "The **Palmer** Site monitored PM2.5 in Palmer, AK between 2010-2019."
+        "The **Butte** Site monitored <abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr> in Butte, AK between 2000-2023."
       ),
       shiny::markdown(
-        "The **Wasilla** Site monitored PM2.5 in Wasilla, AK between 2010-2015."
+        "The **Palmer** Site monitored <abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr> in Palmer, AK between 2010-2019."
+      ),
+      shiny::markdown(
+        "The **Wasilla** Site monitored <abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr> in Wasilla, AK between 2010-2015."
       )
     )
   )
@@ -233,13 +236,16 @@ ms_pm10_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The **Butte** Site monitored PM10 in Butte, AK between 2000-2023."
+        "The <a href='https://dec.alaska.gov/air/air-monitoring/instruments-sites/site-info/palmer-pmc/' target='_blank'>**<abbr title='Plant Materials Center'>PMC</abbr> Site**</a> is located in Palmer, AK"
       ),
       shiny::markdown(
-        "The **Palmer** Site monitored PM10 in Palmer, AK between 2011-2019."
+        "The **Butte** Site monitored <abbr title='particulate matter less than 10 microns in size'>PM<sub>10</sub></abbr> in Butte, AK between 2000-2023."
       ),
       shiny::markdown(
-        "The **Wasilla** Site monitored PM10 in Wasilla, AK between 2010-2015."
+        "The **Palmer** Site monitored <abbr title='particulate matter less than 10 microns in size'>PM<sub>10</sub></abbr> in Palmer, AK between 2011-2019."
+      ),
+      shiny::markdown(
+        "The **Wasilla** Site monitored <abbr title='particulate matter less than 10 microns in size'>PM<sub>10</sub></abbr> in Wasilla, AK between 2010-2015."
       )
     )
   )
@@ -253,7 +259,7 @@ sw_pm25_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The **Bethel** Site monitored PM2.5 in Bethel, AK between 2018-2019"
+        "The **Bethel** Site monitored <abbr title='particulate matter less than 2.5 microns in size'>PM<sub>2.5</sub></abbr> in Bethel, AK between 2018-2019"
       )
     )
   )
@@ -267,7 +273,7 @@ sw_pm10_info <- function() {
     bslib::card_header("Site Information"),
     bslib::card_body(
       shiny::markdown(
-        "The **Bethel** Site monitored PM10 in Bethel, AK between 2018-2019"
+        "The **Bethel** Site monitored <abbr title='particulate matter less than 10 microns in size'>PM<sub>10</sub></abbr> in Bethel, AK between 2018-2019"
       )
     )
   )
