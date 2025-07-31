@@ -58,12 +58,12 @@ range_pm10_fbx <- function() {
 #'
 #' @noRd
 range_pm25_bethel <- function() {
-  get_range("2018", "2019")
+  get_range("2018", "2020")
 }
 
 #' range_pm10_bethel
 #'
 #' @noRd
 range_pm10_bethel <- function() {
-  get_range("2018", "2019")
+  get_range("2018", "2020")
 }

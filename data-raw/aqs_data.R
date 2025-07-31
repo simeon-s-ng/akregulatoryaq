@@ -18,19 +18,19 @@ aqs_credentials(
 
 # Write data to Shared Drive ----
 
-years <- seq("2000", "2009") # Year range of site/pollutant
+years <- seq("2018", "2020") # Year range of site/pollutant
 
 for(i in seq_along(years)) {
   write_csv(
     aqs_transactionsample_by_site(
-      parameter = "42101",
+      parameter = "81102",
       bdate = as.Date(paste0(years[[i]], "0101"), format = "%Y%m%d"),
       edate = as.Date(paste0(years[[i]], "1231"), format = "%Y%m%d"),
       stateFIPS = "02",
-      countycode = "090",
-      sitenum = "0020"
+      countycode = "050",
+      sitenum = "0001"
     ),
-    file = paste0(write_path, "/Hunter_", years[[i]], "_CO", ".csv")
+    file = paste0(write_path, "/Bethel_", years[[i]], "_PM10", ".csv")
   )
   Sys.sleep(10) # AQS only alllows 10 requests per minute. Pause 10s to space requests out.
 }

@@ -5,7 +5,7 @@
 \alias{pm25_import_named}
 \title{pm25_import_named}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 58280 rows and 3 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 58314 rows and 3 columns.
 }
 \usage{
 pm25_import_named
