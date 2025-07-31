@@ -490,6 +490,7 @@ Hurst_pm25 <- full_join(Hurst_pm25_1, Hurst_pm25_2, by = "Date") |>
     ),
     site_name = "Hurst Road"
   ) |> 
+  filter(hour(Date) == '0') |> 
   select(Date, sample_measurement, site_name)
 ```
 
@@ -511,7 +512,7 @@ NCore_pm25_1 <- NCore_pm25_import |>
   complete(Date = seq.Date(min(Date), max(Date), by = "day"))
 
 NCore_pm25_2 <- NCore_pm25_import |> 
-  filter(poc == 2)
+  filter(poc == 2, hour(Date) == '0')
 
 NCore_pm25_4 <- NCore_pm25_import |> 
   filter(poc == 4)
@@ -544,7 +545,8 @@ NCore_pm25 <- full_join(NCore_pm25_1, NCore_pm25_2, by = "Date") |>
       trunc(sample_measurement.y * 10) / 10,
       trunc(sample_measurement.x * 10) / 10
     ),
-    site_name = "NCore"
+    site_name = "NCore",
+    Date = as.Date(Date)
   ) |> 
   select(Date, sample_measurement, site_name)
 ```
