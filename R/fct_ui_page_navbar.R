@@ -33,6 +33,7 @@ ui_page_navbar <- function() {
     header = tags$script(HTML(js)),
     inverse = TRUE,
     fillable = FALSE,
+    navbar_options = bslib::navbar_options(position = "fixed-top"),
     # Styling for sidebar button and link
     htmltools::tags$head(
       htmltools::tags$style(
@@ -60,13 +61,15 @@ ui_page_navbar <- function() {
             .filter-card {
               border-color: black;
               border-radius: 5px;
+              position: fixed;
               float: left;
-              margin-top: 5px;
+              margin-top: 50px;
               margin-right: 5px;
               width: auto;
               padding: 0px;
               border: 0px;
               left: -2.5px;
+              z-index: 1000;
             }
             .filter-card-body {
               border-color: black;
@@ -79,6 +82,10 @@ ui_page_navbar <- function() {
               box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.1);
               background-color: #072F49;
               padding: 5px;
+            }
+            .custom_nav_panel {
+              padding-top: 45px;
+              padding-left: 65px;
             }
           "
         )
@@ -281,6 +288,7 @@ ui_page_navbar <- function() {
     # Fairbanks ----
     bslib::nav_panel(
       title = "Fairbanks",
+      class = "custom_nav_panel",
       bslib::navset_card_underline(
         title = "Fairbanks North Star Borough",
         id = "fnsb",
