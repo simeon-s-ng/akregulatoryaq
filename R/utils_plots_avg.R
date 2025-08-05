@@ -74,8 +74,8 @@ plot_pm25 <- function(pm25_data, year) {
       plot_theme(),
     tooltip = c('Date', 'text')
   ) |>
-    layout_settings() |>
-    plotly::toWebGL()
+    plotly::toWebGL() |>
+    layout_settings()
 }
 
 #' plot_pm10

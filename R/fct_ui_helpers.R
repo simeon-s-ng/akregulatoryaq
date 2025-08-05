@@ -134,8 +134,7 @@ get_glossary <- function() {
 get_howto <- function() {
   shiny::markdown(
     "To filter by year (2000 and after) and site, view additional site information,
-    or download data click the left-hand menu [**>**] icon.
-    To collapse this menu and view the data figure as a larger figure click [**<**].
+    or download data click the left-hand filter menu button.
     - Site selection defaults to all sites in the region. To unselect or select sites,
     click the site(s) in the site dropdown.
     - Additional site information, can be found in the 'Site Information' box below the site selection dropdown.
@@ -268,7 +267,7 @@ plot_card <- function(avg_mod, dv_mod, table_mod) {
       "Air Quality Monitoring Data",
       height = "75%",
       shiny::markdown(
-        "**Expand the left sidepanel [>] to filter by year or site.** Please wait a few seconds for plots to show.<br>Dashboard will time out after 15 minutes to prevent excessive load on the server. To reload, refresh your browser menu.",
+        "**Click the 'Filters' button to filter by year or site.** Please wait a few seconds for plots to show.<br>Dashboard will time out after 15 minutes to prevent excessive load on the server. To reload, refresh your browser menu.",
         extensions = TRUE
       ),
       avg_mod,
@@ -330,7 +329,7 @@ plot_card_pm25 <- function(avg_ns, epa_dv_ns, dec_dv_ns, table_ns) {
       "Air Quality Monitoring Data",
       height = "75%",
       shiny::markdown(
-        "**Expand the left sidepanel [>] to filter by year or site.** Please wait a few seconds for plots to show.<br>Dashboard will time out after 15 minutes to prevent excessive load on the server. To reload, refresh your browser menu.",
+        "**Click the 'Filters' button to filter by year or site.** Please wait a few seconds for plots to show.<br>Dashboard will time out after 15 minutes to prevent excessive load on the server. To reload, refresh your browser menu.",
         extensions = TRUE
       ),
       mod_pm25_avg_ui(avg_ns),

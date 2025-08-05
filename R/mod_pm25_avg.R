@@ -28,7 +28,7 @@ mod_pm25_avg_server <- function(id, filterProxy){
           site_name %in% filterProxy$site() &
           lubridate::year(Date) %in% filterProxy$year()
         )
-    })
+    }) |> bindCache(filterProxy$site(), filterProxy$year())
     output$plot_pm25 <- plotly::renderPlotly({
       plot_pm25(pm25_data(), filterProxy$year())
     })

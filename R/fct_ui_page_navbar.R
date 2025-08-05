@@ -57,6 +57,29 @@ ui_page_navbar <- function() {
             .accordion-button {
               padding: 0.75rem 1rem
             }
+            .filter-card {
+              border-color: black;
+              border-radius: 5px;
+              float: left;
+              margin-top: 5px;
+              margin-right: 5px;
+              width: auto;
+              padding: 0px;
+              border: 0px;
+              left: -2.5px;
+            }
+            .filter-card-body {
+              border-color: black;
+              border-radius: 5px;
+              padding: 0px;
+            }
+            .filter-button {
+              border-color: black;
+              border-radius: 5px;
+              box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.1);
+              background-color: #072F49;
+              padding: 5px;
+            }
           "
         )
       )
@@ -71,185 +94,189 @@ ui_page_navbar <- function() {
       ".shiny-output-error { visibility: hidden; }",
       ".shiny-output-error:before { visibility: hidden; }"
     ),
-    ## SIDEBAR -----------------------------------------------------------------
-    sidebar = bslib::sidebar(
-      open = FALSE,
-      padding = c(65, 15),
-      # gap = 10,
-      width = "40%",
-      bslib::accordion(
-        bslib::accordion_panel(
-          "Filters", icon = bsicons::bs_icon("filter"),
-          # Fairbanks PM25 Filters ----
-          shiny::conditionalPanel(
-            condition = "input.nav == 'Fairbanks' & input.fnsb == 'pm25'",
-            # PM25 Year Filter Module
-            mod_filter_data_ui(
-              "filter_data_fbx_pm25",
-              range_pm25(),
-              fbx_sites_pm25()
+    # Offcanvas sidebar ----
+    bslib::card(bslib::card_body(bsutils::offcanvas(
+      bsutils::offcanvasButton(
+        "Filters", bs_icon("filter"), class = "filter-button"
+      ),
+      bsutils::offcanvasContent(
+        bsutils::offcanvasHeader("Filters"),
+        htmltools::div(
+        bslib::accordion(
+          bslib::accordion_panel(
+            "Filters", icon = bsicons::bs_icon("filter"),
+            # Fairbanks PM25 Filters ----
+            shiny::conditionalPanel(
+              condition = "input.nav == 'Fairbanks' & input.fnsb == 'pm25'",
+              # PM25 Year Filter Module
+              mod_filter_data_ui(
+                "filter_data_fbx_pm25",
+                range_pm25(),
+                fbx_sites_pm25()
+              ),
+              fbx_pm25_info(),
+              mod_download_ui("dl_pm25_fbx")
             ),
-            fbx_pm25_info(),
-            mod_download_ui("dl_pm25_fbx")
-          ),
-          # Fairbanks PM10 Filters ----
-          shiny::conditionalPanel(
-            condition = "input.nav == 'Fairbanks' & input.fnsb == 'pm10'",
-            mod_filter_data_ui(
-              "filter_data_fbx_pm10",
-              range_pm10_fbx(),
-              fbx_sites_pm10()
+            # Fairbanks PM10 Filters ----
+            shiny::conditionalPanel(
+              condition = "input.nav == 'Fairbanks' & input.fnsb == 'pm10'",
+              mod_filter_data_ui(
+                "filter_data_fbx_pm10",
+                range_pm10_fbx(),
+                fbx_sites_pm10()
+              ),
+              fbx_pm10_info(),
+              mod_download_ui("dl_pm10_fbx")
             ),
-            fbx_pm10_info(),
-            mod_download_ui("dl_pm10_fbx")
-          ),
-          # Fairbanks CO Filters ----
-          shiny::conditionalPanel(
-            condition = "input.nav == 'Fairbanks' & input.fnsb == 'co'",
-            mod_filter_data_ui(
-              "filter_data_fbx_co",
-              range_co(),
-              fbx_sites_co()
+            # Fairbanks CO Filters ----
+            shiny::conditionalPanel(
+              condition = "input.nav == 'Fairbanks' & input.fnsb == 'co'",
+              mod_filter_data_ui(
+                "filter_data_fbx_co",
+                range_co(),
+                fbx_sites_co()
+              ),
+              fbx_co_info(),
+              mod_download_ui("dl_co_fbx")
             ),
-            fbx_co_info(),
-            mod_download_ui("dl_co_fbx")
-          ),
-          # Fairbanks SO2 Filter ----
-          shiny::conditionalPanel(
-            condition = "input.nav == 'Fairbanks' & input.fnsb == 'so2'",
-            mod_filter_data_ui(
-              "filter_data_fbx_so2",
-              range_so2(),
-              fbx_sites_so2()
+            # Fairbanks SO2 Filter ----
+            shiny::conditionalPanel(
+              condition = "input.nav == 'Fairbanks' & input.fnsb == 'so2'",
+              mod_filter_data_ui(
+                "filter_data_fbx_so2",
+                range_so2(),
+                fbx_sites_so2()
+              ),
+              fbx_so2_info(),
+              mod_download_ui("dl_so2_fbx")
             ),
-            fbx_so2_info(),
-            mod_download_ui("dl_so2_fbx")
-          ),
-          # Fairbanks O3 Filter ----
-          shiny::conditionalPanel(
-            condition = "input.nav == 'Fairbanks' & input.fnsb == 'o3'",
-            mod_filter_data_ui(
-              "filter_data_fbx_o3",
-              range_o3(),
-              "NCore"
+            # Fairbanks O3 Filter ----
+            shiny::conditionalPanel(
+              condition = "input.nav == 'Fairbanks' & input.fnsb == 'o3'",
+              mod_filter_data_ui(
+                "filter_data_fbx_o3",
+                range_o3(),
+                "NCore"
+              ),
+              fbx_o3_info(),
+              mod_download_ui("dl_o3_fbx")
             ),
-            fbx_o3_info(),
-            mod_download_ui("dl_o3_fbx")
-          ),
-          # Fairbanks NO2 Filter ----
-          shiny::conditionalPanel(
-            condition = "input.nav == 'Fairbanks' & input.fnsb == 'no2'",
-            mod_filter_data_ui(
-              "filter_data_fbx_no2",
-              range_no2(),
-              "NCore"
+            # Fairbanks NO2 Filter ----
+            shiny::conditionalPanel(
+              condition = "input.nav == 'Fairbanks' & input.fnsb == 'no2'",
+              mod_filter_data_ui(
+                "filter_data_fbx_no2",
+                range_no2(),
+                "NCore"
+              ),
+              fbx_no2_info(),
+              mod_download_ui("dl_no2_fbx")
             ),
-            fbx_no2_info(),
-            mod_download_ui("dl_no2_fbx")
-          ),
-          # Anchorage PM25 Filters ----
-          shiny::conditionalPanel(
-            condition = "input.nav == 'Anchorage' & input.anc == 'pm25'",
-            mod_filter_data_ui(
-              "filter_data_anc_pm25",
-              range_pm25(),
-              anc_sites_pm25()
+            # Anchorage PM25 Filters ----
+            shiny::conditionalPanel(
+              condition = "input.nav == 'Anchorage' & input.anc == 'pm25'",
+              mod_filter_data_ui(
+                "filter_data_anc_pm25",
+                range_pm25(),
+                anc_sites_pm25()
+              ),
+              anc_pm25_info(),
+              mod_download_ui("dl_pm25_anc")
             ),
-            anc_pm25_info(),
-            mod_download_ui("dl_pm25_anc")
-          ),
-          # Anchorage PM10 Filters ----
-          shiny::conditionalPanel(
-            condition = "input.nav == 'Anchorage' & input.anc == 'pm10'",
-            mod_filter_data_ui(
-              "filter_data_anc_pm10",
-              range_pm10(),
-              anc_sites_pm10()
+            # Anchorage PM10 Filters ----
+            shiny::conditionalPanel(
+              condition = "input.nav == 'Anchorage' & input.anc == 'pm10'",
+              mod_filter_data_ui(
+                "filter_data_anc_pm10",
+                range_pm10(),
+                anc_sites_pm10()
+              ),
+              anc_pm10_info(),
+              mod_download_ui("dl_pm10_anc")
             ),
-            anc_pm10_info(),
-            mod_download_ui("dl_pm10_anc")
-          ),
-          # Anchorage CO Filters ----
-          shiny::conditionalPanel(
-            condition = "input.nav == 'Anchorage' & input.anc == 'co'",
-            mod_filter_data_ui(
-              "filter_data_anc_co",
-              range_co(),
-              anc_sites_co()
+            # Anchorage CO Filters ----
+            shiny::conditionalPanel(
+              condition = "input.nav == 'Anchorage' & input.anc == 'co'",
+              mod_filter_data_ui(
+                "filter_data_anc_co",
+                range_co(),
+                anc_sites_co()
+              ),
+              anc_co_info(),
+              mod_download_ui("dl_co_anc")
             ),
-            anc_co_info(),
-            mod_download_ui("dl_co_anc")
-          ),
-          # Juneau PM25 Filters ----
-          shiny::conditionalPanel(
-            condition = "input.nav == 'Juneau' & input.jnu == 'pm25'",
-            mod_filter_data_ui(
-              "filter_data_jnu_pm25",
-              range_pm25(),
-              jnu_sites_pm25()
+            # Juneau PM25 Filters ----
+            shiny::conditionalPanel(
+              condition = "input.nav == 'Juneau' & input.jnu == 'pm25'",
+              mod_filter_data_ui(
+                "filter_data_jnu_pm25",
+                range_pm25(),
+                jnu_sites_pm25()
+              ),
+              jnu_pm25_info(),
+              mod_download_ui("dl_pm25_jnu")
             ),
-            jnu_pm25_info(),
-            mod_download_ui("dl_pm25_jnu")
-          ),
-          # Juneau PM10 Filters ----
-          shiny::conditionalPanel(
-            condition = "input.nav == 'Juneau' & input.jnu == 'pm10'",
-            mod_filter_data_ui(
-              "filter_data_jnu_pm10",
-              range_pm10(),
-              jnu_sites_pm10()
+            # Juneau PM10 Filters ----
+            shiny::conditionalPanel(
+              condition = "input.nav == 'Juneau' & input.jnu == 'pm10'",
+              mod_filter_data_ui(
+                "filter_data_jnu_pm10",
+                range_pm10(),
+                jnu_sites_pm10()
+              ),
+              jnu_pm10_info(),
+              mod_download_ui("dl_pm10_jnu")
             ),
-            jnu_pm10_info(),
-            mod_download_ui("dl_pm10_jnu")
-          ),
-          # Mat-Su PM25 Filters ----
-          shiny::conditionalPanel(
-            condition = "input.nav == 'Mat-Su' & input.ms == 'pm25'",
-            mod_filter_data_ui(
-              "filter_data_ms_pm25",
-              range_pm25(),
-              matsu_sites_pm25()
+            # Mat-Su PM25 Filters ----
+            shiny::conditionalPanel(
+              condition = "input.nav == 'Mat-Su' & input.ms == 'pm25'",
+              mod_filter_data_ui(
+                "filter_data_ms_pm25",
+                range_pm25(),
+                matsu_sites_pm25()
+              ),
+              ms_pm25_info(),
+              mod_download_ui("dl_pm25_ms")
             ),
-            ms_pm25_info(),
-            mod_download_ui("dl_pm25_ms")
-          ),
-          # Mat-Su PM10 Filters ----
-          shiny::conditionalPanel(
-            condition = "input.nav == 'Mat-Su' & input.ms == 'pm10'",
-            mod_filter_data_ui(
-              "filter_data_ms_pm10",
-              range_pm10(),
-              matsu_sites_pm10()
+            # Mat-Su PM10 Filters ----
+            shiny::conditionalPanel(
+              condition = "input.nav == 'Mat-Su' & input.ms == 'pm10'",
+              mod_filter_data_ui(
+                "filter_data_ms_pm10",
+                range_pm10(),
+                matsu_sites_pm10()
+              ),
+              ms_pm10_info(),
+              mod_download_ui("dl_pm10_ms")
             ),
-            ms_pm10_info(),
-            mod_download_ui("dl_pm10_ms")
-          ),
-          # Bethel PM25 Filters ----
-          shiny::conditionalPanel(
-            condition = "input.nav == 'Bethel' & input.sw == 'pm25'",
-            mod_filter_data_ui(
-              "filter_data_sw_pm25",
-              range_pm25_bethel(),
-              bethel_sites_pm25()
+            # Bethel PM25 Filters ----
+            shiny::conditionalPanel(
+              condition = "input.nav == 'Bethel' & input.sw == 'pm25'",
+              mod_filter_data_ui(
+                "filter_data_sw_pm25",
+                range_pm25_bethel(),
+                bethel_sites_pm25()
+              ),
+              sw_pm25_info(),
+              mod_download_ui("dl_pm25_sw")
             ),
-            sw_pm25_info(),
-            mod_download_ui("dl_pm25_sw")
-          ),
-          # Bethel PM10 Filters ----
-          shiny::conditionalPanel(
-            condition = "input.nav == 'Bethel' & input.sw == 'pm10'",
-            mod_filter_data_ui(
-              "filter_data_sw_pm10",
-              range_pm25_bethel(),
-              bethel_sites_pm25()
-            ),
-            sw_pm10_info(),
-            mod_download_ui("dl_pm10_sw")
+            # Bethel PM10 Filters ----
+            shiny::conditionalPanel(
+              condition = "input.nav == 'Bethel' & input.sw == 'pm10'",
+              mod_filter_data_ui(
+                "filter_data_sw_pm10",
+                range_pm25_bethel(),
+                bethel_sites_pm25()
+              ),
+              sw_pm10_info(),
+              mod_download_ui("dl_pm10_sw")
+            )
           )
         ),
         open = "Filters"
       )
-    ),
+      )
+    ), class = "filter-card-body"), class = "filter-card"),
     # REGION PAGES -------------------------------------------------------------
     # Fairbanks ----
     bslib::nav_panel(
