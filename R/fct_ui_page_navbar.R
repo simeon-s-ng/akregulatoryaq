@@ -87,6 +87,9 @@ ui_page_navbar <- function() {
               padding-top: 45px;
               padding-left: 65px;
             }
+            .filter-sidebar{
+              padding-top: 45px;
+            }
           "
         )
       )
@@ -107,6 +110,7 @@ ui_page_navbar <- function() {
         "Filters", bs_icon("filter"), class = "filter-button"
       ),
       bsutils::offcanvasContent(
+        class = "filter-sidebar",
         bsutils::offcanvasHeader("Filters"),
         htmltools::div(
         bslib::accordion(
@@ -441,6 +445,7 @@ ui_page_navbar <- function() {
     # Anchorage ----
     bslib::nav_panel(
       title = "Anchorage",
+      class = "custom_nav_panel",
       bslib::navset_card_underline(
         title = "Municipality of Anchorage",
         id = "anc",
@@ -522,6 +527,7 @@ ui_page_navbar <- function() {
     # Juneau ----
     bslib::nav_panel(
       title = "Juneau",
+      class = "custom_nav_panel",
       bslib::navset_card_underline(
         title = "City and Borough of Juneau",
         id = "jnu",
@@ -580,6 +586,7 @@ ui_page_navbar <- function() {
     # Mat-Su ----
     bslib::nav_panel(
       title = "Mat-Su",
+      class = "custom_nav_panel",
       bslib::navset_card_underline(
         title = "Matanuska-Susitna Borough",
         id = "ms",
@@ -638,6 +645,7 @@ ui_page_navbar <- function() {
     # Bethel ----
     bslib::nav_panel(
       title = "Bethel",
+      class = "custom_nav_panel",
       bslib::navset_card_underline(
         title = "Southwest Alaska",
         id = "sw",
