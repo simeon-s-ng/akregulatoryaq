@@ -87,8 +87,15 @@ ui_page_navbar <- function() {
               padding-top: 45px;
               padding-left: 65px;
             }
-            .filter-sidebar{
+            .filter-sidebar {
               padding-top: 45px;
+            }
+            .myPickerInput {
+              position: relative;
+            }
+            .dropdown-menu {
+              inset: auto !important;
+              transform: none !important;
             }
           "
         )
