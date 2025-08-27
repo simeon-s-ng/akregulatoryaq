@@ -113,7 +113,7 @@ plot_pm25_epa_dv <- function(pm25_data, region) {
       ggplot2::scale_linetype_manual(values = c("dashed", "solid")) +
       # Axis settings
       ggplot2::labs(
-        title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup> Percentiles<br> (EPA Concurred Exceptional Events Excluded)", sep = ' '),
+        title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup> Percentiles<br> (EPA Concurred Exceptional Events Excluded/Wildfires Included)", sep = ' '),
         y = "PM<sub>2.5</sub> 24-hr Concentration (\u00B5g/m\u00B3)",
         color = NULL,
         shape = NULL,
@@ -257,7 +257,7 @@ plot_pm25_dec_dv <- function(pm25_data, region) {
       ggplot2::scale_linetype_manual(values = c("dashed", "solid")) +
       # Axis settings
       ggplot2::labs(
-        title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup> Percentiles<br> (DEC Exceptional Events Excluded)", sep = ' '),
+        title = paste(region, "PM<sub>2.5</sub> 24-hr Design Values & 98<sup>th</sup> Percentiles<br> (DEC Exceptional Events Excluded/Wildfires Excluded)", sep = ' '),
         y = "PM<sub>2.5</sub> 24-hr Concentration (\u00B5g/m\u00B3)",
         color = NULL,
         shape = NULL,
