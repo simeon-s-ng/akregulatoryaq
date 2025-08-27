@@ -497,7 +497,8 @@ pm10_dvs_ms <- pm10_dvs |>
   filter(
     site_name == "Butte" |
     site_name == "Palmer" |
-    site_name == "Wasilla"
+    site_name == "Wasilla" |
+    site_name == "PMC"
   )
 
 pm10_dvs_anc <- pm10_dvs |>

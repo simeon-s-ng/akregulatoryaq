@@ -20,8 +20,11 @@ mod_filter_data_ui <- function(id, range, sites) {
         range,
         selected = TRUE,
         multiple = FALSE,
-        inline = TRUE,
-        width = 'fit'
+        inline = FALSE,
+        width = 'fit',
+        options = list(
+          `none-selected-text` = "Select a Year"
+        )
       )
     ),
     div(
@@ -33,7 +36,7 @@ mod_filter_data_ui <- function(id, range, sites) {
         selected = sites,
         multiple = TRUE,
         inline = TRUE,
-        width = 'fit',
+        width = '100%',
         options = list(
           `actions-box` = TRUE,
           `none-selected-text` = "Select a Site"

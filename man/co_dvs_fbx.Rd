@@ -5,7 +5,7 @@
 \alias{co_dvs_fbx}
 \title{co_dvs_fbx}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 94 rows and 4 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 96 rows and 4 columns.
 }
 \usage{
 co_dvs_fbx

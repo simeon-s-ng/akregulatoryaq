@@ -5,7 +5,7 @@
 \alias{pm10_dvs_anc}
 \title{pm10_dvs_anc}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 166 rows and 4 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 172 rows and 4 columns.
 }
 \usage{
 pm10_dvs_anc

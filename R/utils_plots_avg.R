@@ -9,6 +9,9 @@
 #'
 #' @noRd
 plot_pm25 <- function(pm25_data, year) {
+  default_max <- 100
+  yaxis_max <- ceiling(max(default_max, max(pm25_data$sample_measurement, na.rm = TRUE)) / 100) * 100
+
   plotly::ggplotly(
     ggplot2::ggplot(pm25_data) +
       ggplot2::geom_point(
@@ -37,7 +40,7 @@ plot_pm25 <- function(pm25_data, year) {
           lubridate::as_date(paste(year, "-12-31", sep=""))
         )
       ) +
-      ggplot2::scale_y_continuous(breaks = seq(0, 100, 10), limits = c(0, 100)) +
+      ggplot2::scale_y_continuous(breaks = seq(0, yaxis_max, yaxis_max / 10), limits = c(0, yaxis_max)) +
       # NAAQS 35ug/m3  limit
       # If year >= 2006, naaqs = 35
       # If year < 2006, naaqs = 65
@@ -75,7 +78,15 @@ plot_pm25 <- function(pm25_data, year) {
     tooltip = c('Date', 'text')
   ) |>
     plotly::toWebGL() |>
-    layout_settings()
+    layout_settings() |>
+    plotly::layout(
+      yaxis = list(
+        autorange = "max",
+        autorangeoptions = list(
+          maxallowed = yaxis_max
+        )
+      )
+    )
 }
 
 #' plot_pm10

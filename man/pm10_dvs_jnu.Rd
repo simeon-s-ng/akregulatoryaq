@@ -5,7 +5,7 @@
 \alias{pm10_dvs_jnu}
 \title{pm10_dvs_jnu}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 48 rows and 4 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 50 rows and 4 columns.
 }
 \usage{
 pm10_dvs_jnu

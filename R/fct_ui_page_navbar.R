@@ -97,6 +97,9 @@ ui_page_navbar <- function() {
               inset: auto !important;
               transform: none !important;
             }
+            .offcanvas {
+              --bs-offcanvas-width: 50% !important
+            }
           "
         )
       )

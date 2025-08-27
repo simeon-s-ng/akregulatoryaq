@@ -5,7 +5,7 @@
 \alias{pm25_dvs_anc}
 \title{pm25_dvs_anc}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 168 rows and 4 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 172 rows and 4 columns.
 }
 \usage{
 pm25_dvs_anc

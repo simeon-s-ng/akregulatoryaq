@@ -5,7 +5,7 @@
 \alias{so2_dvs}
 \title{so2_dvs}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 24 rows and 4 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 28 rows and 4 columns.
 }
 \usage{
 so2_dvs

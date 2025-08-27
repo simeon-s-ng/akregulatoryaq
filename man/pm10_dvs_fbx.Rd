@@ -5,7 +5,7 @@
 \alias{pm10_dvs_fbx}
 \title{pm10_dvs_fbx}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 28 rows and 4 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 30 rows and 4 columns.
 }
 \usage{
 pm10_dvs_fbx

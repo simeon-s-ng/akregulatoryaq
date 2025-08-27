@@ -5,7 +5,7 @@
 \alias{o3_dvs_fbx}
 \title{o3_dvs_fbx}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 26 rows and 4 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 28 rows and 4 columns.
 }
 \usage{
 o3_dvs_fbx
